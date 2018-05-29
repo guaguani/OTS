@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.model.Venue_plan" table="venue_plan" catalog="tickets">
+        <id name="planid" type="java.lang.Integer">
+            <column name="planid" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="theme" type="java.lang.String">
+            <column name="theme" length="45"/>
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" length="45"/>
+        </property>
+        <property name="time" type="java.lang.String">
+            <column name="time" length="45"/>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="45"/>
+        </property>
+        <property name="id" type="java.lang.Integer">
+            <column name="id" length="11"/>
+        </property>
+        <property name="ordernum" type="java.lang.Integer">
+            <column name="ordernum" length="11"/>
+        </property>
+        <property name="backnum" type="java.lang.Integer">
+            <column name="backnum" length="11"/>
+        </property>
+    </class>
+</hibernate-mapping>

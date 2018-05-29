@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<package name="struts2" extends="struts-default">
+		<action name="queryVenue" class="com.action.VenueAction" method="queryVenue">
+			<result name="success">/jsp/VenueMainframe.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="queryUser" class="com.action.UserAction" method="queryUser">
+			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="addUser" class="com.action.UserAction" method="addUser">
+			<result name="success">/jsp/UserLogin.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="addVenue" class="com.action.VenueAction" method="addVenue">
+			<result name="success">/jsp/VenueLogin.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="queryManager" class="com.action.ManagerAction" method="queryManager">
+			<result name="success">/jsp/ManagerMainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="modifyVenueInfo" class="com.action.VenueAction" method="modifyVenueInfo">
+			<result name="success">/jsp/VenueMainframe.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="releasePlan" class="com.action.VenueAction" method="releasePlan">
+			<result name="success">/jsp/VenueMainframe.jsp</result>
+			<result name="error">/jsp/VenueMainframe.jsp</result>
+		</action>
+		<action name="modifyUserInfo" class="com.action.UserAction" method="modifyUserInfo">
+			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="cancelMember" class="com.action.UserAction" method="cancelMember">
+			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="showOnePlan" class="com.action.UserAction" method="showOnePlan">
+			<result name="success">/jsp/Plan.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="reserveTickets" class="com.action.UserAction" method="reserveTickets">
+			<result name="success">/jsp/Plan.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="payOrder" class="com.action.UserAction" method="payOrder">
+			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="cancelOrder" class="com.action.UserAction" method="cancelOrder">
+			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="approveVenueRegister" class="com.action.ManagerAction" method="approveVenueRegister">
+			<result name="success">/jsp/ManagerMainFrame.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="allocateSeat" class="com.action.UserAction" method="allocateSeat">
+			<result name="success">/jsp/Plan.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="activate" class="com.action.UserAction" method="activate">
+			<result name="success">/jsp/UserLogin.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+	</package>
+</struts>

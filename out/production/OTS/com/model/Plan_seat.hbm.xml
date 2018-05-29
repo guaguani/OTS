@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.model.Plan_seat" table="plan_seat" catalog="tickets">
+        <id name="orderid" type="java.lang.Integer">
+            <column name="orderid" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="planid" type="java.lang.Integer">
+            <column name="planid" />
+        </property>
+        <property name="seatid" type="java.lang.Integer">
+            <column name="seatid" length="45"/>
+        </property>
+        <property name="userid" type="java.lang.String">
+            <column name="userid" length="45"/>
+        </property>
+        <property name="venueid" type="java.lang.Integer">
+            <column name="venueid" length="45"/>
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="price"/>
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state"/>
+        </property>
+        <property name="typeofemail" type="java.lang.String">
+            <column name="typeofemail"/>
+        </property>
+        <property name="maketime" type="java.lang.String">
+            <column name="maketime"/>
+        </property>
+        <property name="notexist" type="java.lang.Integer">
+            <column name="notexist"/>
+        </property>
+    </class>
+</hibernate-mapping>

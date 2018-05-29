@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.model.Seat" table="seat" catalog="tickets">
+        <!--<composite-id>-->
+            <!--<key-property name="venueid" column="venueid" type="java.lang.Integer"></key-property>-->
+            <!--<key-property name="planid" column="planid" type="java.lang.Integer"></key-property>-->
+        <!--</composite-id>-->
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+        </id>
+        <property name="venueid" type="java.lang.Integer">
+            <column name="venueid" />
+        </property>
+        <property name="from" type="java.lang.Integer">
+            <column name="from_row"/>
+        </property>
+        <property name="to" type="java.lang.Integer">
+            <column name="to_row"/>
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="price_row"/>
+        </property>
+        <property name="planid" type="java.lang.Integer">
+            <column name="planid"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.model.User" table="user" catalog="tickets">
+        <id name="userid" type="java.lang.String">
+            <column name="userid" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="state" type="java.lang.Integer">
+            <column name="state" length="11"/>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" length="11"/>
+        </property>
+        <property name="cost" type="java.lang.Double">
+            <column name="cost"/>
+        </property>
+        <property name="integral" type="java.lang.Integer">
+            <column name="integral" length="11"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="45"/>
+        </property>
+        <property name="typeofemail" type="java.lang.String">
+            <column name="typeofemail" length="45"/>
+        </property>
+        <property name="activate" type="java.lang.Integer">
+            <column name="activate" length="11"/>
+        </property>
+        <property name="backtimes" type="java.lang.Integer">
+            <column name="backtimes" length="11"/>
+        </property>
+        <property name="ordertimes" type="java.lang.Integer">
+            <column name="ordertimes" length="11"/>
+        </property>
+    </class>
+</hibernate-mapping>
