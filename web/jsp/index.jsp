@@ -34,7 +34,7 @@
     <div class="snow background layered"></div>
 </div>
 <div class="top-buttons-agileinfo">
-    <a href="../jsp/UserLogin.jsp"  class="active">登录</a><a href="../jsp/signup.jsp">注册</a>
+    <a href="index.jsp" class="active">登录</a><a href="../jsp/signup.jsp">注册</a>
 </div>
 <h1>Tickets</h1>
 <div class="main-agileits">

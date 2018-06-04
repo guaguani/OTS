@@ -15,7 +15,7 @@
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript">
       function memberLogin() {
-          window.location.href="../jsp/UserLogin.jsp";
+          window.location.href="../jsp/index.jsp";
       };
       function venueLogin() {
           window.location.href="../jsp/VenueLogin.jsp";

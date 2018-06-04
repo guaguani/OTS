@@ -41,20 +41,4 @@
         <filter-name>GetVenueIdFilter</filter-name>
         <url-pattern>/jsp/VenueRegister.jsp</url-pattern>
     </filter-mapping>
-    <servlet>
-        <servlet-name>ModifyVenueInfoServlet</servlet-name>
-        <servlet-class>com.servlet.ModifyVenueInfoServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ModifyVenueInfoServlet</servlet-name>
-        <url-pattern>/ModifyVenueInfo</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ReleasePlanServlet</servlet-name>
-        <servlet-class>com.servlet.ReleasePlanServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ReleasePlanServlet</servlet-name>
-        <url-pattern>/releasePlan</url-pattern>
-    </servlet-mapping>
 </web-app>
