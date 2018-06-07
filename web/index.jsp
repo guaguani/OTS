@@ -31,7 +31,7 @@
 <div class="frontdiv">
   <h1 class="title">Close Contact With Everything</h1>
 </div>
-<h1 class="maintitle">Tickets</h1>
+<h1 class="maintitle"><a href="./jsp/example.jsp">Tickets</a></h1>
 <h2 class="sidetitle">Login Ways</h2>
 <div class="buttondiv">
   <button class="memberb" onclick="memberLogin()">Member</button>
