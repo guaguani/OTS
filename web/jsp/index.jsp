@@ -48,7 +48,7 @@
             <div class="submit-w3l">
                 <input type="submit" value="登录">
             </div>
-            <p class="p-bottom-w3ls"><a href="../jsp/signup.jsp">点击注册</a></p>
+            <p class="p-bottom-w3ls" style="color: #000;"><a href="../jsp/signup.jsp">点击注册</a></p>
         </form>
     </div>
 </div>
