@@ -32,7 +32,7 @@
   <h1 class="title">Close Contact With Everything</h1>
 </div>
 <h1 class="maintitle"><a href="./jsp/example.jsp">Tickets</a></h1>
-<h2 class="sidetitle">Login Ways</h2>
+<h2 class="sidetitle"><a href="./jsp/search.jsp">Search</a></h2>
 <div class="buttondiv">
   <button class="memberb" onclick="memberLogin()">Member</button>
   <button class="venueb" onclick="venueLogin()">Venue</button>
