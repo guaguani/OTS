@@ -11,6 +11,10 @@ a {
     /*blr: expression(this.onFocus=this.blur());*/
 }
 
+a:hover {
+    color: #ed0a75;
+}
+
 h3 {
     margin-top: 0;
 }
