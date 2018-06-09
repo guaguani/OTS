@@ -11,6 +11,18 @@
     <title>Title</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../css/index_css.css" rel="stylesheet" type="text/css" media="all">
+    <script>
+        function openLogin() {
+            document.getElementById("front").style.display="";
+            document.getElementById("back").style.display="";
+            document.getElementById("username").value="";
+            document.getElementById("password").value="";
+        }
+        function closeLogin() {
+            document.getElementById("front").style.display="none";
+            document.getElementById("back").style.display="none";
+        }
+    </script>
 </head>
 <body class="home">
     <div class="header">
@@ -51,8 +63,8 @@
                 </form>
             </div>
             <div class="right">
-                <div style="display: block" class="item-login item1">
-                    <div class="text1" style="color:#ff7919;">
+                <div style="display: block" class="item-login item1" onclick="openLogin()">
+                    <div class="text1" style="color:#ff7919;" >
                         <div class="login_icon"></div>
                         登录
                     </div>
@@ -351,6 +363,26 @@
             <div class="links-and-brand">
                 <img src="../img/logo.png" class="footer-logo">
             </div>
+        </div>
+    </div>
+    <div id=back style="display:none; POSITION:absolute; left:0; top:0; width:100%; height:100%;
+    background-color:#ededed; filter:alpha(opacity=60)"></div>
+    <div id=front style="display:none; POSITION:absolute; left:50%; top:50%; width:400px; height:450px;
+    margin-left:-200px; margin-top:-225px; border:1px solid #ffffff; background-color:#ffffff; text-align:center">
+        <div style="margin-top:50px;margin-bottom:30px">
+            <label style="font-size: 20px;text-align: center;margin-top: 50px;">登录</label>
+        </div>
+        <div style="text-align: center">
+            <label style="text-align: right;width: 80px;">用户</label>
+            <input type="text" id="username" name="username" value=""/>
+        </div>
+        <div style="text-align: center;margin-top:30px;margin-bottom:30px">
+            <label style="text-align: right;width: 80px;">  密码</label>
+            <input type="password" id="password" name="password" value=""/>
+        </div>
+        <div style="margin-top:30px">
+            <input type="button" id="cancelLogin" value="退出" onclick="closeLogin()"/>
+            <input type="button" id="submit" class="submit" value="登录"/>
         </div>
     </div>
 </body>
