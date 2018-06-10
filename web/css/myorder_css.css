@@ -28,7 +28,7 @@ h3 {
 }
 
 .box1{
-    width: 1200px;
+    width: 1300px;
     margin: 0 auto;
     position: relative;
     min-height: 90px;
@@ -208,116 +208,111 @@ h3 {
 }
 
 
-.search_main {
-    background-color: #fff;
+
+
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table;
 }
 
-.search_city{
-    padding: 10px 24px 0;
-    border: 1px solid #e9e9e9;
-    margin-bottom: 15px;
-    font-size: 15px;
+
+.container {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.content {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.main {
+    padding: 0 18px;
+}
+
+.info-content {
+    border: 1px solid #e1e1e1;
     position: relative;
-    z-index: 1;
-    background-color: #fff;
 }
 
-div, dl, dt, dd, ul, li {
-    margin: 0;
-    padding: 0;
+.info-content .user-profile-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    background-color: #f4f3f4;
+    text-align: center;
+    border-right: 1px solid #e1e1e1;
 }
 
-.search_city .search_city_line {
-    width: 1200px;
-    position: relative;
-    margin: auto;
-    border-bottom: 1px dotted #dfdfdf;
-    margin-bottom: 10px;
-}
-
-.search_city dl {
-    line-height: 20px;
-    padding-bottom: 5px;
-}
-
-.search_city dt {
-    float: left;
-    line-height: 26px;
-    color: #968788;
-    text-align: right;
-    margin-right: 18px;
-}
-
-.search_city dd {
-    width: 50px;
-    float: left;
-}
-
-.search_city dd a:hover, .search_city dd .active {
-    background-color: #ed0a75;
+.info-content .user-profile-nav a.active, .info-content .user-profile-nav a:hover {
     color: #fff;
+    background-color: #ed3931;
 }
 
-.search_city dd a {
-    display: inline-block;
-    height: 26px;
-    line-height: 26px;
-    padding: 0 8px;
+.info-content .user-profile-nav a {
+    display: block;
+    font-weight: 400;
     color: #333;
-    white-space: nowrap;
+    height: 40px;
+    width: 202px;
+    margin-left: -1px;
+    line-height: 40px;
+    font-size: 18px;
 }
 
-
-
-.search_city .search_city_num {
-    width: 800px;
-}
-
-.clear {
-}
-
-ul {
-    list-style: none;
-}
-
-.search_city .search_city_num li {
-    padding-bottom: 5px;
+.info-content .orders-container, .info-content .profile-container {
     float: left;
-    margin-right: 24px;
+    margin-left: 200px;
+    padding-left: 40px;
+    width: 1050px;
+    min-height: 900px;
 }
 
-.clear:after {
-    content: '\20';
-    display: block;
-    height: 0;
-    clear: both;
+.info-content .orders-container .profile-title, .info-content .profile-container .profile-title {
+    padding: 26px 0;
+    color: #ec443f;
+    font-size: 25px;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 30px;
 }
 
-.search_city dl:after {
-    content: '\20';
-    display: block;
-    height: 0;
-    clear: both;
+.order-box {
+    border: 1px solid #e5e5e5;
+    margin: 0 40px 30px 0;
 }
 
-
-
-.search_list {
-    width: 1200px;
-    position: relative;
-    margin: auto;
-    border: 1px solid #efefef;
-    border-top: none;
-    padding: 5px 18px;
+.order-box .order-header {
+    background-color: #f7f7f7;
+    font-size: 14px;
+    padding: 16px 20px;
 }
 
-.search_list li {
-    padding: 25px 0 18px;
-    border-bottom: 1px dotted #cecece;
-    margin: 0 10px;
+.order-box .order-header .order-date {
+    color: #333;
+    display: inline-block;
+    margin-right: 99px;
+    font-size: 20px;
 }
 
-.search_list li .search_img {
+.order-box .order-header .order-id {
+    color: #999;
+    font-size: 20px;
+}
+
+.order-box .order-header .del-order {
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/delete_order.png);
+    float: right;
+}
+
+.order-box .order-body {
+    padding: 20px;
+    padding-right: 0;
+}
+
+.order-box .order-body .poster {
     width: 153px;
     height: 206px;
     overflow: hidden;
@@ -325,24 +320,44 @@ ul {
     float: left;
 }
 
-.search_list li .search_img img {
+.order-box .order-body .poster img {
     width: 100%;
     height: 100%;
 }
 
-img {
-    border: 0;
+.order-box .order-body .order-content {
+    width: 40%;
 }
 
-.search_list li .search_txt {
-    width: 680px;
-    line-height: 24px;
-    float: left;
+.order-box .order-body .activity-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin: 4px 0 7px -6px;
 }
 
-.search_list li:after {
-    content: '\20';
-    display: block;
-    height: 0;
-    clear: both;
+.order-box .order-body .venue-name {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.order-box .order-body>div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.order-box .order-body .actions, .order-box .order-body .order-price, .order-box .order-body .order-status {
+    font-size: 17px;
+    color: #333;
+    width: 12%;
+    line-height: 95px;
+}
+
+.order-box .order-body .order-price {
+    width: 15%;
+}
+
+.order-box .order-body .actions {
+    text-align: center;
 }
