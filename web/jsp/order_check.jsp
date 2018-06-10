@@ -125,7 +125,7 @@
         <span style="float: left;margin-bottom: 20px;margin-left: 18px;">选择付款方式 :</span>
         <div class="box-main">
             <ul style="min-height: 100%;padding: 0;">
-                <li class="pay-money-img"><a class="icon icon-pay-weixin"></a></li>
+                <li class="pay-money-img"><a class="icon icon-pay-weixin" href="./pay.jsp"></a></li>
                 <li class="pay-money-img"><a class="icon icon-pay-alibaba"></a></li>
             </ul>
         </div>

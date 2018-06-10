@@ -179,7 +179,7 @@
                         </div>
 
                         <div style="float: left;width: 450px;margin-left: 17%;margin-top: 5%;">
-                            <a class="u-btn-buynow" href="javascript:;">立即预定</a>
+                            <a class="u-btn-buynow" href="./order_check.jsp">立即预定</a>
                         </div>
                     </div>
 
