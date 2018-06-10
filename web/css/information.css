@@ -1,12 +1,18 @@
 .am-btn-danger {
     display: block;
     height: 42px;
-    background-color: #ed0a75;
+    background-color: #ff7919;
     text-align: center;
     text-decoration: none;
     color: #fff;
     font-size: 16px;
     line-height: 42px;
     width: 120px;
-    margin-right: 15px;
+    margin-left: 45%;
+}
+
+li.person {
+    border-bottom: 1px solid #F5F8FA;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
