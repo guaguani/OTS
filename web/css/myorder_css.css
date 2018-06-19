@@ -1,221 +1,3 @@
-body {
-    background-color: #f5f5f5;
-    font-family: PingFang SC,Lantinghei SC,Microsoft Yahei;
-    margin:0;
-}
-
-a {
-    color: #333;
-    text-decoration: none;
-    outline: 0;
-    /*blr: expression(this.onFocus=this.blur());*/
-}
-
-a:hover {
-    color: #ed0a75;
-}
-
-h3 {
-    margin-top: 0;
-}
-
-.header{
-    border-bottom: 1px solid #eaeaea;
-    box-sizing: border-box;
-    background-color: #fff;
-    min-height: 91px;
-    margin:0;
-}
-
-.box1{
-    width: 1300px;
-    margin: 0 auto;
-    position: relative;
-    min-height: 90px;
-    zoom:1;
-}
-
-.logo_box{
-    display: block;
-    float: left;
-    margin-top: 25px;
-}
-
-.logo{
-    border: 0;
-    float: left;
-    width: 104px;
-    height: 40px;
-}
-
-.menu{
-    position: absolute;
-    height: 100%;
-    left: 210px;
-}
-
-.menu-item{
-    cursor: pointer;
-    margin-right: 35px;
-    box-sizing: border-box;
-    height: 90px;
-    line-height: 90px;
-    float: left;
-    font-size: 18px;
-    color: #535353;
-    font-weight: 500;
-    padding-top: 5px;
-}
-
-.city-name:after {
-    display: block;
-    content: "";
-    background-image: url(../img/down_arrow.png);
-    width: 8px;
-    position: absolute;
-    height: 22px;
-    background-position: center;
-    background-repeat: no-repeat;
-    right: 25px;
-    top: 40px;
-}
-
-.city_box{
-    border: solid 1px #ececec;
-    left: -250px;
-    font-size: 12px;
-    line-height: 20px;
-    padding: 15px 20px;
-    width: 440px;
-    position: absolute;
-    background-color: #fff;
-    z-index: 20;
-    top: 45px;
-}
-
-.city_box:before{
-    content: '';
-    left: 120px;
-    clear: both;
-    position: absolute;
-    top: -15px;
-    margin-left: -10px;
-    background-image: url(../img/up_arrow.png);
-    height: 15px;
-    width: 24px;
-    background-size: contain;
-}
-
-.selected{
-    padding: 3px 8px;
-    background-color: #fff5f8;
-    color: #ff7919;
-}
-
-.city_box li{
-    cursor: pointer;
-    color: #333;
-    float: left;
-    font-size: 14px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    height: auto;
-    line-height: 1.5;
-}
-
-.search-bar {
-    position: absolute;
-    left: 500px;
-    top: 30px;
-    width: 455px;
-}
-
-.input {
-    background-image: url(../img/search_icon.png);
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
-    background-position: 9px center;
-    float: left;
-    width: 328px;
-    font-size: 14px;
-    padding: 8px 8px 8px 34px;
-    height: 35px;
-    border: solid 2px #ff7919;
-    border-right: 0;
-    outline: none;
-}
-
-.btn-submit {
-    float: left;
-    display: block;
-    height: 35px;
-    width: 80px;
-    background-color: #ff7919;
-    border: 0;
-    color: #fff;
-    font-size: 16px;
-    background-size: 22px 22px;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.right{
-    float: right;
-    min-height: 67px;
-    min-width: 240px;
-}
-
-.item-login{
-    cursor: pointer;
-    margin-top: 23px;
-}
-
-.item1 {
-    position: relative;
-    margin-left: 40px;
-    margin-right: 5px;
-    height: 44px;
-    float: right;
-}
-
-.text1{
-    cursor: pointer;
-    padding-left: 22px;
-    line-height: 44px;
-    font-size: 16px;
-    min-height: 44px;
-    min-width: 54px;
-}
-
-.right {
-    text-align: right;
-}
-
-.login_icon{
-    background-image: url(../img/login_icon.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    height: 100%;
-    width: 18px;
-    margin-right: 4px;
-    left: 0;
-    background-size: contain;
-}
-
-.user_icon{
-    background-image: url(../img/default_head.png);
-}
-
-
-
-
-.clearfix:after, .clearfix:before {
-    content: " ";
-    display: table;
-}
-
-
 .container {
     width: 1300px;
     margin: 0 auto;
@@ -228,11 +10,12 @@ h3 {
 
 .main {
     padding: 0 18px;
+    min-height: 600px;
 }
 
 .info-content {
-    border: 1px solid #e1e1e1;
     position: relative;
+    min-height: 600px;
 }
 
 .info-content .user-profile-nav {
@@ -240,14 +23,13 @@ h3 {
     top: 0;
     bottom: 0;
     width: 200px;
-    background-color: #f4f3f4;
+    background-color: white;
+    height: 80px;
     text-align: center;
-    border-right: 1px solid #e1e1e1;
 }
 
-.info-content .user-profile-nav a.active, .info-content .user-profile-nav a:hover {
-    color: #fff;
-    background-color: #ed3931;
+.clear{
+    margin-top: 10px;
 }
 
 .info-content .user-profile-nav a {
@@ -261,31 +43,43 @@ h3 {
     font-size: 18px;
 }
 
-.info-content .orders-container, .info-content .profile-container {
-    float: left;
-    margin-left: 200px;
-    padding-left: 40px;
-    width: 1050px;
-    min-height: 900px;
+.info-content .user-profile-nav a:hover{
+    color: #fff;
+    background-color: #ff7919;
 }
 
-.info-content .orders-container .profile-title, .info-content .profile-container .profile-title {
-    padding: 26px 0;
-    color: #ec443f;
+.active{
+    color: #fff !important;
+    background-color: #ff7919;
+}
+
+.info-content .orders-container, .info-content .profile-container {
+    float: left;
+    margin-left: 240px;
+    width: 1050px;
+    min-height: 900px;
+    background-color: white;
+}
+
+.profile-title {
+    padding: 26px 26px;
+    color: #ff7919;
     font-size: 25px;
-    border-bottom: 1px solid #e1e1e1;
     margin-bottom: 30px;
+    width: 1264px;
 }
 
 .order-box {
     border: 1px solid #e5e5e5;
     margin: 0 40px 30px 0;
+    background-color: white;
 }
 
 .order-box .order-header {
     background-color: #f7f7f7;
     font-size: 14px;
     padding: 16px 20px;
+    border-left: 1px solid #e5e5e5;
 }
 
 .order-box .order-header .order-date {
@@ -330,19 +124,19 @@ h3 {
 }
 
 .order-box .order-body .activity-name {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
     color: #333;
-    margin: 4px 0 7px -6px;
+    margin: 4px 0 17px 0px;
 }
 
 .order-box .order-body .venue-name {
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
-    margin-bottom: 4px;
+    margin-bottom: 14px;
 }
 
-.order-box .order-body>div {
+.order-box .order-body div {
     display: inline-block;
     vertical-align: top;
 }
@@ -356,6 +150,13 @@ h3 {
 
 .order-box .order-body .order-price {
     width: 15%;
+    color: #ff7919;
+    font-size: 18px;
+}
+
+.order-detail{
+    font-size: 18px;
+    color: #ff7919;
 }
 
 .order-box .order-body .actions {

@@ -1,15 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2018/6/10
-  Time: 16:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>MyOrder</title>
+    <title>罗汉豆</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../css/index_css.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../css/search_css.css" rel="stylesheet" type="text/css" media="all">
     <link href="../css/myorder_css.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body>
@@ -70,17 +65,50 @@
 
 
 <div class="container">
+    <div class="profile-title">我的订单</div>
     <div class="content">
         <div class="main">
             <div class="info-content clearfix">
                 <div class="user-profile-nav">
-                    <a href="" class="Allorders active">全部订单</a>
-                    <a href="" class="Unpayorders ">未支付</a>
-                    <a href="" class="Unuseorders ">未使用</a>
-                    <a href="" class="Doneorders ">已完成</a>
-                </div>
+                    <a href="./information.jsp" class="Allorders">个人信息</a>
+                    <a href="./signup.jsp" class="Unpayorders active">我的订单</a>
+                 </div>
                 <div class="orders-container">
-                    <div class="profile-title">我的订单</div>
+                    <div class="search_city" style="background-color: #fff;width: 300px;margin: 0;">
+                        <dl id="category_filter_id" class="search_city_line">
+                            <dd class="search_city_num">
+                                <ul class="clear" style="font-size: 18px;">
+                                    <li>
+                                        <a href="" onclick="">
+                                            全部订单
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" onclick="">
+                                            未支付
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" onclick="">
+                                            待使用
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" onclick="">
+                                            已完成
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" onclick="">
+                                            已取消
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </dd>
+
+                        </dl>
+                    </div>
                     <div class="order-box" data-orderid="3149336059" style="height: 300px">
                         <div class="order-header">
                             <span class="order-date">2018-05-19</span>

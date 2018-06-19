@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>支付</title>
     <link href="../css/index_css.css" rel="stylesheet"  type="text/css">
 </head>
 <body>
@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<div style="width: 800px;margin-left:275px;overflow: hidden;">
+<div style="width: 800px;margin-left:350px;overflow: hidden;">
     <div>
         <div class="order-area">
             <div id="order">
