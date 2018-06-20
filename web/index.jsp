@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Title</title>
+  <title>罗汉豆</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="../css/index_css.css" rel="stylesheet" type="text/css" media="all">
   <script>
