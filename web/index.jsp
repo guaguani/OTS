@@ -11,20 +11,84 @@
   <title>罗汉豆</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="../css/index_css.css" rel="stylesheet" type="text/css" media="all">
+  <script src="./js/jquery-3.2.1.js"></script>
+  <script src="./js/Act.js"></script>
+  <script src="./js/User.js"></script>
   <script>
-      function openLogin() {
-          document.getElementById("front").style.display="";
-          document.getElementById("back").style.display="";
-          document.getElementById("username").value="";
-          document.getElementById("password").value="";
-      }
-      function closeLogin() {
-          document.getElementById("front").style.display="none";
-          document.getElementById("back").style.display="none";
-      }
+      setInterval(function () {
+          //alert("in");
+          var oUl = document.getElementById('slide_window');
+          var t=parseInt($("#counter").attr("name"));
+          var left=parseInt($("#left").attr("name"));
+
+          if(t==2198){
+              t=0;
+              if(left==4000){
+                  left=40;
+                  t=199;
+                  $("#sp1").attr("style","background-color: #ff7919;");
+                  $("#sp1").siblings().attr("style","");
+              }
+          }
+          else{
+              if(t<198){
+                  left=left+5;
+                  oUl.style.left = -(left)+'px';
+              }
+              else{
+                  var s=(left-40)/990+1;
+                  $("#sp"+s).attr("style","background-color: #ff7919;");
+                  $("#sp"+s).siblings().attr("style","");
+              }
+              t=t+1;
+          }
+          $("#counter").attr("name",t+"");
+          $("#left").attr("name",left+"");
+      }, 1);
+
+      $(document).ready(function(){
+          $("body").on('click','.city-name',function(){
+              $(this).parent().parent().find(".city_box").toggle();
+          });
+          $("body").on('click','.city-item',function(){
+              var name=$(this).html();
+              $(this).parent().parent().parent().parent().find(".city-name").html(name);
+              search_by_city(name);
+          });
+          $("body").on('click','.btn-submit',function(){
+              var user_input=$(this).prev().value();
+              search_by_input(user_input);
+          });
+          $("body").on('click','.item-login',function(){
+              $(".log_pane").show();
+          });
+          $("body").on('click','#login',function(){
+              var name=$("#log_username").val();
+              var pass=$("#log_password").val();
+              var res=login(name,pass);
+              if(res=="1"){
+                  $(".item-login").hide();
+                  $(".item-user").show();
+              }
+          });
+          $("body").on('click','.spi',function(){
+              var id=parseInt($(this).attr("name"));
+              $("#sp"+id).attr("style","background-color: #ff7919;");
+              $("#sp"+id).siblings().attr("style","");
+              var t=99;
+              var left=40+((id-1)*990)-495;
+              var oUl = document.getElementById('slide_window');
+              oUl.style.left = -(left)+'px';
+              $("#counter").attr("name",t+"");
+              $("#left").attr("name",left+"");
+          });
+      });
+
   </script>
 </head>
 <body class="home">
+<a id="counter" style="display: none;" name="0"></a>
+<a id="left" style="display: none;" name="40"></a>
 <div class="header">
   <div class="box1">
     <a href="/" class="logo_box">
@@ -39,7 +103,7 @@
       <div class="city_box" style="display: none;">
         <div>
           <ul>
-            <li class="selected" data-name="beijing">北京</li>
+            <li class="selected city-item" data-name="beijing">全国</li>
             <li class="city-item" data-name="shanghai">上海</li>
             <li class="city-item" data-name="beijing">北京</li>
             <li class="city-item" data-name="guangzhou">广州</li>
@@ -63,15 +127,14 @@
       </form>
     </div>
     <div class="right">
-      <div style="display: block" class="item-login item1" onclick="openLogin()">
+      <div style="" class="item-login item1">
         <div class="text1" style="color:#ff7919;" >
           <div class="login_icon"></div>
           登录
         </div>
       </div>
-      <div style="display: none" class="item-user item1">
-        <div class="text1" style="color:#ff7919;">
-          <div class="user_icon"></div>
+      <div style="display: none;" class="item-user item1">
+        <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
           个人中心
         </div>
       </div>
@@ -116,8 +179,8 @@
         <div class="next">
           <i class="fa fa-angle-right"></i>
         </div>
-        <div class="slide-container" style="left: -40px;">
-          <ul style="width: 7920px;margin-top: 0px;">
+        <div id="slide_window" class="slide-container" style="left: -40px;">
+          <ul id="slide_ul" style="width: 7920px;margin-top: 0px;">
             <li data-color="#050100" class="item">
               <a href="" target="_blank">
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
@@ -147,11 +210,11 @@
         </div>
 
         <ul class="spots">
-          <li class="item"></li>
-          <li class="item"></li>
-          <li class="item"></li>
-          <li class="item"></li>
-          <li class="item" style="background-color: #ff7919;"></li>
+          <li class="item spi" id="sp1" name="1" style="background-color: #ff7919;"></li>
+          <li class="item spi" id="sp2" name="2"></li>
+          <li class="item spi" id="sp3" name="3"></li>
+          <li class="item spi" id="sp4" name="4"></li>
+          <li class="item spi" id="sp5" name="5"></li>
         </ul>
       </div>
     </div>
@@ -365,25 +428,24 @@
     </div>
   </div>
 </div>
-<div id=back style="display:none; POSITION:absolute; left:0; top:0; width:100%; height:100%;
-    background-color:#ededed; filter:alpha(opacity=60)"></div>
-<div id=front style="display:none; POSITION:absolute; left:50%; top:50%; width:400px; height:450px;
-    margin-left:-200px; margin-top:-225px; border:1px solid #ffffff; background-color:#ffffff; text-align:center">
-  <div style="margin-top:50px;margin-bottom:30px">
-    <label style="font-size: 20px;text-align: center;margin-top: 50px;">登录</label>
-  </div>
-  <div style="text-align: center">
-    <label style="text-align: right;width: 80px;">用户</label>
-    <input type="text" id="username" name="username" value=""/>
-  </div>
-  <div style="text-align: center;margin-top:30px;margin-bottom:30px">
-    <label style="text-align: right;width: 80px;">  密码</label>
-    <input type="password" id="password" name="password" value=""/>
-  </div>
-  <div style="margin-top:30px">
-    <input type="button" id="cancelLogin" value="退出" onclick="closeLogin()"/>
-    <input type="button" id="submit" class="submit" value="登录"/>
+
+<div class="log_pane" style="display: none;">
+  <div class="log_back"></div>
+  <div class="pop_login">
+    <ul class="pop_login_title">
+      <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
+      <div class="icon icon-login-popup-logo"></div>
+    </ul>
+    <ul class="pop_login_form">
+      <li id="user_name"><input placeholder="用户名" id="log_username"></li>
+      <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
+      <li id="li_login">
+        <a id="login">登录</a>
+        <a id="reg" style="margin-left: 40px;">注册</a>
+      </li>
+    </ul>
   </div>
 </div>
+
 </body>
 </html>

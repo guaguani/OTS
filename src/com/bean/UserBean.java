@@ -19,8 +19,35 @@ public class UserBean implements Serializable{
 	private int b_day;
 	/*个人兴趣*/
 	private ArrayList<String> interest;
-	
-	
+	private String curPos;
+	private String curType;
+	private String curInput;
+
+
+	public String getCurPos() {
+		return curPos;
+	}
+
+	public void setCurPos(String curPos) {
+		this.curPos = curPos;
+	}
+
+	public String getCurType() {
+		return curType;
+	}
+
+	public void setCurType(String curType) {
+		this.curType = curType;
+	}
+
+	public String getCurInput() {
+		return curInput;
+	}
+
+	public void setCurInput(String curInput) {
+		this.curInput = curInput;
+	}
+
 	
 	public String getId() {
 		return id;
