@@ -11,7 +11,41 @@
     <title>订单确认</title>
     <script src="../js/jquery-2.1.4.min.js"></script>
     <link href="../css/index_css.css" rel="stylesheet"  type="text/css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/Act.js"></script>
+    <script src="../js/User.js"></script>
+    <script src="../js/Order.js"></script>
     <script>
+        $(document).ready(function() {
+            $("body").on('click', '.city-name', function () {
+                $(this).parent().parent().find(".city_box").toggle();
+            });
+            $("body").on('click', '.city-item', function () {
+                var name = $(this).html();
+                $(this).parent().parent().parent().parent().find(".city-name").html(name);
+                search_by_city(name);
+            });
+            $("body").on('click', '.btn-submit', function () {
+                var user_input = $(this).prev().value();
+                search_by_input(user_input);
+            });
+            $("body").on('click', '.item-login', function () {
+                $(".log_pane").show();
+            });
+            $("body").on('click', '#login', function () {
+                var name = $("#log_username").val();
+                var pass = $("#log_password").val();
+                var res = login(name, pass);
+                if (res == "1") {
+                    $(".item-login").hide();
+                    $(".item-user").show();
+                }
+            });
+
+            $("body").on('click', '.icon-pay-weixin', function () {
+                //pop
+            });
+        });
         setInterval(function () {
         //alert("in");
         var v1=$("#counter");
@@ -24,7 +58,7 @@
             if(sec==0){
                 if(min==0){
                     $("#counter").attr("data-state","1");
-                    //time_out_cancle(oid);
+                    cancle(oid);
                 }
                 else{
                     min=min-1;
@@ -65,7 +99,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="selected" data-name="beijing">北京</li>
+                        <li class="selected city-item" data-name="beijing">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -89,21 +123,21 @@
             </form>
         </div>
         <div class="right">
-            <div style="display: block" class="item-login item1" onclick="openLogin()">
+            <div style="" class="item-login item1">
                 <div class="text1" style="color:#ff7919;" >
                     <div class="login_icon"></div>
                     登录
                 </div>
             </div>
-            <div style="display: none" class="item-user item1">
-                <div class="text1" style="color:#ff7919;">
-                    <div class="user_icon"></div>
+            <div style="display: none;" class="item-user item1">
+                <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
                     个人中心
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="s_container">
     <div class="order-progress-bar">
         <div class="step first done">
@@ -174,12 +208,12 @@
     </table>
 
 
-    <div class="right" style="float: left;">
+    <div class="right" style="float: left;margin-bottom: 20px;">
         <span style="float: left;margin-bottom: 20px;margin-left: 18px;">选择付款方式 :</span>
         <div class="box-main">
             <ul style="min-height: 100%;padding: 0;">
-                <li class="pay-money-img"><a class="icon icon-pay-weixin" href="./pay.jsp"></a></li>
-                <li class="pay-money-img"><a class="icon icon-pay-alibaba"></a></li>
+                <li class="pay-money-img"><a class="icon icon-pay-weixin"></a></li>
+                <li class="pay-money-img"><a class="icon icon-pay-alibaba" href="./pay.jsp"></a></li>
             </ul>
         </div>
     </div>
@@ -202,6 +236,24 @@
 
         <p class="tip">请重新尝试</p>
 
+    </div>
+</div>
+
+<div class="log_pane" style="display: none;">
+    <div class="log_back"></div>
+    <div class="pop_login">
+        <ul class="pop_login_title">
+            <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
+            <div class="icon icon-login-popup-logo"></div>
+        </ul>
+        <ul class="pop_login_form">
+            <li id="user_name"><input placeholder="用户名" id="log_username"></li>
+            <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
+            <li id="li_login">
+                <a id="login">登录</a>
+                <a id="reg" style="margin-left: 40px;">注册</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>

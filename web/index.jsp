@@ -82,6 +82,10 @@
               $("#counter").attr("name",t+"");
               $("#left").attr("name",left+"");
           });
+
+          $("body").on('click', '.search_type', function () {
+              search_by_type($(this.attr("name")));
+          });
       });
 
   </script>
@@ -147,28 +151,28 @@
   <div class="box" style="min-height: 360px;overflow: hidden;">
     <ul class="left_cate" style="padding: 0;">
       <li class="item-1">
-        <a href="">演唱会</a>
+        <a class="search_type" name="2">演唱会</a>
       </li>
       <li class="item-2">
-        <a href="">话剧歌剧</a>
+        <a class="search_type" name="3">话剧歌剧</a>
       </li>
       <li class="item-5">
-        <a href="">休闲展览</a>
+        <a class="search_type" name="4">休闲展览</a>
       </li>
       <li class="item-8">
-        <a href="">体育赛事</a>
+        <a class="search_type" name="5">体育赛事</a>
       </li>
       <li class="item-3">
-        <a href="">音乐会</a>
+        <a class="search_type" name="6">音乐会</a>
       </li>
       <li class="item-4">
-        <a href="">儿童亲子</a>
+        <a class="search_type" name="7">儿童亲子</a>
       </li>
       <li class="item-6">
-        <a href="">舞蹈芭蕾</a>
+        <a class="search_type" name="8">舞蹈芭蕾</a>
       </li>
       <li class="item-7">
-        <a href="">戏曲综艺</a>
+        <a class="search_type" name="9">戏曲综艺</a>
       </li>
     </ul>
     <div class="ad_pos" style="margin-top: 16px;">

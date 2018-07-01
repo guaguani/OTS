@@ -10,8 +10,94 @@
 <head>
     <title>支付</title>
     <link href="../css/index_css.css" rel="stylesheet"  type="text/css">
+    <link href="../css/third.css" rel="stylesheet"  type="text/css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/Order.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("body").on('click','#pay',function(){
+                var oid=$(this).attr("data-oid");
+                var v1=$("#counter");
+                var v2=document.getElementById("account").value;
+                var v3=document.getElementById("pwd").value
+                var info=$("#info").attr("name");
+                if(info==null||info==""){
+                    info="no";
+                }
+                var sum=$("#total").html();
+                var can=true;
+                if(v2==null||v2=="") {
+                    alert("请输入账号");
+                    can=false;
+                }
+                else{
+                    if(v3==null||v3=="") {
+                        alert("请输入密码");
+                        can=false;
+                    }
+                }
+                if(can){
+                    var sec=parseInt(v1.attr("data-sec"));
+                    var min=parseInt(v1.attr("data-min"));
+                    var state=parseInt(v1.attr("data-state"));
+                    var par=oid+":";
+                    if(state==0){
+                        par=par+v2+":"+v3+":"+min+":"+sec+":"+info+":"+sum;
+                        //alert(par);
+                        pay_money(par);
+
+                    }
+
+                }
+
+            });
+
+            $("body").on('click','#i_know',function(){
+                //window.location.href='order_scan.jsp';
+            });
+
+
+        });
+
+        setInterval(function () {
+            //alert("in");
+            var v1=$("#counter");
+            var sec=parseInt(v1.attr("data-sec"));
+            var min=parseInt(v1.attr("data-min"));
+            var oid=v1.attr("data-oid");
+            var state=parseInt(v1.attr("data-state"));
+            //alert(min);
+            if(state==0){
+                if(sec==0){
+                    if(min==0){
+                        $("#counter").attr("data-state","1");
+                        $("#loading").fadeIn(500);
+                        time_out_cancle(oid);
+                        $("#loading").fadeOut(500);
+                    }
+                    else{
+                        min=min-1;
+                        sec=59;
+                    }
+                }
+                else{
+                    sec=sec-1;
+                }
+
+                v1.attr("data-sec",sec+"");
+                v1.attr("data-min",min+"");
+
+            }
+            else{
+                clearInterval();
+            }
+        }, 1000);
+    </script>
 </head>
 <body>
+<a data-sec="" data-oid="" data-state="0" id="counter"></a>
+<a id="info" name=""></a>
 <div class="pay_header">
     <div style="width: 950px;zoom:1;">
         <div class="header-title">
@@ -43,27 +129,41 @@
                 </div>
             </div>
         </div>
-        <div class="cashier-center-container">
-            <div>
-                <div class="cashier-center-view">
-                    <div class="qrcode-area">
-                        <div class="qrcode-header">
-                            <div style="text-align: center;">扫一扫付款（元）</div>
-                            <div class="qrcode-header-money">33.00</div>
-                        </div>
-                        <div class="qrcode-img-wrapper">
-                            <div class="qrcode-img-area">
-                                <div style="position: relative;display: inline-block;">
-                                    <canvas width="168" height="168" style="float: left;"></canvas>
-                                    <img src="../img/alicenter_icon.png" style="position: absolute;top: 50%;left: 50%;width:42px;height:42px;margin-left: -21px;margin-top: -21px">
+        <div class="d6">
+            <div class="d7">
+                <div class="d8">
+                    <form>
+                        <div class="d9">
+                            <div class="d10">
+                                <div style="width:100%">
+                                    <div class="d11">
+                                        <p class="p1">登录支付平台付账</p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div style="padding: 10px 0 6px;margin: 0;zoom: 1;min-height: 52px;">
-                                <div style="margin-left: 35px;float: left;">打开手机支付宝<br>扫一扫继续付款</div>
+                            <div style="padding: 0;margin-top: 10px;">
+                                <div>
+                                    <div class="d12">
+                                        <label class="d15">帐户名：</label>
+                                        <input class="i1" id="account">
+                                    </div>
+                                    <div class="d13">
+                                        <label class="d15">支付密码：</label>
+                                        <span class="s6">
+												<input type="password" class="i2" id="pwd">
+											</span>
+                                    </div>
+                                    <div class="d14">
+                                        <div class="d16">
+                                            <a class="a1">
+                                                <span class="s7" data-oid="" id="pay">支付</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

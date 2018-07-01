@@ -1150,64 +1150,7 @@ li {
     color: #f60;
 }
 
-.cashier-center-container {
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    width: 800px;
-    min-height: 460px;
-    background-color: #fff;
-}
 
-.cashier-center-view {
-    position: relative;
-    width: 800px;
-    float: left;
-    margin: 0;
-    padding: 0;
-}
-
-.qrcode-area {
-    margin: 0 auto;
-    position: relative;
-    width: 300px;
-}
-
-.qrcode-header {
-    display: block;
-    width: auto;
-    margin: 0;
-    padding: 0;
-    margin-top: 75px;
-    margin-bottom: 16px;
-}
-
-.qrcode-header-money {
-    font-size: 26px;
-    font-weight: 700;
-    color: #f60;
-    text-align: center;
-}
-
-.qrcode-img-wrapper {
-    position: relative;
-    width: 168px;
-    height: auto;
-    min-height: 168px;
-    margin: 0 auto;
-    padding: 6px;
-    border: 1px solid #d3d3d3;
-    -webkit-box-shadow: 1px 1px 1px #ccc;
-    box-shadow: 1px 1px 1px #ccc;
-}
-
-.qrcode-img-area {
-    width: 168px;
-    height: 168px;
-    text-align: center;
-    margin: 0 auto;
-    position: relative;
-}
 
 .log_back{
     position: fixed;

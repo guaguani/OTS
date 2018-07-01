@@ -71,8 +71,10 @@
 
 .order-box {
     border: 1px solid #e5e5e5;
-    margin: 0 40px 30px 0;
+    margin-left: 21px;
     background-color: white;
+    width: 1008px;
+    margin-bottom: 15px;
 }
 
 .order-box .order-header {
@@ -90,7 +92,7 @@
 }
 
 .order-box .order-header .order-id {
-    color: #999;
+    color: #333;
     font-size: 20px;
 }
 
@@ -132,7 +134,7 @@
 
 .order-box .order-body .venue-name {
     font-size: 16px;
-    color: #999;
+    color: #333;
     margin-bottom: 14px;
 }
 
@@ -161,4 +163,8 @@
 
 .order-box .order-body .actions {
     text-align: center;
+}
+
+.order-time{
+    margin-left: 25px;
 }
