@@ -21,10 +21,7 @@
                 var v1=$("#counter");
                 var v2=document.getElementById("account").value;
                 var v3=document.getElementById("pwd").value
-                var info=$("#info").attr("name");
-                if(info==null||info==""){
-                    info="no";
-                }
+
                 var sum=$("#total").html();
                 var can=true;
                 if(v2==null||v2=="") {
@@ -38,25 +35,17 @@
                     }
                 }
                 if(can){
-                    var sec=parseInt(v1.attr("data-sec"));
-                    var min=parseInt(v1.attr("data-min"));
                     var state=parseInt(v1.attr("data-state"));
                     var par=oid+":";
                     if(state==0){
-                        par=par+v2+":"+v3+":"+min+":"+sec+":"+info+":"+sum;
+                        par=par+v2+":"+v3+":"+sum;
                         //alert(par);
                         pay_money(par);
-
                     }
 
                 }
 
             });
-
-            $("body").on('click','#i_know',function(){
-                //window.location.href='order_scan.jsp';
-            });
-
 
         });
 
@@ -73,7 +62,7 @@
                     if(min==0){
                         $("#counter").attr("data-state","1");
                         $("#loading").fadeIn(500);
-                        time_out_cancle(oid);
+                        time_out_cancel(oid);
                         $("#loading").fadeOut(500);
                     }
                     else{
@@ -97,7 +86,7 @@
 </head>
 <body>
 <a data-sec="" data-oid="" data-state="0" id="counter"></a>
-<a id="info" name=""></a>
+
 <div class="pay_header">
     <div style="width: 950px;zoom:1;">
         <div class="header-title">
@@ -167,6 +156,27 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal-container" style="display:none;" id="time_out_cancel_board">
+    <div class="modal">
+        <span class="icon"></span>
+        <p class="tip">支付超时，该订单已失效，请重新购买</p>
+    </div>
+</div>
+
+<div class="modal-container" style="display:none;" id="wrong_pay_info_board">
+    <div class="modal">
+        <span class="icon"></span>
+        <p class="tip">用户名或密码错误，请重试</p>
+    </div>
+</div>
+
+<div class="modal-container" style="display:none;" id="pay_success_board">
+    <div class="modal">
+        <span class="icon"></span>
+        <p class="tip">支付成功</p>
     </div>
 </div>
 </body>

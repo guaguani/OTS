@@ -32,17 +32,37 @@
             $("body").on('click', '.item-login', function () {
                 $(".log_pane").show();
             });
+            $("body").on('click', '.item-user', function () {
+                window.location.href='./information.jsp';
+            });
             $("body").on('click', '#login', function () {
                 var name = $("#log_username").val();
                 var pass = $("#log_password").val();
                 var res = login(name, pass);
                 if (res == "1") {
+                    $(".log_pane").hide();
                     $(".item-login").hide();
                     $(".item-user").show();
+                }
+                else{
+                    $("#wrong_tip").show();
                 }
             });
             $("body").on('click', '.search_type', function () {
                 search_by_type($(this.attr("name")));
+            });
+
+            $("body").on('click', '.activity_box', function () {
+                var id=$(this).attr("data-aid");
+                get_act_detail(id);
+            });
+
+            $(window).scroll(function(){
+                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                    $("#loading").fadeIn(500);
+                    more_act();
+                    $("#loading").fadeOut(500);
+                }
             });
         });
     </script>
@@ -108,47 +128,47 @@
             <dd class="search_city_num">
                 <ul class="clear">
                     <li>
-                        <a class="search_type" id="all" style="background-color: #ff7919;" name="1">
+                        <a class="search_type" id="all" style="background-color: #ff7919;" name="all">
                             全部
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="con" name="2">
+                        <a class="search_type" id="con" name="con">
                             演唱会
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="ope" name="3">
+                        <a class="search_type" id="ope" name="ope">
                             话剧歌剧
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="ent" name="4">
+                        <a class="search_type" id="ent" name="ent">
                             休闲展览
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="spo" name="5">
+                        <a class="search_type" id="spo" name="spo">
                             体育赛事
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="mus" name="6">
+                        <a class="search_type" id="mus" name="mus">
                             音乐会
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="chi" name="7">
+                        <a class="search_type" id="chi" name="chi">
                             儿童亲子
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="dan" name="8">
+                        <a class="search_type" id="dan" name="dan">
                             舞蹈芭蕾
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="bei" name="9">
+                        <a class="search_type" id="bei" name="bei">
                             戏曲综艺
                         </a>
                     </li>
@@ -161,7 +181,7 @@
     <!-- 搜索结果展示-->
     <div class="search_main">
         <ul class="search_list" id="content_list">
-            <li>
+            <li class="activity_box" data-aid="">
                 <div class="search_img">
                     <a href="./order_check.jsp" title="张杰2018“未·LIVE”巡回演唱会-北京站">
                         <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
@@ -185,7 +205,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="activity_box" data-aid="">
                 <div class="search_img">
                     <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
                         <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
@@ -209,7 +229,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="activity_box" data-aid="">
                 <div class="search_img">
                     <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
                         <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
@@ -233,7 +253,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="activity_box" data-aid="">
                 <div class="search_img">
                     <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
                         <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
@@ -259,6 +279,7 @@
             </li>
         </ul>
     </div>
+
 <div class="log_pane" style="display: none;">
     <div class="log_back"></div>
     <div class="pop_login">
@@ -266,6 +287,7 @@
             <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
             <div class="icon icon-login-popup-logo"></div>
         </ul>
+        <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
         <ul class="pop_login_form">
             <li id="user_name"><input placeholder="用户名" id="log_username"></li>
             <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
@@ -276,13 +298,16 @@
         </ul>
     </div>
 </div>
-<div class="modal-container" style="display:none;" id="little_board">
+
+<div class="modal-container" style="display:none;" id="no_more_board">
     <div class="modal">
         <span class="icon"></span>
-
         <p class="tip">没有更多了</p>
-
     </div>
+</div>
+
+<div id="loading" class="loading" style="position:absolute; left:49%; top:40%; width:20px; height:20px; z-index:30;display: none">
+    <img src="../img/loading.gif"/>
 </div>
 </body>
 </html>

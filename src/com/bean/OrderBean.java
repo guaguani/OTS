@@ -40,6 +40,7 @@ public class OrderBean implements Serializable{
 	/*付款账号*/
 	private String pay_id;
 	private long start;
+	private int num;
 
 	public OrderBean() {
 		start=System.currentTimeMillis();
@@ -178,4 +179,27 @@ public class OrderBean implements Serializable{
 		this.createDate = createDate;
 	}
 
+	public long getStart() {
+		return start;
+	}
+
+	public void setStart(long start) {
+		this.start = start;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public ArrayList<Long> getTime(){
+		ArrayList<Long> result=new ArrayList<Long>();
+		long now=(System.currentTimeMillis()-this.start)/1000;
+		result.add(now/60);
+		result.add(now%60);
+		return result;
+	}
 }

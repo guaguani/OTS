@@ -62,15 +62,23 @@
           $("body").on('click','.item-login',function(){
               $(".log_pane").show();
           });
-          $("body").on('click','#login',function(){
-              var name=$("#log_username").val();
-              var pass=$("#log_password").val();
-              var res=login(name,pass);
-              if(res=="1"){
+          $("body").on('click', '.item-user', function () {
+              window.location.href='./information.jsp';
+          });
+          $("body").on('click', '#login', function () {
+              var name = $("#log_username").val();
+              var pass = $("#log_password").val();
+              var res = login(name, pass);
+              if (res == "1") {
+                  $(".log_pane").hide();
                   $(".item-login").hide();
                   $(".item-user").show();
               }
+              else{
+                  $("#wrong_tip").show();
+              }
           });
+
           $("body").on('click','.spi',function(){
               var id=parseInt($(this).attr("name"));
               $("#sp"+id).attr("style","background-color: #ff7919;");
@@ -85,6 +93,16 @@
 
           $("body").on('click', '.search_type', function () {
               search_by_type($(this.attr("name")));
+          });
+
+          $("body").on('click', '.activity_box', function () {
+              var id=$(this).attr("data-aid");
+              get_act_detail(id);
+          });
+
+          $("body").on('click', '.more', function () {
+              var type=$(this).attr("data-type");
+              search_by_type(type);
           });
       });
 
@@ -151,28 +169,28 @@
   <div class="box" style="min-height: 360px;overflow: hidden;">
     <ul class="left_cate" style="padding: 0;">
       <li class="item-1">
-        <a class="search_type" name="2">演唱会</a>
+        <a class="search_type" name="con">演唱会</a>
       </li>
       <li class="item-2">
-        <a class="search_type" name="3">话剧歌剧</a>
+        <a class="search_type" name="ope">话剧歌剧</a>
       </li>
       <li class="item-5">
-        <a class="search_type" name="4">休闲展览</a>
+        <a class="search_type" name="ent">休闲展览</a>
       </li>
       <li class="item-8">
-        <a class="search_type" name="5">体育赛事</a>
+        <a class="search_type" name="spo">体育赛事</a>
       </li>
       <li class="item-3">
-        <a class="search_type" name="6">音乐会</a>
+        <a class="search_type" name="mus">音乐会</a>
       </li>
       <li class="item-4">
-        <a class="search_type" name="7">儿童亲子</a>
+        <a class="search_type" name="chi">儿童亲子</a>
       </li>
       <li class="item-6">
-        <a class="search_type" name="8">舞蹈芭蕾</a>
+        <a class="search_type" name="dan">舞蹈芭蕾</a>
       </li>
       <li class="item-7">
-        <a class="search_type" name="9">戏曲综艺</a>
+        <a class="search_type" name="bei">戏曲综艺</a>
       </li>
     </ul>
     <div class="ad_pos" style="margin-top: 16px;">
@@ -185,28 +203,28 @@
         </div>
         <div id="slide_window" class="slide-container" style="left: -40px;">
           <ul id="slide_ul" style="width: 7920px;margin-top: 0px;">
-            <li data-color="#050100" class="item">
-              <a href="" target="_blank">
+            <li data-aid="" class="item activity_box">
+              <a>
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
               </a>
             </li>
-            <li data-color="#050100" class="item">
-              <a href="" target="_blank">
+            <li data-aid="" class="item activity_box">
+              <a>
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
               </a>
             </li>
-            <li data-color="#050100" class="item">
-              <a href="" target="_blank">
+            <li data-aid="" class="item activity_box">
+              <a>
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
               </a>
             </li>
-            <li data-color="#050100" class="item">
-              <a href="" target="_blank">
+            <li data-aid="" class="item activity_box">
+              <a>
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
               </a>
             </li>
-            <li data-color="#050100" class="item">
-              <a href="" target="_blank">
+            <li data-aid="" class="item activity_box">
+              <a>
                 <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
               </a>
             </li>
@@ -228,16 +246,16 @@
 
 <div class="list-block box new-block">
   <div class="block-title">
-    <a href="" class="title">
+    <a class="title">
       <img src="../img/hot.png" class="title-icon">
       <span class="title-text">近期热门</span>
     </a>
-    <a href="./jsp/search.jsp" class="more">更多 &gt;</a>
+    <a class="more" data-type="all">更多 &gt;</a>
   </div>
   <div style="border-top-color:#ffcca6;border-top-width:2px" class="items">
     <ul style="padding: 0;">
-      <li class="item">
-        <a target="_blank" href="./jsp/activity.jsp" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -249,8 +267,8 @@
           </div>
         </a>
       </li>
-      <li class="item">
-        <a target="_blank" href="" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -262,8 +280,8 @@
           </div>
         </a>
       </li>
-      <li class="item">
-        <a target="_blank" href="" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -275,8 +293,8 @@
           </div>
         </a>
       </li>
-      <li class="item">
-        <a target="_blank" href="" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -288,8 +306,8 @@
           </div>
         </a>
       </li>
-      <li class="item">
-        <a target="_blank" href="" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -301,8 +319,8 @@
           </div>
         </a>
       </li>
-      <li class="item">
-        <a target="_blank" href="" class="inner">
+      <li class="item activity_box" data-aid="">
+        <a class="inner">
           <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
           <div class="info">
             <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
@@ -321,37 +339,37 @@
 <div class="box">
   <div class="list-block category-block">
     <div class="block-title">
-      <a href="" class="title">
+      <a class="title">
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">演唱会</span>
       </a>
-      <a href="" class="more">更多 &gt;</a>
+      <a class="more" data-type="con">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
-        <li class="item main-item">
-          <a href="">
+        <li class="item main-item activity_box" data-aid="">
+          <a>
             <img alt="JJ林俊杰【圣所】世界巡回演唱会 济南站" src="../img/example_big_act.jpg" class="poster">
           </a>
           <div class="info">
             <div class="bg" style="background-color:#ff7919"></div>
-            <a href="">
+            <a>
               <div class="title">[济南] JJ林俊杰【圣所】世界巡回演唱会 济南站</div>
             </a>
             <div class="price">暂时售空</div>
           </div>
         </li>
-        <li style="" class="item">
-          <a href="">
+        <li class="item activity_box" data-aid="">
+          <a>
             <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
           </a>
           <div class="info other-info">
-            <a href="">
+            <a>
               <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
             </a>
 
             <div style="color:#999;">2018.08.11</div>
-            <a href="">
+            <a>
               <div style="color:#999;">国家体育场（鸟巢）</div>
             </a>
             <div class="price" style="margin-top: 20px;">
@@ -361,17 +379,17 @@
             </div>
           </div>
         </li>
-        <li style="" class="item">
-          <a href="">
+        <li class="item activity_box" data-aid="">
+          <a>
             <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
           </a>
           <div class="info other-info">
-            <a href="">
+            <a>
               <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
             </a>
 
             <div style="color:#999;">2018.08.11</div>
-            <a href="">
+            <a>
               <div style="color:#999;">国家体育场（鸟巢）</div>
             </a>
             <div class="price" style="margin-top: 20px;">
@@ -381,17 +399,17 @@
             </div>
           </div>
         </li>
-        <li style="" class="item">
-          <a href="">
+        <li class="item activity_box" data-aid="">
+          <a>
             <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
           </a>
           <div class="info other-info">
-            <a href="">
+            <a>
               <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
             </a>
 
             <div style="color:#999;">2018.08.11</div>
-            <a href="">
+            <a>
               <div style="color:#999;">国家体育场（鸟巢）</div>
             </a>
             <div class="price" style="margin-top: 20px;">
@@ -401,17 +419,17 @@
             </div>
           </div>
         </li>
-        <li style="" class="item">
-          <a href="">
+        <li class="item activity_box" data-aid="">
+          <a>
             <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
           </a>
           <div class="info other-info">
-            <a href="">
+            <a>
               <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
             </a>
 
             <div style="color:#999;">2018.08.11</div>
-            <a href="">
+            <a>
               <div style="color:#999;">国家体育场（鸟巢）</div>
             </a>
             <div class="price" style="margin-top: 20px;">
@@ -425,6 +443,7 @@
     </div>
   </div>
 </div>
+
 <div class="footer bottom-bar">
   <div class="box">
     <div class="links-and-brand">
@@ -433,6 +452,7 @@
   </div>
 </div>
 
+
 <div class="log_pane" style="display: none;">
   <div class="log_back"></div>
   <div class="pop_login">
@@ -440,6 +460,7 @@
       <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
       <div class="icon icon-login-popup-logo"></div>
     </ul>
+    <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
     <ul class="pop_login_form">
       <li id="user_name"><input placeholder="用户名" id="log_username"></li>
       <li id="password"><input type="password" placeholder="密码" id="log_password"></li>

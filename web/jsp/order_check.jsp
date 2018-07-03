@@ -29,22 +29,10 @@
                 var user_input = $(this).prev().value();
                 search_by_input(user_input);
             });
-            $("body").on('click', '.item-login', function () {
-                $(".log_pane").show();
-            });
-            $("body").on('click', '#login', function () {
-                var name = $("#log_username").val();
-                var pass = $("#log_password").val();
-                var res = login(name, pass);
-                if (res == "1") {
-                    $(".item-login").hide();
-                    $(".item-user").show();
-                }
+            $("body").on('click', '.item-user', function () {
+                window.location.href='./information.jsp';
             });
 
-            $("body").on('click', '.icon-pay-weixin', function () {
-                //pop
-            });
         });
         setInterval(function () {
         //alert("in");
@@ -58,7 +46,7 @@
             if(sec==0){
                 if(min==0){
                     $("#counter").attr("data-state","1");
-                    cancle(oid);
+                    time_out_cancel(oid);
                 }
                 else{
                     min=min-1;
@@ -79,7 +67,7 @@
             v3.innerHTML=sec+"";
         }
         else{
-        //clearInterval();
+            clearInterval();
         }
         }, 1000);
     </script>
@@ -123,13 +111,7 @@
             </form>
         </div>
         <div class="right">
-            <div style="" class="item-login item1">
-                <div class="text1" style="color:#ff7919;" >
-                    <div class="login_icon"></div>
-                    登录
-                </div>
-            </div>
-            <div style="display: none;" class="item-user item1">
+            <div style="" class="item-user item1">
                 <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
                     个人中心
                 </div>
@@ -218,41 +200,12 @@
 </div>
 
 
-
-<div class="modal-container" style="display:none;" id="little_board1">
+<div class="modal-container" style="display:none;" id="time_out_cancel_board">
     <div class="modal">
         <span class="icon"></span>
-
         <p class="tip">支付超时，该订单已失效，请重新购买</p>
-
-        <div class="ok-btn btn" id="i_know">我知道了</div>
-    </div>
-</div>
-<div class="modal-container" style="display:none;" id="little_board">
-    <div class="modal">
-        <span class="icon"></span>
-
-        <p class="tip">请重新尝试</p>
-
     </div>
 </div>
 
-<div class="log_pane" style="display: none;">
-    <div class="log_back"></div>
-    <div class="pop_login">
-        <ul class="pop_login_title">
-            <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
-            <div class="icon icon-login-popup-logo"></div>
-        </ul>
-        <ul class="pop_login_form">
-            <li id="user_name"><input placeholder="用户名" id="log_username"></li>
-            <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
-            <li id="li_login">
-                <a id="login">登录</a>
-                <a id="reg" style="margin-left: 40px;">注册</a>
-            </li>
-        </ul>
-    </div>
-</div>
 </body>
 </html>

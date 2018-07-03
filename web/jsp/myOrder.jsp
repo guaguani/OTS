@@ -11,6 +11,7 @@
     <script src="../js/User.js"></script>
     <script src="../js/Order.js"></script>
     <script>
+        get_order("all");
         $(document).ready(function() {
             $("body").on('click', '.city-name', function () {
                 $(this).parent().parent().find(".city_box").toggle();
@@ -48,6 +49,15 @@
                 var order_id=$(this).attr("name");
                 cancel(order_id);
             });
+
+            $(window).scroll(function(){
+                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                    $("#loading").fadeIn(500);
+                    more_order();
+                    $("#loading").fadeOut(500);
+                }
+            });
+
         });
     </script>
 </head>
@@ -117,7 +127,7 @@
                             <dd class="search_city_num" style="margin-left: 21px;">
                                 <ul class="clear" style="font-size: 18px;padding-left: 0px;">
                                     <li>
-                                        <a class="order_type" name="all">
+                                        <a class="order_type" name="all" style="color:#ff7919;">
                                             全部订单
                                         </a>
                                     </li>
