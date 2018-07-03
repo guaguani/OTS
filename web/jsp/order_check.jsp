@@ -209,12 +209,10 @@
 
 
     <div class="right" style="float: left;margin-bottom: 20px;">
-        <span style="float: left;margin-bottom: 20px;margin-left: 18px;">选择付款方式 :</span>
         <div class="box-main">
-            <ul style="min-height: 100%;padding: 0;">
-                <li class="pay-money-img"><a class="icon icon-pay-weixin"></a></li>
-                <li class="pay-money-img"><a class="icon icon-pay-alibaba" href="./pay.jsp"></a></li>
-            </ul>
+            <div style="float: left;width: 450px;margin-left: 1000px;margin-top: 25px;">
+                <a class="ensure_btn" href="./pay.jsp">确认支付</a>
+            </div>
         </div>
     </div>
 </div>

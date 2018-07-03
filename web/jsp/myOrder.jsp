@@ -24,19 +24,30 @@
                 var user_input = $(this).prev().value();
                 search_by_input(user_input);
             });
-            $("body").on('click', '.item-login', function () {
-                $(".log_pane").show();
+            $("body").on('click', '.logout', function () {
+                logout();
             });
-            $("body").on('click', '#login', function () {
-                var name = $("#log_username").val();
-                var pass = $("#log_password").val();
-                var res = login(name, pass);
-                if (res == "1") {
-                    $(".item-login").hide();
-                    $(".item-user").show();
-                }
+            $("body").on('click', '.item-user', function () {
+                window.location.href='./information.jsp';
+            });
+            $("body").on('click', '.order_type', function () {
+                var type=$(this).attr("name");
+                get_order(type);
+            });
+            $("body").on('click', '.order-detail', function () {
+                var act_id=$(this).attr("name");
+                get_act_detail(act_id);
             });
 
+            $("body").on('click', '.order-pay', function () {
+                var order_id=$(this).attr("name");
+                change_cur_order(order_id);
+            });
+
+            $("body").on('click', '.order-cancel', function () {
+                var order_id=$(this).attr("name");
+                cancel(order_id);
+            });
         });
     </script>
 </head>
@@ -74,19 +85,13 @@
             </div>
         </div>
         <div class="search-bar">
-            <form action="" style="overflow: hidden;">
+            <form style="overflow: hidden;">
                 <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value="" class="input">
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
         <div class="right">
-            <div style="" class="item-login item1">
-                <div class="text1" style="color:#ff7919;" >
-                    <div class="login_icon"></div>
-                    登录
-                </div>
-            </div>
-            <div style="display: none;" class="item-user item1">
+            <div style="" class="item-user item1">
                 <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
                     个人中心
                 </div>
@@ -102,8 +107,9 @@
         <div class="main">
             <div class="info-content clearfix">
                 <div class="user-profile-nav">
-                    <a href="" class="Allorders">个人信息</a>
-                    <a href="" class="Unpayorders active">我的订单</a>
+                    <a href="./information.jsp">个人信息</a>
+                    <a class="active">我的订单</a>
+                    <a class="logout">退出登录</a>
                  </div>
                 <div class="orders-container">
                     <div class="search_city" style="background-color: #fff;width: 300px;margin: 0;">
@@ -131,7 +137,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="order_type" name="cancle">
+                                        <a class="order_type" name="cancel">
                                             已取消
                                         </a>
                                     </li>
@@ -145,7 +151,7 @@
                         <div class="order-header">
                             <span class="order-date">2018-05-19</span>
                             <span class="order-id">订单号：3149336059</span>
-                            <span class="del-order" data-orderid="3149336059"></span>
+
                         </div>
                         <div class="order-body" style="height: 220px">
                             <div class="poster">
@@ -160,7 +166,7 @@
                             <div class="order-status">已完成</div>
                             <div class="actions">
                                 <div>
-                                    <a href="" class="order-detail">查看详情</a>
+                                    <a class="order-detail" name="">活动详情</a>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +175,7 @@
                         <div class="order-header">
                             <span class="order-date">2018-05-19</span>
                             <span class="order-id">订单号：3149336059</span>
-                            <span class="del-order" data-orderid="3149336059"></span>
+
                         </div>
                         <div class="order-body" style="height: 220px">
                             <div class="poster">
@@ -181,10 +187,10 @@
                                 <div class="order-time">5月19日 13：45</div>
                             </div>
                             <div class="order-price">¥62.8</div>
-                            <div class="order-status">已完成</div>
+                            <div class="order-status">已取消</div>
                             <div class="actions">
                                 <div>
-                                    <a href="" class="order-detail">查看详情</a>
+                                    <a href="" class="order-detail" name="">活动详情</a>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +199,7 @@
                         <div class="order-header">
                             <span class="order-date">2018-05-19</span>
                             <span class="order-id">订单号：3149336059</span>
-                            <span class="del-order" data-orderid="3149336059"></span>
+
                         </div>
                         <div class="order-body" style="height: 220px">
                             <div class="poster">
@@ -205,10 +211,10 @@
                                 <div class="order-time">5月19日 13：45</div>
                             </div>
                             <div class="order-price">¥62.8</div>
-                            <div class="order-status">已完成</div>
+                            <div class="order-status">未支付</div>
                             <div class="actions">
                                 <div>
-                                    <a href="" class="order-detail">查看详情</a>
+                                    <a class="order-pay" name="">立即支付</a>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +223,7 @@
                         <div class="order-header">
                             <span class="order-date">2018-05-19</span>
                             <span class="order-id">订单号：3149336059</span>
-                            <span class="del-order" data-orderid="3149336059"></span>
+
                         </div>
                         <div class="order-body" style="height: 220px">
                             <div class="poster">
@@ -229,10 +235,10 @@
                                 <div class="order-time">5月19日 13：45</div>
                             </div>
                             <div class="order-price">¥62.8</div>
-                            <div class="order-status">已完成</div>
+                            <div class="order-status">待使用</div>
                             <div class="actions">
                                 <div>
-                                    <a href="" class="order-detail">查看详情</a>
+                                    <a class="order-cancel" style="color: #333;" name="">取消订单</a>
                                 </div>
                             </div>
                         </div>
@@ -242,30 +248,23 @@
         </div>
     </div>
 </div>
-<div class="log_pane" style="display: none;">
-    <div class="log_back"></div>
-    <div class="pop_login">
-        <ul class="pop_login_title">
-            <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
-            <div class="icon icon-login-popup-logo"></div>
-        </ul>
-        <ul class="pop_login_form">
-            <li id="user_name"><input placeholder="用户名" id="log_username"></li>
-            <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
-            <li id="li_login">
-                <a id="login">登录</a>
-                <a id="reg" style="margin-left: 40px;">注册</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="modal-container" style="display:none;" id="little_board">
+
+<div class="modal-container" style="display:none;" id="no_more_board">
     <div class="modal">
         <span class="icon"></span>
-
         <p class="tip">没有更多了</p>
-
     </div>
+</div>
+
+<div class="modal-container" style="display:none;" id="canceled_board">
+    <div class="modal">
+        <span class="icon"></span>
+        <p class="tip">已为您取消订单</p>
+    </div>
+</div>
+
+<div id="loading" class="loading" style="position:absolute; left:49%; top:40%; width:20px; height:20px; z-index:30;display: none">
+    <img src="../img/loading.gif"/>
 </div>
 </body>
 </html>
