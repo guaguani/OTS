@@ -1,19 +1,19 @@
 package com.action;
 
+import com.bean.*;
 import com.model.Plan_seat;
 import com.model.Venue;
 import com.model.Venue_plan;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.model.User;
-import com.service.VenueService;
+import com.service.*;
 import com.util.MD5Util;
 import com.util.SendMailUtil;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import com.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -34,9 +34,30 @@ public class UserAction extends ActionSupport{
     private UserService userService;
 
     @Autowired
+    private UserService_new nuserService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private ActService actService;
+
+    @Autowired
     private VenueService venueService;
 
     private User user;
+
+    private UserBean userbean;
+
+    private IndexBean indexBean;
+
+    private OrderPageBean orderPageBean;
+
+    private OrderBean orderBean;
+
+    private SearchPageBean searchPageBean;
+
+    private ActivityBean activityBean;
 
     private String email;
 
@@ -249,6 +270,13 @@ public class UserAction extends ActionSupport{
         return SUCCESS;
     }
 
+    public String logOut(){
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        ActionContext actionContext = ActionContext.getContext();
+        actionContext.put("Username", "");
+        session.setAttribute("userbean",null);
+        return SUCCESS;
+    }
     /**
      * 用户登录
      * @return
@@ -263,6 +291,18 @@ public class UserAction extends ActionSupport{
             System.out.println("Email:"+email);
         }
         user = userService.getUser(email);
+        if(nuserService.logIn(email,password).equals("SUCCESS")){
+            userbean=nuserService.getUserInfo(email);
+            orderPageBean=new OrderPageBean();
+            orderPageBean.setType("all");
+            orderPageBean.setOffset(6);
+            orderPageBean.setBeans(orderService.getOrder(0,email,"all"));
+        }
+        else{
+            userbean=new UserBean();
+            userbean.setId("");
+        }
+
         String pw = user.getPassword();
         int activate = user.getActivate();
         level = user.getLevel();
@@ -283,6 +323,8 @@ public class UserAction extends ActionSupport{
                     actionContext.put("integral",integral);
                     actionContext.put("password",pw);
                     session.setAttribute("Username",email);
+                    session.setAttribute("userbean",userbean);
+                    session.setAttribute("orderPageBean",orderPageBean);
                     session.setAttribute("state",state);
                     session.setAttribute("password",pw);
                     session.setAttribute("level",level);
@@ -406,11 +448,23 @@ public class UserAction extends ActionSupport{
      * @return
      */
     public String payOrder(){
-        String orderid = getParam("id");
-        String username = getParam("Username");
-        userService.payOrder(orderid,username);
-        queryUser();
-        return SUCCESS;
+        //oid:account:password:sum
+        String orderid = getParam("oid");
+        String account = getParam("account");
+        String password = getParam(" password");
+        String sum = getParam(" sum");
+        String result=orderService.userPay(account,password,Double.parseDouble(sum),Integer.parseInt(orderid));
+        if(result.equals("SUCCESS")){
+            orderPageBean.setType("unuse");
+            orderPageBean.setOffset(6);
+            orderPageBean.setBeans(orderService.getOrder(0,email,"unuse"));
+            HttpSession session=ServletActionContext.getRequest().getSession();
+            session.setAttribute("orderPageBean",orderPageBean);
+            return SUCCESS;
+        }
+        else{
+            return ERROR;
+        }
     }
 
     /**
@@ -419,15 +473,88 @@ public class UserAction extends ActionSupport{
      */
     public String cancelOrder(){
         String orderid = getParam("id");
-        String username = getParam("Username");
-        String result = userService.cancelOrder(orderid,username);
+        String result = orderService.cancleOrder(Integer.parseInt(orderid));
         if(result.equals("SUCCESS")){
-            queryUser();
+            orderPageBean.setType("cancel");
+            orderPageBean.setOffset(6);
+            orderPageBean.setBeans(orderService.getOrder(0,email,"cancel"));
+            HttpSession session=ServletActionContext.getRequest().getSession();
+            session.setAttribute("orderPageBean",orderPageBean);
             return SUCCESS;
         }
         else{
             return ERROR;
         }
+    }
+
+    public String searchActByCond(){
+        String city = getParam("city");
+        String type = getParam("type");
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        searchPageBean=(SearchPageBean)session.getAttribute("searchPageBean");
+        if(searchPageBean==null){
+            searchPageBean=new SearchPageBean();
+        }
+        if(!(city==null)){
+            searchPageBean.setCur_city(city);
+        }
+        else{
+            city=searchPageBean.getCur_city();
+        }
+        if(!(type==null)){
+            searchPageBean.setCur_type(type);
+        }
+        else{
+            type=searchPageBean.getCur_type();
+        }
+        searchPageBean.setCur_input("");
+        searchPageBean.setCur_offset(0);
+
+        searchPageBean.setBeans(actService.selectByCond(city,type,0));
+
+        session.setAttribute("searchPageBean",searchPageBean);
+        return SUCCESS;
+    }
+
+    public String searchActByInput(){
+        String input = getParam("input");
+        searchPageBean=new SearchPageBean();
+        searchPageBean.setCur_city("");
+        searchPageBean.setCur_input(input);
+        searchPageBean.setCur_offset(0);
+        searchPageBean.setCur_type("");
+        searchPageBean.setBeans(actService.selectByNameOrVen(input,0));
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        session.setAttribute("searchPageBean",searchPageBean);
+        return SUCCESS;
+    }
+
+    public String getOrder(){
+        String type = getParam("type");
+        orderPageBean.setType(type);
+        orderPageBean.setOffset(6);
+        orderPageBean.setBeans(orderService.getOrder(0,email,type));
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        session.setAttribute("orderPageBean",orderPageBean);
+        return SUCCESS;
+    }
+
+    public String changeCurOrder(){
+        String orderid = getParam("oid");
+        orderBean=orderService.getOrderByID(Integer.parseInt(orderid));
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        session.setAttribute("orderBean",orderBean);
+        return SUCCESS;
+
+    }
+
+    public String changeCurAct(){
+        String aid = getParam("act_id");
+        activityBean=actService.getByID(Integer.parseInt(aid));
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        session.setAttribute("activityBean",activityBean);
+        return SUCCESS;
+
     }
 
     public String allocateSeat(){

@@ -9,7 +9,27 @@
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 		<action name="addUser" class="com.action.UserAction" method="addUser">
-			<result name="success">/jsp/UserLogin.jsp</result>
+			<result name="success">/index.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="logOut" class="com.action.UserAction" method="logOut">
+			<result name="success">/index.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="changeCurOrder" class="com.action.UserAction" method="changeCurOrder">
+			<result name="success">/jsp/pay.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="changeCurAct" class="com.action.UserAction" method="changeCurAct">
+			<result name="success">/jsp/activity.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="searchActByCond" class="com.action.UserAction" method="searchActByCond">
+			<result name="success">/jsp/search.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="searchActByInput" class="com.action.UserAction" method="searchActByInput">
+			<result name="success">/jsp/search.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 		<action name="modifyUserInfo" class="com.action.UserAction" method="modifyUserInfo">
@@ -29,11 +49,15 @@
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 		<action name="payOrder" class="com.action.UserAction" method="payOrder">
-			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 		<action name="cancelOrder" class="com.action.UserAction" method="cancelOrder">
-			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="success">/jsp/myOrder.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="getOrder" class="com.action.UserAction" method="getOrder">
+			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 		<action name="allocateSeat" class="com.action.UserAction" method="allocateSeat">
