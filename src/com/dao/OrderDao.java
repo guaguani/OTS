@@ -20,4 +20,9 @@ public interface OrderDao {
      *修改订单
      */
     public void modOrder(OrderBean order);
+
+    /*
+     * 根据ID获取订单
+     */
+    public OrderBean getOrderByID(int id);
 }

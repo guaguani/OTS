@@ -12,4 +12,9 @@ public interface User_newDao {
      * 修改用户个人信息
      */
     public void modUser(UserBean user);
+
+    /*
+     *存在则返回TRUE,不存在则返回FALSE
+     */
+    public String isUserExist(String userid);
 }
