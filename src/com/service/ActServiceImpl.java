@@ -1,11 +1,15 @@
 package com.service;
 
 import com.bean.ActivityBean;
+import com.bean.OrderBean;
 import com.dao.ActDao;
+import com.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 @Service
 public class ActServiceImpl implements ActService{
@@ -13,9 +17,49 @@ public class ActServiceImpl implements ActService{
     @Autowired
     private ActDao actDao;
 
+    @Autowired
+    private OrderDao orderDao;
+
     @Override
     public int buyTicket(int aid, String showtime, double ticket, int num, double sum, String username) {
-        return 0;
+        OrderBean orderBean = new OrderBean();
+
+        int oid = (int)(1 + Math.random()*10000000);
+
+        ActivityBean activityBean = getByID(aid);
+        String path = activityBean.getPath();
+        int venueid = activityBean.getVid();
+        String state = "未支付";
+        String actName = activityBean.getName();
+        String venueName = activityBean.getVname();
+        String room = activityBean.getHalls().get(0).getName();
+        ArrayList<String> seatX = new ArrayList<>();
+        ArrayList<String> seatY = new ArrayList<>();
+
+        Date createDate = new Date();
+
+        orderBean.setId(oid);
+        orderBean.setUserid(username);
+        orderBean.setPath(path);
+        orderBean.setActid(aid);
+        orderBean.setVenueid(venueid);
+        orderBean.setState(state);
+        orderBean.setSum(sum);
+        orderBean.setActName(actName);
+        orderBean.setActTime(showtime);
+        orderBean.setVenueName(venueName);
+        orderBean.setRoom(room);
+        orderBean.setSeatX(seatX);
+        orderBean.setSeatY(seatY);
+        orderBean.setPayDate(null);
+        orderBean.setCreateDate(createDate);
+        orderBean.setPay_id("");
+        orderBean.setStart(0);
+        orderBean.setNum(num);
+
+        orderDao.addOrder(orderBean);
+
+        return oid;
     }
 
     @Override
@@ -35,27 +79,11 @@ public class ActServiceImpl implements ActService{
 
     @Override
     public ArrayList<ActivityBean> selectByCond(String city, String type, int offset) {
-        return actDao.selectByCond(city, type);
+        return actDao.selectByCond(city, type, offset);
     }
 
     @Override
     public ArrayList<ActivityBean> selectByNameOrVen(String input, int offset) {
-        ArrayList<ActivityBean> allBeans = actDao.getAllActivity();
-        String comp[] = input.split("");
-        ArrayList<ActivityBean> result = new ArrayList<>();
-
-        for (ActivityBean activityBean : allBeans){
-
-            for (int i = 0; i < comp.length; i++){
-                if (activityBean.getName().contains(comp[i]) ||
-                        activityBean.getVname().contains(comp[i]) ||
-                        activityBean.getDes().contains(comp[i])){
-                    result.add(activityBean);
-                }
-            }
-
-        }
-
-        return result;
+        return actDao.selectByNameOrVen(input, offset);
     }
 }

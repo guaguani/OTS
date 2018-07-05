@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public ArrayList<OrderBean> getOrder(int offset, String userid, String type) {
-        return orderDao.getOrder(userid, type);
+        return orderDao.getOrder(offset, userid, type);
     }
 
     @Override

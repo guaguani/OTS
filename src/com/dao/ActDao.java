@@ -24,10 +24,10 @@ public interface ActDao {
     /*
      * 搜索演出 city 是城市名或全国，sort是演出类型或全部演出
      */
-    public ArrayList<ActivityBean> selectByCond(String city,String type);
+    public ArrayList<ActivityBean> selectByCond(String city,String type,int offset);
 
     /*
-     * 得到所有活动
+     * 根据用户输入的场馆名或者活动名搜索
      */
-    public ArrayList<ActivityBean> getAllActivity();
+    public ArrayList<ActivityBean> selectByNameOrVen(String input,int offset);
 }
