@@ -12,6 +12,23 @@ public class SearchPageBean implements Serializable{
 	private String cur_city;
 	private String cur_input;
 	private int cur_offset;
+	private ArrayList<String> style;
+
+	public void SearchPageBean(){
+		style=new ArrayList<String>();
+		style.add("background-color: #ff7919;");
+		for(int i=1;i<9;i++){
+			style.add("");
+		}
+	}
+
+	public ArrayList<String> getStyle() {
+		return style;
+	}
+
+	public void setStyle(ArrayList<String> style) {
+		this.style = style;
+	}
 
 	public ArrayList<ActivityBean> getBeans() {
 		return beans;

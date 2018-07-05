@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="orderbean" type="com.bean.OrderBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
     <title>支付</title>
@@ -85,7 +87,7 @@
     </script>
 </head>
 <body>
-<a data-sec="" data-oid="" data-state="0" id="counter"></a>
+<a data-sec=<%=orderbean.getTime().get(1)+orderbean.getTime().get(1)*60 %> data-oid=<%=orderbean.getId() %> data-state="0" id="counter"></a>
 
 <div class="pay_header">
     <div style="width: 950px;zoom:1;">
@@ -109,11 +111,11 @@
                         </span>
                     </div>
                     <div class="commodity-message-row">
-                        <span class="first">美团订单-250317588842701528541568</span>
-                        <span class="second">收款方：美团点评</span>
+                        <span class="first"><%="罗汉豆订单："+orderbean.getId() %></span>
+                        <span class="second">收款方：罗汉豆票务</span>
                     </div>
                     <span class="payAmount-area">
-                        <strong>33.00</strong> 元
+                        <strong><%=orderbean.getSum() %></strong> 元
                     </span>
                 </div>
             </div>
@@ -134,7 +136,11 @@
                                 <div>
                                     <div class="d12">
                                         <label class="d15">帐户名：</label>
+                                        <%if(!userbean.getPayID().equals("")){%>
+                                        <input class="i1" id="account" value=<%=userbean.getPayID() %>>
+                                        <%}else{%>
                                         <input class="i1" id="account">
+                                        <%}%>
                                     </div>
                                     <div class="d13">
                                         <label class="d15">支付密码：</label>
@@ -145,7 +151,7 @@
                                     <div class="d14">
                                         <div class="d16">
                                             <a class="a1">
-                                                <span class="s7" data-oid="" id="pay">支付</span>
+                                                <span class="s7" data-oid=<%=orderbean.getId() %> id="pay">支付</span>
                                             </a>
                                         </div>
                                     </div>

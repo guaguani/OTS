@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="indexbean" type="com.bean.IndexBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
   <title>罗汉豆</title>
@@ -120,12 +122,12 @@
     <div class="menu">
       <a href="/" class="menu-item">首页</a>
       <a class="menu-item city-name">
-        全国
+        <%=indexbean.getCurCity() %>
       </a>
       <div class="city_box" style="display: none;">
         <div>
           <ul>
-            <li class="selected city-item" data-name="beijing">全国</li>
+            <li class="city-item" data-name="beijing">全国</li>
             <li class="city-item" data-name="shanghai">上海</li>
             <li class="city-item" data-name="beijing">北京</li>
             <li class="city-item" data-name="guangzhou">广州</li>
@@ -149,17 +151,20 @@
       </form>
     </div>
     <div class="right">
+      <%if(userbean.getId().equals("")){ %>
       <div style="" class="item-login item1">
         <div class="text1" style="color:#ff7919;" >
           <div class="login_icon"></div>
           登录
         </div>
       </div>
+      <%}else{%>
       <div style="display: none;" class="item-user item1">
         <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
           个人中心
         </div>
       </div>
+      <%}%>
     </div>
   </div>
 </div>
@@ -203,31 +208,13 @@
         </div>
         <div id="slide_window" class="slide-container" style="left: -40px;">
           <ul id="slide_ul" style="width: 7920px;margin-top: 0px;">
-            <li data-aid="" class="item activity_box">
+            <%for(int i=0;i<5;i++){ %>
+            <li class="item activity_box" data-aid=<%=indexbean.getAdBeans().get(i).getId() %> >
               <a>
-                <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
+                <div class="img" style=<%="background-image:url("+indexbean.getAdBeans().get(i).getApath()+")"%> ></div>
               </a>
             </li>
-            <li data-aid="" class="item activity_box">
-              <a>
-                <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
-              </a>
-            </li>
-            <li data-aid="" class="item activity_box">
-              <a>
-                <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
-              </a>
-            </li>
-            <li data-aid="" class="item activity_box">
-              <a>
-                <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
-              </a>
-            </li>
-            <li data-aid="" class="item activity_box">
-              <a>
-                <div style="background-image:url(./img/ad1.jpg)" class="img"></div>
-              </a>
-            </li>
+            <%}%>
           </ul>
         </div>
 
@@ -254,84 +241,21 @@
   </div>
   <div style="border-top-color:#ffcca6;border-top-width:2px" class="items">
     <ul style="padding: 0;">
-      <li class="item activity_box" data-aid="">
+      <%for(int i=0;i<6;i++){ %>
+      <li class="item activity_box" data-aid=<%=indexbean.getHot().get(i).getId() %>>
         <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
+          <div class="poster" style=<%="background-image:url("+indexbean.getHot().get(i).getPath()+")" %> ></div>
           <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
+            <div class="title"><%="["+indexbean.getHot().get(i).getCity()+"]"+"  "+indexbean.getHot().get(i).getName() %></div>
             <div class="price">
               <span class="unit">¥</span>
-              <span class="amount">61</span>
+              <span class="amount"><%=indexbean.getHot().get(i).getPrice() %></span>
               起
             </div>
           </div>
         </a>
       </li>
-      <li class="item activity_box" data-aid="">
-        <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
-          <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
-            <div class="price">
-              <span class="unit">¥</span>
-              <span class="amount">61</span>
-              起
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="item activity_box" data-aid="">
-        <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
-          <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
-            <div class="price">
-              <span class="unit">¥</span>
-              <span class="amount">61</span>
-              起
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="item activity_box" data-aid="">
-        <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
-          <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
-            <div class="price">
-              <span class="unit">¥</span>
-              <span class="amount">61</span>
-              起
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="item activity_box" data-aid="">
-        <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
-          <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
-            <div class="price">
-              <span class="unit">¥</span>
-              <span class="amount">61</span>
-              起
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="item activity_box" data-aid="">
-        <a class="inner">
-          <div style="background-image:url(./img/example_act.jpg)" class="poster"></div>
-          <div class="info">
-            <div class="title">[北京] 【限时特惠】经典影像盛宴</div>
-            <div class="price">
-              <span class="unit">¥</span>
-              <span class="amount">61</span>
-              起
-            </div>
-          </div>
-        </a>
-      </li>
+      <%}%>
     </ul>
   </div>
 </div>
@@ -347,102 +271,395 @@
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
-        <li class="item main-item activity_box" data-aid="">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getCon().get(0).getId() %>>
           <a>
-            <img alt="JJ林俊杰【圣所】世界巡回演唱会 济南站" src="../img/example_big_act.jpg" class="poster">
+            <img alt=<%=indexbean.getCon().get(0).getName() %> src=<%=indexbean.getCon().get(0).getPath() %> class="poster">
           </a>
           <div class="info">
             <div class="bg" style="background-color:#ff7919"></div>
             <a>
-              <div class="title">[济南] JJ林俊杰【圣所】世界巡回演唱会 济南站</div>
+              <div class="title"><%="["+indexbean.getCon().get(0).getCity()+"]   "+indexbean.getCon().get(0).getName() %></div>
             </a>
-            <div class="price">暂时售空</div>
+            <div class="price"><%=indexbean.getCon().get(0).getPrice() %></div>
           </div>
         </li>
-        <li class="item activity_box" data-aid="">
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getCon().get(i).getId() %>>
           <a>
-            <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
+            <img alt=<%=indexbean.getCon().get(i).getName() %> src=<%=indexbean.getCon().get(i).getPath() %> class="poster">
           </a>
           <div class="info other-info">
             <a>
-              <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
+              <div class="title"><%="["+indexbean.getCon().get(i).getCity()+"]   "+indexbean.getCon().get(i).getName() %></div>
             </a>
 
-            <div style="color:#999;">2018.08.11</div>
+            <div style="color:#999;"><%=indexbean.getCon().get(i).getFirst() %></div>
             <a>
-              <div style="color:#999;">国家体育场（鸟巢）</div>
+              <div style="color:#999;"><%=indexbean.getCon().get(i).getVname() %></div>
             </a>
             <div class="price" style="margin-top: 20px;">
               <span class="unit">¥</span>
-              <span class="amount">354</span>
+              <span class="amount"><%=indexbean.getCon().get(i).getPrice() %></span>
               起
             </div>
           </div>
         </li>
-        <li class="item activity_box" data-aid="">
-          <a>
-            <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-          </a>
-          <div class="info other-info">
-            <a>
-              <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
-            </a>
-
-            <div style="color:#999;">2018.08.11</div>
-            <a>
-              <div style="color:#999;">国家体育场（鸟巢）</div>
-            </a>
-            <div class="price" style="margin-top: 20px;">
-              <span class="unit">¥</span>
-              <span class="amount">354</span>
-              起
-            </div>
-          </div>
-        </li>
-        <li class="item activity_box" data-aid="">
-          <a>
-            <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-          </a>
-          <div class="info other-info">
-            <a>
-              <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
-            </a>
-
-            <div style="color:#999;">2018.08.11</div>
-            <a>
-              <div style="color:#999;">国家体育场（鸟巢）</div>
-            </a>
-            <div class="price" style="margin-top: 20px;">
-              <span class="unit">¥</span>
-              <span class="amount">354</span>
-              起
-            </div>
-          </div>
-        </li>
-        <li class="item activity_box" data-aid="">
-          <a>
-            <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-          </a>
-          <div class="info other-info">
-            <a>
-              <div class="title">[北京] 张杰2018“未·LIVE”巡回演唱会-北京站</div>
-            </a>
-
-            <div style="color:#999;">2018.08.11</div>
-            <a>
-              <div style="color:#999;">国家体育场（鸟巢）</div>
-            </a>
-            <div class="price" style="margin-top: 20px;">
-              <span class="unit">¥</span>
-              <span class="amount">354</span>
-              起
-            </div>
-          </div>
-        </li>
+        <%}%>
       </ul>
     </div>
   </div>
 </div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">话剧歌剧</span>
+      </a>
+      <a class="more" data-type="ope">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getOpe().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getOpe().get(0).getName() %> src=<%=indexbean.getOpe().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getOpe().get(0).getCity()+"]   "+indexbean.getOpe().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getOpe().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getOpe().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getOpe().get(i).getName() %> src=<%=indexbean.getOpe().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getOpe().get(i).getCity()+"]   "+indexbean.getOpe().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getOpe().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getOpe().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getOpe().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">休闲展览</span>
+      </a>
+      <a class="more" data-type="ent">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getEnt().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getEnt().get(0).getName() %> src=<%=indexbean.getEnt().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getEnt().get(0).getCity()+"]   "+indexbean.getEnt().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getEnt().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getEnt().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getEnt().get(i).getName() %> src=<%=indexbean.getEnt().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getEnt().get(i).getCity()+"]   "+indexbean.getEnt().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getEnt().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getEnt().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getEnt().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">体育赛事</span>
+      </a>
+      <a class="more" data-type="spo">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getSpo().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getSpo().get(0).getName() %> src=<%=indexbean.getSpo().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getSpo().get(0).getCity()+"]   "+indexbean.getSpo().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getSpo().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getSpo().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getSpo().get(i).getName() %> src=<%=indexbean.getSpo().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getSpo().get(i).getCity()+"]   "+indexbean.getSpo().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getSpo().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getSpo().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getSpo().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">音乐会</span>
+      </a>
+      <a class="more" data-type="mus">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getMus().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getMus().get(0).getName() %> src=<%=indexbean.getMus().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getMus().get(0).getCity()+"]   "+indexbean.getMus().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getMus().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getMus().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getMus().get(i).getName() %> src=<%=indexbean.getMus().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getMus().get(i).getCity()+"]   "+indexbean.getMus().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getMus().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getMus().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getMus().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">儿童亲子</span>
+      </a>
+      <a class="more" data-type="chi">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getChi().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getChi().get(0).getName() %> src=<%=indexbean.getChi().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getChi().get(0).getCity()+"]   "+indexbean.getChi().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getChi().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getChi().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getChi().get(i).getName() %> src=<%=indexbean.getChi().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getChi().get(i).getCity()+"]   "+indexbean.getChi().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getChi().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getChi().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getChi().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">舞蹈芭蕾</span>
+      </a>
+      <a class="more" data-type="dan">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getDan().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getDan().get(0).getName() %> src=<%=indexbean.getDan().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getDan().get(0).getCity()+"]   "+indexbean.getDan().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getDan().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getDan().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getDan().get(i).getName() %> src=<%=indexbean.getDan().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getDan().get(i).getCity()+"]   "+indexbean.getDan().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getDan().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getDan().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getDan().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="list-block category-block">
+    <div class="block-title">
+      <a class="title">
+        <img src="../img/hot.png" class="title-icon">
+        <span class="title-text1">戏曲综艺</span>
+      </a>
+      <a class="more" data-type="bei">更多 &gt;</a>
+    </div>
+    <div class="items">
+      <ul style="margin-top: 0px;padding: 0;">
+        <li class="item main-item activity_box" data-aid=<%=indexbean.getBei().get(0).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getBei().get(0).getName() %> src=<%=indexbean.getBei().get(0).getPath() %> class="poster">
+          </a>
+          <div class="info">
+            <div class="bg" style="background-color:#ff7919"></div>
+            <a>
+              <div class="title"><%="["+indexbean.getBei().get(0).getCity()+"]   "+indexbean.getBei().get(0).getName() %></div>
+            </a>
+            <div class="price"><%=indexbean.getBei().get(0).getPrice() %></div>
+          </div>
+        </li>
+        <%for(int i=1;i<5;i++){ %>
+        <li class="item activity_box" data-aid=<%=indexbean.getBei().get(i).getId() %>>
+          <a>
+            <img alt=<%=indexbean.getBei().get(i).getName() %> src=<%=indexbean.getBei().get(i).getPath() %> class="poster">
+          </a>
+          <div class="info other-info">
+            <a>
+              <div class="title"><%="["+indexbean.getBei().get(i).getCity()+"]   "+indexbean.getBei().get(i).getName() %></div>
+            </a>
+
+            <div style="color:#999;"><%=indexbean.getBei().get(i).getFirst() %></div>
+            <a>
+              <div style="color:#999;"><%=indexbean.getBei().get(i).getVname() %></div>
+            </a>
+            <div class="price" style="margin-top: 20px;">
+              <span class="unit">¥</span>
+              <span class="amount"><%=indexbean.getBei().get(i).getPrice() %></span>
+              起
+            </div>
+          </div>
+        </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>
+
 
 <div class="footer bottom-bar">
   <div class="box">

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="orderbean" type="com.bean.OrderBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
     <title>订单确认</title>
@@ -13,7 +15,6 @@
     <link href="../css/index_css.css" rel="stylesheet"  type="text/css">
     <script src="../js/jquery-3.2.1.js"></script>
     <script src="../js/Act.js"></script>
-    <script src="../js/User.js"></script>
     <script src="../js/Order.js"></script>
     <script>
         $(document).ready(function() {
@@ -82,12 +83,12 @@
         <div class="menu">
             <a href="/" class="menu-item">首页</a>
             <a class="menu-item city-name">
-                全国
+                <%=userbean.getCurPos() %>
             </a>
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="selected city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="beijing">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -132,7 +133,7 @@
             <div class="bar"></div>
             <span class="step-text">购票</span>
         </div>
-        <div class="step done">
+        <div class="step">
             <span class="step-num done">3</span>
             <div class="bar"></div>
             <span class="step-text">15分钟内付款</span>
@@ -145,12 +146,12 @@
     </div>
 
     <div class="count-down-wrapper">
-        <div class="count-down" data-sec="59" data-min="14" data-oid="" data-state="0" id="counter" style="margin-top: -20px;">
+        <div class="count-down" data-sec=<%=orderbean.getTime().get(1) %> data-min=<%=orderbean.getTime().get(0) %> data-oid=<%=orderbean.getId() %> data-state="0" id="counter" style="margin-top: -20px;">
             <p class="time-left">
                 请在
-                <span class="minute" id="m_place">14</span>
+                <span class="minute" id="m_place"><%=orderbean.getTime().get(0) %></span>
                 分钟
-                <span class="second" id="s_place">59</span>
+                <span class="second" id="s_place"><%=orderbean.getTime().get(1) %></span>
                 秒内完成支付
             </p>
             <p class="tip">超时订单会自动取消，请尽快支付</p>
@@ -171,20 +172,24 @@
         </thead>
         <tbody>
         <tr>
-            <td class="movie-name">######</td>
-            <td class="showtime">######</td>
-            <td class="cinema-name">######</td>
+            <td class="movie-name"><%=orderbean.getActName() %></td>
+            <td class="showtime"><%=orderbean.getTime() %></td>
+            <td class="cinema-name"><%=orderbean.getVenueName() %></td>
             <td>
-                <span class="halll">######</span>
+                <span class="hall"><%=orderbean.getTime() %></span>
                 <div class="seats">
                     <div>
-                        <span class="">######</span>
+                        <%if(orderbean.getSeatX().size()>1){%>
+                        <span class=""><%=orderbean.getSeatX().get(0)+"排"+orderbean.getSeatY().get(0)+"座等" %></span>
+                        <%}else{%>
+                        <span class=""><%=orderbean.getSeatX().get(0)+"排"+orderbean.getSeatY().get(0)+"座" %></span>
+                        <%}%>
                     </div>
                     <div>
                     </div>
                 </div>
             </td>
-            <td class="showtime">######</td>
+            <td class="showtime"><%=orderbean.getSum()+"元" %></td>
         </tr>
         </tbody>
     </table>

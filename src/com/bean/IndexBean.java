@@ -17,6 +17,19 @@ public class IndexBean implements Serializable{
 	private ArrayList<ActivityBean> chi;
 	private ArrayList<ActivityBean> dan;
 	private ArrayList<ActivityBean> bei;
+	private String curCity;
+
+	public void IndexBean(){
+		curCity="全国";
+	}
+
+	public String getCurCity() {
+		return curCity;
+	}
+
+	public void setCurCity(String curCity) {
+		this.curCity = curCity;
+	}
 
 	public ArrayList<ActivityBean> getAdBeans() {
 		return adBeans;

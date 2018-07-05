@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="orderPagebean" type="com.bean.OrderPageBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
     <title>我的订单</title>
@@ -11,7 +13,6 @@
     <script src="../js/User.js"></script>
     <script src="../js/Order.js"></script>
     <script>
-        get_order("all");
         $(document).ready(function() {
             $("body").on('click', '.city-name', function () {
                 $(this).parent().parent().find(".city_box").toggle();
@@ -72,12 +73,12 @@
         <div class="menu">
             <a href="/" class="menu-item">首页</a>
             <a class="menu-item city-name">
-                全国
+                <%=userbean.getCurPos() %>
             </a>
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="selected city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="beijing">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -96,7 +97,7 @@
         </div>
         <div class="search-bar">
             <form style="overflow: hidden;">
-                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value="" class="input">
+                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value=<%=userbean.getCurInput() %> class="input">
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
@@ -127,27 +128,27 @@
                             <dd class="search_city_num" style="margin-left: 21px;">
                                 <ul class="clear" style="font-size: 18px;padding-left: 0px;">
                                     <li>
-                                        <a class="order_type" name="all" style="color:#ff7919;">
+                                        <a class="order_type" name="all" style=<%=orderPagebean.getStyle().get(0) %>>
                                             全部订单
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="order_type" name="unpay">
+                                        <a class="order_type" name="unpay" style=<%=orderPagebean.getStyle().get(1) %>>
                                             未支付
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="order_type" name="unuse">
+                                        <a class="order_type" name="unuse" style=<%=orderPagebean.getStyle().get(2) %>>
                                             待使用
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="order_type" name="finish">
+                                        <a class="order_type" name="finish" style=<%=orderPagebean.getStyle().get(3) %>>
                                             已完成
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="order_type" name="cancel">
+                                        <a class="order_type" name="cancel" style=<%=orderPagebean.getStyle().get(4) %>>
                                             已取消
                                         </a>
                                     </li>
@@ -157,102 +158,37 @@
 
                         </dl>
                     </div>
-                    <div class="order-box" data-orderid="3149336059" style="height: 300px">
+                    <%for(int i=0;i<orderPagebean.getBeans().size();i++){ %>
+                    <div style="height: 300px" class="order-box" data-orderid=<%=orderPagebean.getBeans().get(i).getId() %> >
                         <div class="order-header">
-                            <span class="order-date">2018-05-19</span>
-                            <span class="order-id">订单号：3149336059</span>
-
+                            <span class="order-date"><%=orderPagebean.getBeans().get(i).getCreateDate() %></span>
+                            <span class="order-id"><%="订单号："+orderPagebean.getBeans().get(i).getId() %></span>
                         </div>
                         <div class="order-body" style="height: 220px">
                             <div class="poster">
-                                <img src="../img/example_poster.jpg">
+                                <img src=<%=orderPagebean.getBeans().get(i).getPath() %>>
                             </div>
                             <div class="order-content">
-                                <div class="activity-name">张杰2018“未·LIVE”巡回演唱会-北京站</div>
-                                <div class="venue-name">国家体育场（鸟巢）</div>
-                                <div class="order-time">5月19日 13：45</div>
+                                <div class="activity-name"><%=orderPagebean.getBeans().get(i).getActName() %></div>
+                                <div class="venue-name"><%=orderPagebean.getBeans().get(i).getVenueName() %></div>
+                                <div class="order-time"><%=orderPagebean.getBeans().get(i).getTime() %></div>
                             </div>
-                            <div class="order-price">¥62.8</div>
-                            <div class="order-status">已完成</div>
+                            <div class="order-price"><%="￥"+orderPagebean.getBeans().get(i).getSum() %></div>
+                            <div class="order-status"><%=orderPagebean.getBeans().get(i).getState() %></div>
                             <div class="actions">
                                 <div>
-                                    <a class="order-detail" name="">活动详情</a>
+                                    <%if(orderPagebean.getBeans().get(i).getState().equals("未支付")){%>
+                                    <a class="order-pay" name=<%=orderPagebean.getBeans().get(i).getId() %>>立即支付</a>
+                                    <%}else if(orderPagebean.getBeans().get(i).getState().equals("待使用")){%>
+                                    <a class="order-cancel" style="color: #333;" name=<%=orderPagebean.getBeans().get(i).getId() %>>取消订单</a>
+                                    <%}else{%>
+                                    <a class="order-detail" name=<%=orderPagebean.getBeans().get(i).getActid() %>>活动详情</a>
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="order-box" data-orderid="3149336059" style="height: 300px">
-                        <div class="order-header">
-                            <span class="order-date">2018-05-19</span>
-                            <span class="order-id">订单号：3149336059</span>
-
-                        </div>
-                        <div class="order-body" style="height: 220px">
-                            <div class="poster">
-                                <img src="../img/example_poster.jpg">
-                            </div>
-                            <div class="order-content">
-                                <div class="activity-name">张杰2018“未·LIVE”巡回演唱会-北京站</div>
-                                <div class="venue-name">国家体育场（鸟巢）</div>
-                                <div class="order-time">5月19日 13：45</div>
-                            </div>
-                            <div class="order-price">¥62.8</div>
-                            <div class="order-status">已取消</div>
-                            <div class="actions">
-                                <div>
-                                    <a href="" class="order-detail" name="">活动详情</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-box" data-orderid="3149336059" style="height: 300px">
-                        <div class="order-header">
-                            <span class="order-date">2018-05-19</span>
-                            <span class="order-id">订单号：3149336059</span>
-
-                        </div>
-                        <div class="order-body" style="height: 220px">
-                            <div class="poster">
-                                <img src="../img/example_poster.jpg">
-                            </div>
-                            <div class="order-content">
-                                <div class="activity-name">张杰2018“未·LIVE”巡回演唱会-北京站</div>
-                                <div class="venue-name">国家体育场（鸟巢）</div>
-                                <div class="order-time">5月19日 13：45</div>
-                            </div>
-                            <div class="order-price">¥62.8</div>
-                            <div class="order-status">未支付</div>
-                            <div class="actions">
-                                <div>
-                                    <a class="order-pay" name="">立即支付</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-box" data-orderid="3149336059" style="height: 300px">
-                        <div class="order-header">
-                            <span class="order-date">2018-05-19</span>
-                            <span class="order-id">订单号：3149336059</span>
-
-                        </div>
-                        <div class="order-body" style="height: 220px">
-                            <div class="poster">
-                                <img src="../img/example_poster.jpg">
-                            </div>
-                            <div class="order-content">
-                                <div class="activity-name">张杰2018“未·LIVE”巡回演唱会-北京站</div>
-                                <div class="venue-name">国家体育场（鸟巢）</div>
-                                <div class="order-time">5月19日 13：45</div>
-                            </div>
-                            <div class="order-price">¥62.8</div>
-                            <div class="order-status">待使用</div>
-                            <div class="actions">
-                                <div>
-                                    <a class="order-cancel" style="color: #333;" name="">取消订单</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>

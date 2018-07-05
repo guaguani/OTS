@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="searchPagebean" type="com.bean.SearchPageBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
     <title>活动搜索</title>
@@ -78,12 +80,12 @@
         <div class="menu">
             <a href="/" class="menu-item">首页</a>
             <a class="menu-item city-name">
-                全国
+                <%=userbean.getCurPos() %>
             </a>
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="selected city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="beijing">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -102,22 +104,25 @@
         </div>
         <div class="search-bar">
             <form action="" style="overflow: hidden;">
-                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value="" class="input">
+                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value=<%=searchPagebean.getCur_input() %> class="input">
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
         <div class="right">
+            <%if(userbean.getId().equals("")){ %>
             <div style="" class="item-login item1">
                 <div class="text1" style="color:#ff7919;" >
                     <div class="login_icon"></div>
                     登录
                 </div>
             </div>
+            <%}else{%>
             <div style="display: none;" class="item-user item1">
                 <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
                     个人中心
                 </div>
             </div>
+            <%}%>
         </div>
     </div>
 </div>
@@ -128,47 +133,47 @@
             <dd class="search_city_num">
                 <ul class="clear">
                     <li>
-                        <a class="search_type" id="all" style="background-color: #ff7919;" name="all">
+                        <a class="search_type" id="all" name="all" style=<%=searchPagebean.getStyle().get(0) %> >
                             全部
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="con" name="con">
+                        <a class="search_type" id="con" name="con" style=<%=searchPagebean.getStyle().get(1) %> >
                             演唱会
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="ope" name="ope">
+                        <a class="search_type" id="ope" name="ope" style=<%=searchPagebean.getStyle().get(2) %> >
                             话剧歌剧
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="ent" name="ent">
+                        <a class="search_type" id="ent" name="ent" style=<%=searchPagebean.getStyle().get(3) %> >
                             休闲展览
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="spo" name="spo">
+                        <a class="search_type" id="spo" name="spo" style=<%=searchPagebean.getStyle().get(4) %> >
                             体育赛事
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="mus" name="mus">
+                        <a class="search_type" id="mus" name="mus" style=<%=searchPagebean.getStyle().get(5) %> >
                             音乐会
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="chi" name="chi">
+                        <a class="search_type" id="chi" name="chi" style=<%=searchPagebean.getStyle().get(6) %> >
                             儿童亲子
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="dan" name="dan">
+                        <a class="search_type" id="dan" name="dan" style=<%=searchPagebean.getStyle().get(7) %> >
                             舞蹈芭蕾
                         </a>
                     </li>
                     <li>
-                        <a class="search_type" id="bei" name="bei">
+                        <a class="search_type" id="bei" name="bei" style=<%=searchPagebean.getStyle().get(8) %> >
                             戏曲综艺
                         </a>
                     </li>
@@ -181,102 +186,32 @@
     <!-- 搜索结果展示-->
     <div class="search_main">
         <ul class="search_list" id="content_list">
-            <li class="activity_box" data-aid="">
+            <%for(int i=0;i<searchPagebean.getBeans().size();i++){%>
+            <li class="activity_box" data-aid=<%=searchPagebean.getBeans().get(i).getId() %>>
                 <div class="search_img">
-                    <a href="./order_check.jsp" title="张杰2018“未·LIVE”巡回演唱会-北京站">
-                        <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
+                    <a title=<%=searchPagebean.getBeans().get(i).getName() %>>
+                        <img alt=<%=searchPagebean.getBeans().get(i).getName() %> src=<%=searchPagebean.getBeans().get(i).getPath() %> class="poster">
                     </a>
                 </div>
                 <div class="search_txt">
                     <h3>
-                        "[北京] "
-                        <a href="" onclick="">
-                             张杰2018“未·LIVE”巡回演唱会-北京站
+                        <%="["+searchPagebean.getBeans().get(i).getCity()+"]" %>
+                        <a>
+                            <%=searchPagebean.getBeans().get(i).getName() %>
                         </a>
                     </h3>
-                    <div style="color:#999;">2018.08.11</div>
-                    <a href="">
-                        <div style="color:#999;">国家体育场（鸟巢）</div>
+                    <div style="color:#999;"><%=searchPagebean.getBeans().get(i).getFirst() %></div>
+                    <a>
+                        <div style="color:#999;"><%=searchPagebean.getBeans().get(i).getVname() %></div>
                     </a>
                     <div class="price" style="margin-top: 20px;">
                         <span class="unit">¥</span>
-                        <span class="amount">354</span>
+                        <span class="amount"><%=searchPagebean.getBeans().get(i).getPrice() %></span>
                         起
                     </div>
                 </div>
             </li>
-            <li class="activity_box" data-aid="">
-                <div class="search_img">
-                    <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
-                        <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-                    </a>
-                </div>
-                <div class="search_txt">
-                    <h3>
-                        "[北京] "
-                        <a href="" onclick="">
-                            张杰2018“未·LIVE”巡回演唱会-北京站
-                        </a>
-                    </h3>
-                    <div style="color:#999;">2018.08.11</div>
-                    <a href="">
-                        <div style="color:#999;">国家体育场（鸟巢）</div>
-                    </a>
-                    <div class="price" style="margin-top: 20px;">
-                        <span class="unit">¥</span>
-                        <span class="amount">354</span>
-                        起
-                    </div>
-                </div>
-            </li>
-            <li class="activity_box" data-aid="">
-                <div class="search_img">
-                    <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
-                        <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-                    </a>
-                </div>
-                <div class="search_txt">
-                    <h3>
-                        "[北京] "
-                        <a href="" onclick="">
-                            张杰2018“未·LIVE”巡回演唱会-北京站
-                        </a>
-                    </h3>
-                    <div style="color:#999;">2018.08.11</div>
-                    <a href="">
-                        <div style="color:#999;">国家体育场（鸟巢）</div>
-                    </a>
-                    <div class="price" style="margin-top: 20px;">
-                        <span class="unit">¥</span>
-                        <span class="amount">354</span>
-                        起
-                    </div>
-                </div>
-            </li>
-            <li class="activity_box" data-aid="">
-                <div class="search_img">
-                    <a href="" title="张杰2018“未·LIVE”巡回演唱会-北京站">
-                        <img alt="张杰2018“未·LIVE”巡回演唱会-北京站" src="../img/example_poster.jpg" class="poster">
-                    </a>
-                </div>
-                <div class="search_txt">
-                    <h3>
-                        "[北京] "
-                        <a href="" onclick="">
-                            张杰2018“未·LIVE”巡回演唱会-北京站
-                        </a>
-                    </h3>
-                    <div style="color:#999;">2018.08.11</div>
-                    <a href="">
-                        <div style="color:#999;">国家体育场（鸟巢）</div>
-                    </a>
-                    <div class="price" style="margin-top: 20px;">
-                        <span class="unit">¥</span>
-                        <span class="amount">354</span>
-                        起
-                    </div>
-                </div>
-            </li>
+            <%}%>
         </ul>
     </div>
 
