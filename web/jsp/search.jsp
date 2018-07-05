@@ -196,9 +196,7 @@
                 <div class="search_txt">
                     <h3>
                         <%="["+searchPagebean.getBeans().get(i).getCity()+"]" %>
-                        <a>
-                            <%=searchPagebean.getBeans().get(i).getName() %>
-                        </a>
+                        <%=searchPagebean.getBeans().get(i).getName() %>
                     </h3>
                     <div style="color:#999;"><%=searchPagebean.getBeans().get(i).getFirst() %></div>
                     <a>

@@ -1,5 +1,8 @@
 package com.bean;
 
+import com.service.ActService;
+import com.service.ActServiceImpl;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -21,6 +24,17 @@ public class IndexBean implements Serializable{
 
 	public void IndexBean(){
 		curCity="全国";
+		ActService service=new ActServiceImpl();
+		adBeans=service.advertiseAct();
+		hot=service.hotAct();
+		con=service.selectByCond("全国","演唱会",0);
+		ope=service.selectByCond("全国","话剧歌剧",0);
+		ent=service.selectByCond("全国","休闲展览",0);
+		spo=service.selectByCond("全国","体育赛事",0);
+		mus=service.selectByCond("全国","音乐会",0);
+		chi=service.selectByCond("全国","儿童亲子",0);
+		dan=service.selectByCond("全国","舞蹈芭蕾",0);
+		bei=service.selectByCond("全国","戏曲综艺",0);
 	}
 
 	public String getCurCity() {

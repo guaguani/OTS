@@ -12,6 +12,8 @@ public class OrderPageBean implements Serializable{
 	private String type;
 	private ArrayList<OrderBean> beans;
 	private ArrayList<String> style;
+	private ArrayList<String> types;
+
 
 	public void OrderPageBean(){
 		style=new ArrayList<String>();
@@ -19,6 +21,19 @@ public class OrderPageBean implements Serializable{
 		for(int i=1;i<5;i++){
 			style.add("");
 		}
+		types.add("全部订单");
+		types.add("未支付");
+		types.add("待使用");
+		types.add("已完成");
+		types.add("已取消");
+	}
+
+	public ArrayList<String> getTypes() {
+		return types;
+	}
+
+	public void setTypes(ArrayList<String> types) {
+		this.types = types;
 	}
 
 	public ArrayList<String> getStyle() {

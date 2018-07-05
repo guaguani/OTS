@@ -26,6 +26,9 @@ public class UserBean implements Serializable{
 	public void UserBean(){
 		id="";
 		payID="";
+		curInput="";
+		curPos="全国";
+		curType="全部演出";
 	}
 
 	public String getCurPos() {

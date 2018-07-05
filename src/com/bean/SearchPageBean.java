@@ -13,13 +13,36 @@ public class SearchPageBean implements Serializable{
 	private String cur_input;
 	private int cur_offset;
 	private ArrayList<String> style;
+	private ArrayList<String> type;
 
 	public void SearchPageBean(){
 		style=new ArrayList<String>();
 		style.add("background-color: #ff7919;");
+		type.add("全部");
+		type.add("演唱会");
+		type.add("话剧歌剧");
+		type.add("休闲展览");
+		type.add("体育赛事");
+		type.add("音乐会");
+		type.add("儿童亲子");
+		type.add("舞蹈芭蕾");
+		type.add("戏曲综艺");
+
 		for(int i=1;i<9;i++){
 			style.add("");
 		}
+		cur_type="全部";
+		cur_input="";
+		cur_city="全国";
+		cur_offset=8;
+	}
+
+	public ArrayList<String> getType() {
+		return type;
+	}
+
+	public void setType(ArrayList<String> type) {
+		this.type = type;
 	}
 
 	public ArrayList<String> getStyle() {

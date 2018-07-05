@@ -122,7 +122,7 @@
                     <a class="active">我的订单</a>
                     <a class="logout">退出登录</a>
                  </div>
-                <div class="orders-container">
+                <div class="orders-container" id="order_box">
                     <div class="search_city" style="background-color: #fff;width: 300px;margin: 0;">
                         <dl id="category_filter_id" class="search_city_line">
                             <dd class="search_city_num" style="margin-left: 21px;">

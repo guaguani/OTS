@@ -38,11 +38,10 @@
                 }
                 if(can){
                     var state=parseInt(v1.attr("data-state"));
-                    var par=oid+":";
+
                     if(state==0){
-                        par=par+v2+":"+v3+":"+sum;
-                        //alert(par);
-                        pay_money(par);
+
+                        pay_money(oid,v2,v3,sum);
                     }
 
                 }

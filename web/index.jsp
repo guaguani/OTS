@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="indexbean" type="com.bean.IndexBean" scope="session"></jsp:useBean>
+<jsp:useBean id="indexbean" class="com.bean.IndexBean" scope="session"></jsp:useBean>
 <jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
