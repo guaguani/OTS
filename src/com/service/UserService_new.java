@@ -4,7 +4,7 @@ import com.bean.UserBean;
 
 public interface UserService_new {
 	/*
-	 * 用户登录
+	 * 用户登录，用户不存在返回NONEXIST，密码错误返回WRONGPASSWORD，登录成功返回LOGINSUCESS，其他错误UNKNOWNERROR
 	 */
 	public String logIn(String userid,String password);
 	/*
