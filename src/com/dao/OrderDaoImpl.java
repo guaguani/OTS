@@ -11,14 +11,16 @@ import java.util.ArrayList;
 @Repository
 public class OrderDaoImpl implements OrderDao  {
     @Override
-    public ArrayList<OrderBean> getOrder(String userid, String type) {
+    public ArrayList<OrderBean> getOrder(int offset,String userid, String type) {
         ArrayList<OrderBean> list = new ArrayList<OrderBean>();
 
         Connection conn = JdbcPool.getInstance().getConnection();
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "select * from ticketorder where userid = " + userid + " and state = " + "\"" + type + "\"";
+            int pos = (offset-1)*8;
+            String sql = "select * from ticketorder where userid = " + userid + " and state = " + "\"" + type + "\"" +
+                        "  limit 8 offset " + pos;
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 

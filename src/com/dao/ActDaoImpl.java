@@ -9,6 +9,7 @@ import java.sql.*;;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 @Repository
 public class ActDaoImpl implements ActDao{
@@ -120,18 +121,20 @@ public class ActDaoImpl implements ActDao{
 
     @Override
     public ArrayList<ActivityBean> hotAct() {
-        return advertiseAct();
+        int [] idarray = {1770, 1588, 749 , 61, 844,1429, 1380,433 ,5,2109};
+        return getListByIds(idarray);
     }
 
     @Override
-    public ArrayList<ActivityBean> selectByCond(String city, String type) {
+    public ArrayList<ActivityBean> selectByCond(String city, String type, int offset) {
         ArrayList<ActivityBean> list = new ArrayList<ActivityBean>();
 
         Connection conn = JdbcPool.getInstance().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        int pos = (offset - 1) * 8;
         try {
-            String sql = "select * from Activity where city = ? and type = ?";
+            String sql = "select * from Activity where city = ? and type = ? limit 8 offset " + pos;
             stmt = conn.prepareStatement(sql);
             stmt.setString(1,city);
             stmt.setString(2,type);
@@ -167,11 +170,98 @@ public class ActDaoImpl implements ActDao{
                 e.printStackTrace();
             }
         }
-
+        //按时间顺序，时间早的在前
+        Collections.sort(list, new Comparator(){
+            @Override
+            public int compare(Object o1, Object o2) {
+                ActivityBean stu1=(ActivityBean)o1;
+                ActivityBean stu2=(ActivityBean)o2;
+                return stu1.getFirst().compareTo(stu2.getFirst());
+            }
+        });
         return list;
     }
 
     @Override
+    public ArrayList<ActivityBean> selectByNameOrVen(String input, int offset) {
+        String [] token = input.split(" ");
+        ArrayList<ActivityBean> list = new ArrayList<ActivityBean>();
+
+        Connection conn = JdbcPool.getInstance().getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select * from Activity ";
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                String des = rs.getString(3);
+                String name = rs.getString(5);
+                String vname = rs.getString(6);
+                String build = des + " " + name + " " + vname;
+
+                for(int i = 0; i < token.length; i ++){
+                    if(build.contains(token[i])){
+                        ActivityBean activityBean = new ActivityBean();
+                        activityBean.setId(rs.getInt(1));
+                        activityBean.setVid(rs.getInt(2));
+                        activityBean.setDes(rs.getString(3));
+                        activityBean.setType(rs.getString(4));
+                        activityBean.setName(rs.getString(5));
+                        activityBean.setVname(rs.getString(6));
+                        activityBean.setCity(rs.getString(7));
+                        activityBean.setPath(rs.getString(8));
+                        activityBean.setPrice(rs.getDouble(9));
+                        activityBean.setFirst(rs.getString(10));
+                        activityBean.setLast(rs.getString(11));
+                        activityBean.setState(rs.getString(12));
+                        activityBean.setApath(rs.getString(13));
+
+                        list.add(activityBean);
+                        break;
+                    }
+                }
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                rs.close();
+                stmt.close();
+                JdbcPool.getInstance().releaseConnection(conn);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //按时间顺序，时间早的在前
+        Collections.sort(list, new Comparator(){
+            @Override
+            public int compare(Object o1, Object o2) {
+                ActivityBean stu1=(ActivityBean)o1;
+                ActivityBean stu2=(ActivityBean)o2;
+                return stu1.getFirst().compareTo(stu2.getFirst());
+            }
+        });
+
+        int size = list.size();
+        int head = (offset - 1) * 8;
+        int tail = offset * 8;
+        if(tail >= size){
+            tail = size;
+        }
+        ArrayList<ActivityBean> newlist = new ArrayList<ActivityBean>();
+        for(int i = head; i < tail; i ++){
+            newlist.add(list.get(i));
+        }
+        return  newlist;
+    }
+
     public ArrayList<ActivityBean> getAllActivity() {
         ArrayList<ActivityBean> list = new ArrayList<ActivityBean>();
 
