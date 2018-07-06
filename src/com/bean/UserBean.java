@@ -23,7 +23,7 @@ public class UserBean implements Serializable{
 	private String curType;
 	private String curInput;
 
-	public void UserBean(){
+	public UserBean(){
 		id="";
 		payID="";
 		curInput="";

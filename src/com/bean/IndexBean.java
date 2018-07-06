@@ -22,19 +22,29 @@ public class IndexBean implements Serializable{
 	private ArrayList<ActivityBean> bei;
 	private String curCity;
 
-	public void IndexBean(){
+	public IndexBean(){
 		curCity="全国";
 		ActService service=new ActServiceImpl();
 		adBeans=service.advertiseAct();
+		System.out.println("ad:"+adBeans.size());
 		hot=service.hotAct();
+		System.out.println("hot:"+hot.size());
 		con=service.selectByCond("全国","演唱会",0);
+		System.out.println("con:"+con.size());
 		ope=service.selectByCond("全国","话剧歌剧",0);
+		System.out.println("ope:"+ope.size());
 		ent=service.selectByCond("全国","休闲展览",0);
+		System.out.println("ent:"+ent.size());
 		spo=service.selectByCond("全国","体育赛事",0);
+		System.out.println("spo:"+spo.size());
 		mus=service.selectByCond("全国","音乐会",0);
+		System.out.println("mus:"+mus.size());
 		chi=service.selectByCond("全国","儿童亲子",0);
+		System.out.println("chi:"+chi.size());
 		dan=service.selectByCond("全国","舞蹈芭蕾",0);
+		System.out.println("dan:"+dan.size());
 		bei=service.selectByCond("全国","戏曲综艺",0);
+		System.out.println("bei:"+bei.size());
 	}
 
 	public String getCurCity() {

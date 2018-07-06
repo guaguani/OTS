@@ -15,7 +15,7 @@ public class OrderPageBean implements Serializable{
 	private ArrayList<String> types;
 
 
-	public void OrderPageBean(){
+	public OrderPageBean(){
 		style=new ArrayList<String>();
 		style.add("color:#ff7919;");
 		for(int i=1;i<5;i++){
