@@ -19,7 +19,7 @@ public class ActDaoImpl implements ActDao{
         Connection conn = JdbcPool.getInstance().getConnection();
         Statement stmt = null;
         ResultSet rs = null;
-        ArrayList<Integer> hallsId = new ArrayList<Integer>();
+        int hallsId = 1;
         try {
             String sql = "select * from Activity where id=" + id;
             stmt = conn.createStatement();
@@ -42,9 +42,7 @@ public class ActDaoImpl implements ActDao{
 
                 //获取展厅id列表
                 String [] hallStr = rs.getString(14).split(",");
-                for(int i = 0; i < hallStr.length; i ++){
-                    hallsId.add(Integer.parseInt(hallStr[i]));
-                }
+                hallsId = Integer.parseInt(hallStr[0]);
             }
 
         } catch (SQLException e) {
@@ -60,9 +58,8 @@ public class ActDaoImpl implements ActDao{
         }
 
         ArrayList<HallBean> halls = new ArrayList<HallBean>();
-        for(int hallid: hallsId){
-            halls.add(getHallById(hallid));
-        }
+        halls.add(getHallById(hallsId));
+
         activityBean.setHalls(halls);
         return activityBean;
     }
@@ -353,7 +350,7 @@ public class ActDaoImpl implements ActDao{
             }
         }
 
-        SeatBean[][] seats = getSeats(id, rows, col);
+        SeatBean[][] seats = getSeats(hallBean.getVid(), rows, col);
         hallBean.setSeats(seats);
         return hallBean;
     }
@@ -370,6 +367,12 @@ public class ActDaoImpl implements ActDao{
         Connection conn = JdbcPool.getInstance().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+
+        if(row == 20){
+            hid = 1;
+        }else{
+            hid = 3;
+        }
         try {
             for(int i = 1; i <= row; i ++){
                 for(int j = 1; j <= col; j ++) {
