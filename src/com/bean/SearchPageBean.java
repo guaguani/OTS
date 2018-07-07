@@ -15,7 +15,7 @@ public class SearchPageBean implements Serializable{
 	private ArrayList<String> style;
 	private ArrayList<String> type;
 
-	public void SearchPageBean(){
+	public SearchPageBean(){
 		style=new ArrayList<String>();
 		style.add("background-color: #ff7919;");
 		type.add("全部");

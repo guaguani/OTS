@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.bean.UserBean" %>
+<%@ page import="com.bean.IndexBean" %><%--
   Created by IntelliJ IDEA.
   User: 曹畅
   Date: 2018/6/6
@@ -6,8 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="indexbean" class="com.bean.IndexBean" scope="session"></jsp:useBean>
-<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
+<jsp:useBean id="indexbean" class="com.bean.IndexBean" scope="page"></jsp:useBean>
+<jsp:useBean id="userbean" class="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
   <title>罗汉豆</title>
@@ -111,6 +112,11 @@
   </script>
 </head>
 <body class="home">
+<%if(userbean==null){
+    userbean=new UserBean();
+}
+  indexbean=new IndexBean();
+%>
 <a id="counter" style="display: none;" name="0"></a>
 <a id="left" style="display: none;" name="40"></a>
 <div class="header">
@@ -151,7 +157,7 @@
       </form>
     </div>
     <div class="right">
-      <%if(userbean.getId().equals("")){ %>
+      <%if(userbean==null||userbean.getId()==null||userbean.getId().equals("")){ %>
       <div style="" class="item-login item1">
         <div class="text1" style="color:#ff7919;" >
           <div class="login_icon"></div>

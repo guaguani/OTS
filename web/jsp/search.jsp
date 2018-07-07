@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="searchPagebean" type="com.bean.SearchPageBean" scope="session"></jsp:useBean>
-<jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
+<jsp:useBean id="userbean" class="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
     <title>活动搜索</title>
@@ -109,7 +109,7 @@
             </form>
         </div>
         <div class="right">
-            <%if(userbean.getId().equals("")){ %>
+            <%if(userbean==null||userbean.getId().equals("")){ %>
             <div style="" class="item-login item1">
                 <div class="text1" style="color:#ff7919;" >
                     <div class="login_icon"></div>
