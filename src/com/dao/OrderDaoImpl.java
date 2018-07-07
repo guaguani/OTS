@@ -18,7 +18,7 @@ public class OrderDaoImpl implements OrderDao  {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            int pos = (offset-1)*8;
+            int pos = offset*8;
             String sql = "select * from ticketorder where userid = " + userid + " and state = " + "\"" + type + "\"" +
                         "  limit 8 offset " + pos;
             stmt = conn.createStatement();

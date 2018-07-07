@@ -129,7 +129,7 @@ public class ActDaoImpl implements ActDao{
         Connection conn = JdbcPool.getInstance().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        int pos = (offset - 1) * 8;
+        int pos = offset * 8;
         try {
             String sql = "select * from Activity where city = ? and type = ? limit 8 offset " + pos;
             stmt = conn.prepareStatement(sql);
@@ -247,8 +247,8 @@ public class ActDaoImpl implements ActDao{
         });
 
         int size = list.size();
-        int head = (offset - 1) * 8;
-        int tail = offset * 8;
+        int head = offset * 8;
+        int tail = (offset + 1) * 8;
         if(tail >= size){
             tail = size;
         }
