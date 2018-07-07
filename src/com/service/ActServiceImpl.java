@@ -3,22 +3,23 @@ package com.service;
 import com.bean.ActivityBean;
 import com.bean.OrderBean;
 import com.dao.ActDao;
+import com.dao.ActDaoImpl;
 import com.dao.OrderDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dao.OrderDaoImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
+
 
 @Service
 public class ActServiceImpl implements ActService{
 
-    @Autowired
-    private ActDao actDao;
 
-    @Autowired
-    private OrderDao orderDao;
+    private ActDao actDao = new ActDaoImpl();
+
+
+    private OrderDao orderDao = new OrderDaoImpl();
 
     @Override
     public int buyTicket(int aid, String showtime, double ticket, int num, double sum, String username) {
@@ -69,6 +70,8 @@ public class ActServiceImpl implements ActService{
 
     @Override
     public ArrayList<ActivityBean> advertiseAct() {
+        ArrayList<ActivityBean> result = actDao.advertiseAct();
+        System.out.println("size : " + result.size());
         return actDao.advertiseAct();
     }
 

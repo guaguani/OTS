@@ -2,14 +2,14 @@ package com.service;
 
 import com.bean.UserBean;
 import com.dao.User_newDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dao.User_newDaoImpl;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService_newImpl implements UserService_new {
 
-    @Autowired
-    private User_newDao userNewDao;
+
+    private User_newDao userNewDao = new User_newDaoImpl();
 
     @Override
     public String logIn(String userid, String password) {

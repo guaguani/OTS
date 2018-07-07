@@ -2,7 +2,7 @@ package com.service;
 
 import com.bean.OrderBean;
 import com.dao.OrderDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dao.OrderDaoImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.Date;
 @Service
 public class OrderServiceImpl implements OrderService{
 
-    @Autowired
-    private OrderDao orderDao;
+
+    private OrderDao orderDao = new OrderDaoImpl();
 
     @Override
     public ArrayList<OrderBean> getOrder(int offset, String userid, String type) {
