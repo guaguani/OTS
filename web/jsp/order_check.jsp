@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="orderbean" type="com.bean.OrderBean" scope="session"></jsp:useBean>
+<jsp:useBean id="OPB" type="com.bean.OrderPageBean" scope="session"></jsp:useBean>
 <jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
@@ -33,6 +33,8 @@
             $("body").on('click', '.item-user', function () {
                 window.location.href='./information.jsp';
             });
+
+
 
         });
         setInterval(function () {
@@ -146,12 +148,12 @@
     </div>
 
     <div class="count-down-wrapper">
-        <div class="count-down" data-sec=<%=orderbean.getTime().get(1) %> data-min=<%=orderbean.getTime().get(0) %> data-oid=<%=orderbean.getId() %> data-state="0" id="counter" style="margin-top: -20px;">
+        <div class="count-down" data-sec=<%=OPB.getBeans().get(0).getTime().get(1) %> data-min=<%=OPB.getBeans().get(0).getTime().get(0) %> data-state="0" data-count="0" id="counter" style="margin-top: -20px;">
             <p class="time-left">
                 请在
-                <span class="minute" id="m_place"><%=orderbean.getTime().get(0) %></span>
+                <span class="minute" id="m_place"><%=OPB.getBeans().get(0).getTime().get(0) %></span>
                 分钟
-                <span class="second" id="s_place"><%=orderbean.getTime().get(1) %></span>
+                <span class="second" id="s_place"><%=OPB.getBeans().get(0).getTime().get(1) %></span>
                 秒内完成支付
             </p>
             <p class="tip">超时订单会自动取消，请尽快支付</p>
@@ -160,7 +162,8 @@
 
     <p class="warning">请仔细核对场次信息，<span class="attention">出票后退票和改签将扣取一定费用</span></p>
 
-    <table class="order-table">
+    <%for(int i=0;i<OPB.getBeans().size();i++){%>
+    <table class="order-table" data-oid=<%=OPB.getBeans().get(i).getId()%>>
         <thead>
         <tr>
             <th style="min-width:160px;">名称</th>
@@ -172,28 +175,28 @@
         </thead>
         <tbody>
         <tr>
-            <td class="movie-name"><%=orderbean.getActName() %></td>
-            <td class="showtime"><%=orderbean.getTime() %></td>
-            <td class="cinema-name"><%=orderbean.getVenueName() %></td>
+            <td class="movie-name"><%=OPB.getBeans().get(i).getActName() %></td>
+            <td class="showtime"><%=OPB.getBeans().get(i).getTime() %></td>
+            <td class="cinema-name"><%=OPB.getBeans().get(i).getVenueName() %></td>
             <td>
-                <span class="hall"><%=orderbean.getTime() %></span>
+                <span class="hall"><%=OPB.getBeans().get(i).getTime() %></span>
                 <div class="seats">
                     <div>
-                        <%if(orderbean.getSeatX().size()>1){%>
-                        <span class=""><%=orderbean.getSeatX().get(0)+"排"+orderbean.getSeatY().get(0)+"座等" %></span>
+                        <%if(OPB.getBeans().get(i).getSeatX().size()>1){%>
+                        <span class=""><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座等" %></span>
                         <%}else{%>
-                        <span class=""><%=orderbean.getSeatX().get(0)+"排"+orderbean.getSeatY().get(0)+"座" %></span>
+                        <span class=""><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座" %></span>
                         <%}%>
                     </div>
                     <div>
                     </div>
                 </div>
             </td>
-            <td class="showtime"><%=orderbean.getSum()+"元" %></td>
+            <td class="showtime"><%=OPB.getBeans().get(i).getSum()+"元" %></td>
         </tr>
         </tbody>
     </table>
-
+    <%}%>
 
     <div class="right" style="float: left;margin-bottom: 20px;">
         <div class="box-main">

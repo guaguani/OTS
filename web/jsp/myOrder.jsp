@@ -51,14 +51,6 @@
                 cancel(order_id);
             });
 
-            $(window).scroll(function(){
-                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
-                    $("#loading").fadeIn(500);
-                    more_order();
-                    $("#loading").fadeOut(500);
-                }
-            });
-
         });
     </script>
 </head>

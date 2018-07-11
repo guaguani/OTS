@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="searchPagebean" type="com.bean.SearchPageBean" scope="session"></jsp:useBean>
+<jsp:useBean id="searchPagebean" class="com.bean.SearchPageBean" scope="session"></jsp:useBean>
 <jsp:useBean id="userbean" class="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
@@ -40,15 +40,8 @@
             $("body").on('click', '#login', function () {
                 var name = $("#log_username").val();
                 var pass = $("#log_password").val();
-                var res = login(name, pass);
-                if (res == "1") {
-                    $(".log_pane").hide();
-                    $(".item-login").hide();
-                    $(".item-user").show();
-                }
-                else{
-                    $("#wrong_tip").show();
-                }
+                login(name, pass);
+
             });
             $("body").on('click', '.search_type', function () {
                 search_by_type($(this.attr("name")));
@@ -59,18 +52,11 @@
                 get_act_detail(id);
             });
 
-            $(window).scroll(function(){
-                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
-                    $("#loading").fadeIn(500);
-                    more_act();
-                    $("#loading").fadeOut(500);
-                }
-            });
         });
     </script>
 </head>
 <body>
-
+<%userbean.setPagePos("search");%>
 <div class="header">
     <div class="box1">
         <a href="/" class="logo_box">
@@ -210,27 +196,40 @@
                 </div>
             </li>
             <%}%>
+
+            <div style="float: left;width: 450px;margin-left: 17%;margin-top: 5%;">
+                <a class="page_but">上一页</a>
+                <a class="page_but">下一页</a>
+            </div>
         </ul>
     </div>
 
-<div class="log_pane" style="display: none;">
-    <div class="log_back"></div>
-    <div class="pop_login">
-        <ul class="pop_login_title">
-            <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
-            <div class="icon icon-login-popup-logo"></div>
-        </ul>
-        <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
-        <ul class="pop_login_form">
-            <li id="user_name"><input placeholder="用户名" id="log_username"></li>
-            <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
-            <li id="li_login">
-                <a id="login">登录</a>
-                <a id="reg" style="margin-left: 40px;">注册</a>
-            </li>
-        </ul>
+<%if(userbean.isWrong()){%>
+<div class="log_pane">
+        <%}else{%>
+    <div class="log_pane" style="display: none;">
+        <%}%>
+        <div class="log_back"></div>
+        <div class="pop_login">
+            <ul class="pop_login_title">
+                <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
+                <div class="icon icon-login-popup-logo"></div>
+            </ul>
+            <%if(userbean.isWrong()){%>
+            <div style="color: red;margin-left: 100px;" id="wrong_tip">用户名或密码错误，请重试</div>
+            <%}else{%>
+            <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
+            <%}%>
+            <ul class="pop_login_form">
+                <li id="user_name"><input placeholder="用户名" id="log_username"></li>
+                <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
+                <li id="li_login">
+                    <a id="login">登录</a>
+                    <a id="reg" style="margin-left: 40px;">注册</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 
 <div class="modal-container" style="display:none;" id="no_more_board">
     <div class="modal">
@@ -242,5 +241,6 @@
 <div id="loading" class="loading" style="position:absolute; left:49%; top:40%; width:20px; height:20px; z-index:30;display: none">
     <img src="../img/loading.gif"/>
 </div>
+    <%%>
 </body>
 </html>

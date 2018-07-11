@@ -71,15 +71,7 @@
           $("body").on('click', '#login', function () {
               var name = $("#log_username").val();
               var pass = $("#log_password").val();
-              var res = login(name, pass);
-              if (res == "1") {
-                  $(".log_pane").hide();
-                  $(".item-login").hide();
-                  $(".item-user").show();
-              }
-              else{
-                  $("#wrong_tip").show();
-              }
+              login(name, pass);
           });
 
           $("body").on('click','.spi',function(){
@@ -95,7 +87,7 @@
           });
 
           $("body").on('click', '.search_type', function () {
-              search_by_type($(this.attr("name")));
+              search_by_type($(this).attr("name"));
           });
 
           $("body").on('click', '.activity_box', function () {
@@ -112,11 +104,7 @@
   </script>
 </head>
 <body class="home">
-<%if(userbean==null){
-    userbean=new UserBean();
-}
-  indexbean=new IndexBean();
-%>
+<%userbean.setPagePos("index");%>
 <a id="counter" style="display: none;" name="0"></a>
 <a id="left" style="display: none;" name="40"></a>
 <div class="header">
@@ -180,28 +168,28 @@
   <div class="box" style="min-height: 360px;overflow: hidden;">
     <ul class="left_cate" style="padding: 0;">
       <li class="item-1">
-        <a class="search_type" name="con">演唱会</a>
+        <a class="search_type" name="演唱会">演唱会</a>
       </li>
       <li class="item-2">
-        <a class="search_type" name="ope">话剧歌剧</a>
+        <a class="search_type" name="话剧歌剧">话剧歌剧</a>
       </li>
       <li class="item-5">
-        <a class="search_type" name="ent">休闲展览</a>
+        <a class="search_type" name="休闲展览">休闲展览</a>
       </li>
       <li class="item-8">
-        <a class="search_type" name="spo">体育赛事</a>
+        <a class="search_type" name="体育赛事">体育赛事</a>
       </li>
       <li class="item-3">
-        <a class="search_type" name="mus">音乐会</a>
+        <a class="search_type" name="音乐会">音乐会</a>
       </li>
       <li class="item-4">
-        <a class="search_type" name="chi">儿童亲子</a>
+        <a class="search_type" name="儿童亲子">儿童亲子</a>
       </li>
       <li class="item-6">
-        <a class="search_type" name="dan">舞蹈芭蕾</a>
+        <a class="search_type" name="舞蹈芭蕾">舞蹈芭蕾</a>
       </li>
       <li class="item-7">
-        <a class="search_type" name="bei">戏曲综艺</a>
+        <a class="search_type" name="戏曲综艺">戏曲综艺</a>
       </li>
     </ul>
     <div class="ad_pos" style="margin-top: 16px;">
@@ -243,7 +231,7 @@
       <img src="../img/hot.png" class="title-icon">
       <span class="title-text">近期热门</span>
     </a>
-    <a class="more" data-type="all">更多 &gt;</a>
+    <a class="more" data-type="全部演出">更多 &gt;</a>
   </div>
   <div style="border-top-color:#ffcca6;border-top-width:2px" class="items">
     <ul style="padding: 0;">
@@ -273,7 +261,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">演唱会</span>
       </a>
-      <a class="more" data-type="con">更多 &gt;</a>
+      <a class="more" data-type="演唱会">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -323,7 +311,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">话剧歌剧</span>
       </a>
-      <a class="more" data-type="ope">更多 &gt;</a>
+      <a class="more" data-type="话剧歌剧">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -373,7 +361,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">休闲展览</span>
       </a>
-      <a class="more" data-type="ent">更多 &gt;</a>
+      <a class="more" data-type="休闲展览">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -423,7 +411,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">体育赛事</span>
       </a>
-      <a class="more" data-type="spo">更多 &gt;</a>
+      <a class="more" data-type="体育赛事">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -473,7 +461,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">音乐会</span>
       </a>
-      <a class="more" data-type="mus">更多 &gt;</a>
+      <a class="more" data-type="音乐会">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -523,7 +511,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">儿童亲子</span>
       </a>
-      <a class="more" data-type="chi">更多 &gt;</a>
+      <a class="more" data-type="儿童亲子">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -573,7 +561,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">舞蹈芭蕾</span>
       </a>
-      <a class="more" data-type="dan">更多 &gt;</a>
+      <a class="more" data-type="舞蹈芭蕾">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -623,7 +611,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">戏曲综艺</span>
       </a>
-      <a class="more" data-type="bei">更多 &gt;</a>
+      <a class="more" data-type="戏曲综艺">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -675,15 +663,22 @@
   </div>
 </div>
 
-
-<div class="log_pane" style="display: none;">
+<%if(userbean.isWrong()){%>
+<div class="log_pane">
+  <%}else{%>
+    <div class="log_pane" style="display: none;">
+      <%}%>
   <div class="log_back"></div>
   <div class="pop_login">
     <ul class="pop_login_title">
       <span onclick="$('.log_pane').hide()" class="icon-modal-close"></span>
       <div class="icon icon-login-popup-logo"></div>
     </ul>
+    <%if(userbean.isWrong()){%>
+    <div style="color: red;margin-left: 100px;" id="wrong_tip">用户名或密码错误，请重试</div>
+    <%}else{%>
     <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
+    <%}%>
     <ul class="pop_login_form">
       <li id="user_name"><input placeholder="用户名" id="log_username"></li>
       <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
@@ -694,6 +689,6 @@
     </ul>
   </div>
 </div>
-
+<%%>
 </body>
 </html>

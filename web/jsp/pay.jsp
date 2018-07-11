@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="orderbean" type="com.bean.OrderBean" scope="session"></jsp:useBean>
+<jsp:useBean id="OPB" type="com.bean.OrderPageBean" scope="session"></jsp:useBean>
 <jsp:useBean id="userbean" type="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
@@ -19,12 +19,10 @@
         $(document).ready(function(){
 
             $("body").on('click','#pay',function(){
-                var oid=$(this).attr("data-oid");
                 var v1=$("#counter");
                 var v2=document.getElementById("account").value;
                 var v3=document.getElementById("pwd").value
 
-                var sum=$("#total").html();
                 var can=true;
                 if(v2==null||v2=="") {
                     alert("请输入账号");
@@ -41,7 +39,7 @@
 
                     if(state==0){
 
-                        pay_money(oid,v2,v3,sum);
+                        pay_money(v2,v3);
                     }
 
                 }
@@ -86,7 +84,7 @@
     </script>
 </head>
 <body>
-<a data-sec=<%=orderbean.getTime().get(1)+orderbean.getTime().get(1)*60 %> data-oid=<%=orderbean.getId() %> data-state="0" id="counter"></a>
+<a data-sec=<%=OPB.getBeans().get(0).getTime().get(1)+OPB.getBeans().get(0).getTime().get(1)*60 %> data-state="0" id="counter"></a>
 
 <div class="pay_header">
     <div style="width: 950px;zoom:1;">
@@ -110,11 +108,11 @@
                         </span>
                     </div>
                     <div class="commodity-message-row">
-                        <span class="first"><%="罗汉豆订单："+orderbean.getId() %></span>
+                        <span class="first"><%="罗汉豆订单："+OPB.getBeans().get(0).getId() %></span>
                         <span class="second">收款方：罗汉豆票务</span>
                     </div>
                     <span class="payAmount-area">
-                        <strong><%=orderbean.getSum() %></strong> 元
+                        <strong><%=OPB.getSum() %></strong> 元
                     </span>
                 </div>
             </div>
@@ -150,7 +148,7 @@
                                     <div class="d14">
                                         <div class="d16">
                                             <a class="a1">
-                                                <span class="s7" data-oid=<%=orderbean.getId() %> id="pay">支付</span>
+                                                <span class="s7" id="pay">支付</span>
                                             </a>
                                         </div>
                                     </div>
