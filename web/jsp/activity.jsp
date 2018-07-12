@@ -19,17 +19,17 @@
                 $(this).parent().parent().find(".city_box").toggle();
             });
             $("body").on('click','.city-item',function(){
-                var name=$(this).html();
+                var name=$(this).attr("data-name");
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
             $("body").on('click','#pos',function(){
-                var name=$(this).html();
+                var name=$(this).attr("data-name");
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
             $("body").on('click','.btn-submit',function(){
-                var user_input=$(this).prev().value();
+                var user_input=$(this).prev().val();
                 search_by_input(user_input);
             });
             $("body").on('click','.item-login',function(){
@@ -45,7 +45,7 @@
             });
 
             $("body").on('click', '#type', function () {
-                var name=$(this).html();
+                var name=$(this).attr("data-name");
                 search_by_type(name);
             });
 
@@ -218,7 +218,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="country">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -263,9 +263,9 @@
         <p style="background-color: #eaeaea;    padding: 12px 20px 14px 20px;">
             <a href="/">罗汉豆</a>
             <span class="arrow">&gt;</span>
-            <a id="pos"><%=userbean.getCurPos()%></a>
+            <a id="pos" data-name=<%=activitybean.getEngc()%>><%=userbean.getCurPos()%></a>
             <span class="arrow">&gt;</span>
-            <a id="type"><%=userbean.getCurType()%></a>
+            <a id="type" data-name=<%=activitybean.getEngt()%>><%=userbean.getCurType()%></a>
             <span class="arrow">&gt;</span>
             <strong><%=activitybean.getName()%></strong>
         </p>

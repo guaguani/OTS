@@ -52,7 +52,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="country">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>

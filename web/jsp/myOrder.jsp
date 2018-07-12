@@ -23,7 +23,7 @@
                 search_by_city(name);
             });
             $("body").on('click', '.btn-submit', function () {
-                var user_input = $(this).prev().value();
+                var user_input=$(this).prev().val();
                 search_by_input(user_input);
             });
             $("body").on('click', '.logout', function () {

@@ -59,7 +59,7 @@
               search_by_city(name);
           });
           $("body").on('click','.btn-submit',function(){
-              var user_input=$(this).prev().value();
+              var user_input=$(this).prev().val();
               search_by_input(user_input);
           });
           $("body").on('click','.item-login',function(){
@@ -139,7 +139,7 @@
       </div>
     </div>
     <div class="search-bar">
-      <form action="" style="overflow: hidden;">
+      <form action="SearchByInp" style="overflow: hidden;">
         <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value="" class="input">
         <input type="submit" value="搜索" class="btn-submit">
       </form>

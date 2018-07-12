@@ -3,11 +3,6 @@ function search_by_city(city){
     window.location.href="../SearchByCond?type=1&city="+city;
 }
 
-function search_by_input(input){
-    alert("in method search_by_input input is "+input);
-    window.location.href="../SearchByInp?inp="+input;
-}
-
 function search_by_type(type){
     alert("in method search_by_type type is "+type);
     window.location.href="../SearchByCond?city=1&type="+type;

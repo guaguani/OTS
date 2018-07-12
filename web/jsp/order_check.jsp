@@ -22,12 +22,12 @@
                 $(this).parent().parent().find(".city_box").toggle();
             });
             $("body").on('click', '.city-item', function () {
-                var name = $(this).html();
+                var name=$(this).attr("data-name");
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
             $("body").on('click', '.btn-submit', function () {
-                var user_input = $(this).prev().value();
+                var user_input=$(this).prev().val();
                 search_by_input(user_input);
             });
             $("body").on('click', '.item-user', function () {
@@ -90,7 +90,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="country">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>

@@ -400,11 +400,23 @@ public class UserAction extends ActionSupport{
         return input;
     }
 
+    private String transToE(String input){
+
+        for(int i=0;i<chi.size();i++){
+            if(chi.get(i).equals(input)){
+                return eng.get(i);
+            }
+        }
+        return input;
+    }
+
     public String getActDetail(){
         System.out.println("IN ACT! GET DETAIL");
         HttpSession session=ServletActionContext.getRequest().getSession();
         String id = getParam("id");
         ActivityBean activityBean=actService.getByID(Integer.parseInt(id));
+        activityBean.setEngc(transToE(activityBean.getCity()));
+        activityBean.setEngt(transToE(activityBean.getType()));
         session.setAttribute("activitybean", activityBean);
         return SUCCESS;
     }
@@ -451,22 +463,29 @@ public class UserAction extends ActionSupport{
 
     public String SearchByInp(){
         System.out.println("IN ACT! SEARCH BY INP");
-
+        check();
         HttpSession session=ServletActionContext.getRequest().getSession();
 
         SearchPageBean searchPageBean=(SearchPageBean)session.getAttribute("searchPagebean");
+        if(searchPageBean==null){
+            searchPageBean=new SearchPageBean();
+        }
         UserBean userBean=(UserBean)session.getAttribute("userbean");
-        String inp = getParam("inp");
+        String inp = getParam("keyword");
+
+        System.out.println("INPUT IS:"+inp);
         searchPageBean.setCur_input(inp);
         userBean.setCurInput(inp);
         userBean.setCurPos("全国");
         userBean.setCurType("全部演出");
+        searchPageBean.setCur_type("全部演出");
+        searchPageBean.setCur_city("全国");
 
         searchPageBean.setCur_offset(8);
         searchPageBean.setBeans(actService.selectByNameOrVen(inp, 0));
 
         session.setAttribute("userbean", userBean);
-        session.setAttribute("searchPagebean", new SearchPageBean());
+        session.setAttribute("searchPagebean",searchPageBean);
         return SUCCESS;
     }
 

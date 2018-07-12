@@ -15,6 +15,8 @@ public class ActivityBean implements Serializable{
 	private String des;
 	/*类型*/
 	private String type;
+	private String engt;
+
 	/*演出场次*/
 	private ArrayList<HallBean> halls;
 	private int id;
@@ -25,6 +27,7 @@ public class ActivityBean implements Serializable{
 	private String vname;
 	/*城市*/
 	private String city;
+	private String engc;
 	/*图片路径*/
 	private String path;
 	/*起价*/
@@ -38,10 +41,22 @@ public class ActivityBean implements Serializable{
 	/*广告位图片路径*/
 	private String apath;
 
+	public String getEngt() {
+		return engt;
+	}
 
-	
-	
-	
+	public void setEngt(String engt) {
+		this.engt = engt;
+	}
+
+	public String getEngc() {
+		return engc;
+	}
+
+	public void setEngc(String engc) {
+		this.engc = engc;
+	}
+
 	public String getApath() {
 		return apath;
 	}
