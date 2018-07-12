@@ -90,7 +90,7 @@
                         li.setAttribute("data-date",""+date);
                         var span1=document.createElement("span");
                         span1.setAttribute("class","price");
-                        span1.innerHTML=price+"元:"+date.slice(5,10);
+                        span1.innerHTML=date.slice(0,10)+" : "+price+"元";
                         li.appendChild(span1);
                         var mnums=document.createElement("span");
                         mnums.setAttribute("class","m-nums");
@@ -98,6 +98,7 @@
                         ul.setAttribute("class","btn-numbox");
                         var li1=document.createElement("li");
                         li1.setAttribute("class","itm");
+                        li1.setAttribute("style","margin-top:0px;");
                         var span2=document.createElement("span");
                         span2.setAttribute("class","number");
                         span2.setAttribute("style","font-size: 16px;");
@@ -156,7 +157,7 @@
                 var n=parseInt(num);
                 var sum=$("#info").attr("data-num");
                 var t_num=parseInt(sum);
-                if(t_num>=20){
+                if(t_num>=19){
                     too_much();
                 }
                 else{
@@ -247,7 +248,7 @@
                 </div>
             </div>
             <%}else{%>
-            <div style="display: none;" class="item-user item1">
+            <div class="item-user item1">
                 <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
                     个人中心
                 </div>
@@ -357,8 +358,8 @@
                 <li id="user_name"><input placeholder="用户名" id="log_username"></li>
                 <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
                 <li id="li_login">
-                    <a id="login">登录</a>
-                    <a id="reg" style="margin-left: 40px;">注册</a>
+                    <a id="login" style="cursor: pointer;">登录</a>
+                    <a id="reg" style="margin-left: 40px;cursor: pointer;">注册</a>
                 </li>
             </ul>
         </div>

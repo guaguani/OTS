@@ -89,7 +89,7 @@
 <div class="pay_header">
     <div style="width: 950px;zoom:1;">
         <div class="header-title">
-            <a href="myOrder.jsp"><div class="alipay-logo"></div></a>
+            <div class="alipay-logo"></div>
             <span class="logo-title">我的收银台</span>
         </div>
     </div>

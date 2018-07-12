@@ -13,8 +13,8 @@ function get_act_detail(act_id){
     window.location.href="../getActDetail?id="+act_id;
 }
 
-function lock_seat(info){//date a price a num l
-    alert("IN LOCK SEAT :"+info);
+function lock_seat(info){
+    //alert("IN LOCK SEAT :"+info);
     window.location.href="../CreateOrder?info="+info;
 }
 

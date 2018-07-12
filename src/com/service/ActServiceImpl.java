@@ -2,11 +2,13 @@ package com.service;
 
 import com.bean.ActivityBean;
 import com.bean.OrderBean;
+import com.bean.SeatBean;
 import com.dao.ActDao;
 import com.dao.ActDaoImpl;
 import com.dao.OrderDao;
 import com.dao.OrderDaoImpl;
 import org.springframework.stereotype.Service;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,10 +36,34 @@ public class ActServiceImpl implements ActService{
         String actName = activityBean.getName();
         String venueName = activityBean.getVname();
         String room = activityBean.getHalls().get(0).getName();
-        ArrayList<String> seatX = new ArrayList<>();
-        ArrayList<String> seatY = new ArrayList<>();
+        SeatBean seats[][]=activityBean.getHalls().get(0).getSeats();
+        ArrayList<String> seatX = new ArrayList<String>();
+        ArrayList<String> seatY = new ArrayList<String>();
+        boolean out=false;
+        int count=num;
+        for(int i=0;i<seats.length;i++){
+            for(int j=0;j<seats[i].length;j++){
+                if(seats[i][j].getState().equals("空")&&Math.abs(seats[i][j].getPrice()-ticket)<0.1){
+                    seats[i][j].setOid(oid);
+                    seats[i][j].setState("售");
+                    seatX.add(seats[i][j].getPosRow());
+                    seatY.add(seats[i][j].getPosColum());
+                    count--;
+                    if(count==0){
+                        out=true;
+                        break;
+                    }
+                }
+
+            }
+            if(out){
+                break;
+            }
+        }
+
 
         Date createDate = new Date();
+
 
         orderBean.setId(oid);
         orderBean.setUserid(username);
@@ -55,7 +81,7 @@ public class ActServiceImpl implements ActService{
         orderBean.setPayDate(null);
         orderBean.setCreateDate(createDate);
         orderBean.setPay_id("");
-        orderBean.setStart(0);
+        orderBean.setStart(System.currentTimeMillis());
         orderBean.setNum(num);
 
         orderDao.addOrder(orderBean);

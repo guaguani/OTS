@@ -197,9 +197,16 @@ public class OrderBean implements Serializable{
 
 	public ArrayList<Long> getTime(){
 		ArrayList<Long> result=new ArrayList<Long>();
-		long now=(System.currentTimeMillis()-this.start)/1000;
-		result.add(now/60);
-		result.add(now%60);
+		long now=900-(System.currentTimeMillis()-this.start)/1000;
+		if(now<=0){
+			result.add(Long.parseLong("0"));
+			result.add(Long.parseLong("0"));
+		}
+		else{
+			result.add(now/60);
+			result.add(now%60);
+		}
+
 		return result;
 	}
 }

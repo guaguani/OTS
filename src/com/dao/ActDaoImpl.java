@@ -374,7 +374,7 @@ public class ActDaoImpl implements ActDao{
             }
         }
 
-        SeatBean[][] seats = getSeats(hallBean.getVid(), rows, col);
+        SeatBean[][] seats = getSeats(hallBean.getId(), rows, col);
         hallBean.setSeats(seats);
         return hallBean;
     }
@@ -407,8 +407,9 @@ public class ActDaoImpl implements ActDao{
                     stmt.setInt(3,j);
                     rs = stmt.executeQuery();
 
-                    SeatBean seat = new SeatBean();
+
                     while (rs.next()) {
+                        SeatBean seat = new SeatBean();
                         seat.setState(rs.getString(2));
                         seat.setPosRow(rs.getString(3));
                         seat.setPosColum(rs.getString(4));

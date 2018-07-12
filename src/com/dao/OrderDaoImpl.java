@@ -6,6 +6,7 @@ import com.bean.OrderBean;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Repository
@@ -19,8 +20,15 @@ public class OrderDaoImpl implements OrderDao  {
         ResultSet rs = null;
         try {
             int pos = offset*8;
-            String sql = "select * from ticketorder where userid = " + userid + " and state = " + "\"" + type + "\"" +
+            String sql="";
+            if(type.equals("全部订单")){
+                sql = "select * from ticketorder where userid = " + userid + " limit 8 offset " + pos;
+            }
+            else{
+                sql = "select * from ticketorder where userid = " + userid + " and state = " + "\"" + type + "\"" +
                         "  limit 8 offset " + pos;
+            }
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
@@ -95,9 +103,12 @@ public class OrderDaoImpl implements OrderDao  {
             stmt.setString(11,order.getRoom());
             stmt.setString(12,listToString(order.getSeatX()));
             stmt.setString(13,listToString(order.getSeatY()));
-            stmt.setString(14,order.getPayDate().toString());
-            stmt.setString(15,order.getCreateDate().toString());
-            stmt.setString(16,order.getPay_id());
+            stmt.setString(14,null);
+            SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+            String time = format0.format(order.getCreateDate().getTime());
+
+            stmt.setString(15,time);
+            stmt.setString(16,null);
 
 
             stmt.executeUpdate();
@@ -146,7 +157,15 @@ public class OrderDaoImpl implements OrderDao  {
             stmt.setString(10,order.getRoom());
             stmt.setString(11,listToString(order.getSeatX()));
             stmt.setString(12,listToString(order.getSeatY()));
-            stmt.setString(13,order.getPayDate().toString());
+            if(order.getPayDate()!=null){
+                SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+                String time = format0.format(order.getPayDate());
+                stmt.setString(13,time);
+            }
+            else{
+                stmt.setString(13,null);
+            }
+
             stmt.setString(14,order.getCreateDate().toString());
             stmt.setString(15,order.getPay_id());
             stmt.setInt(16,order.getId());

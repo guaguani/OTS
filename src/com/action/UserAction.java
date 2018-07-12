@@ -620,7 +620,17 @@ public class UserAction extends ActionSupport{
         session.setAttribute("orderPagebean", orderPagebean);
         session.setAttribute("searchPagebean", new SearchPageBean());
         System.out.println(userBean.getPagePos());
-        return userbean.getPagePos();
+        String s=userBean.getPagePos();
+        if(s.equals("activity")){
+            return "activity";
+        }
+        else if(s.equals("search")){
+            return "search";
+        }
+        else{
+            return "index";
+        }
+
     }
 
     public String logout(){
@@ -662,10 +672,12 @@ public class UserAction extends ActionSupport{
         HttpSession session=ServletActionContext.getRequest().getSession();
         check();
         String type=trans(getParam("type"));
+        System.out.println("TYPE IS:"+type);
 
         UserBean userBean=(UserBean)session.getAttribute("userbean");
         OrderPageBean orderPagebean=(OrderPageBean)session.getAttribute("orderPagebean");
 
+        System.out.println("UID IS:"+userBean.getId());
         orderPagebean.setType(type);
         orderPagebean.setOffset(8);
         orderPagebean.setBeans(orderService.getOrder(0,userBean.getId(),type));

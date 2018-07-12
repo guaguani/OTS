@@ -113,7 +113,7 @@
     <div class="content">
         <div class="main">
             <div class="info-content clearfix">
-                <div class="user-profile-nav">
+                <div class="user-profile-nav" style="cursor: pointer;">
                     <a href="./information.jsp">个人信息</a>
                     <a class="active">我的订单</a>
                     <a class="logout">退出登录</a>
@@ -150,20 +150,20 @@
                                 <img src=<%=orderPagebean.getBeans().get(i).getPath() %>>
                             </div>
                             <div class="order-content">
-                                <div class="activity-name"><%=orderPagebean.getBeans().get(i).getActName() %></div>
-                                <div class="venue-name"><%=orderPagebean.getBeans().get(i).getVenueName() %></div>
-                                <div class="order-time"><%=orderPagebean.getBeans().get(i).getTime() %></div>
+                                <div class="activity-name" style="min-width: 280px;"><%=orderPagebean.getBeans().get(i).getActName() %></div>
+                                <div class="venue-name" style="margin-top: 15px;min-width: 280px;"><%=orderPagebean.getBeans().get(i).getVenueName() %></div>
+                                <div class="order-time" style="margin-left: 0px;min-width: 280px;"><%=orderPagebean.getBeans().get(i).getActTime() %></div>
                             </div>
-                            <div class="order-price"><%="￥"+orderPagebean.getBeans().get(i).getSum() %></div>
+                            <div class="order-price" style="margin-left: 90px;"><%="￥"+orderPagebean.getBeans().get(i).getSum() %></div>
                             <div class="order-status"><%=orderPagebean.getBeans().get(i).getState() %></div>
                             <div class="actions">
                                 <div>
                                     <%if(orderPagebean.getBeans().get(i).getState().equals("未支付")){%>
-                                    <a class="order-pay" name=<%=orderPagebean.getBeans().get(i).getId() %>>立即支付</a>
+                                    <a class="order-pay" style="cursor: pointer;color: lawngreen;" name=<%=orderPagebean.getBeans().get(i).getId() %>>立即支付</a>
                                     <%}else if(orderPagebean.getBeans().get(i).getState().equals("待使用")){%>
-                                    <a class="order-cancel" style="color: #333;" name=<%=orderPagebean.getBeans().get(i).getId() %>>取消订单</a>
+                                    <a class="order-cancel" style="cursor: pointer;" style="color: #333;" name=<%=orderPagebean.getBeans().get(i).getId() %>>取消订单</a>
                                     <%}else{%>
-                                    <a class="order-detail" name=<%=orderPagebean.getBeans().get(i).getActid() %>>活动详情</a>
+                                    <a class="order-detail" style="cursor: pointer;color: #ff7919;" name=<%=orderPagebean.getBeans().get(i).getActid() %>>活动详情</a>
                                     <%}%>
                                 </div>
                             </div>

@@ -150,7 +150,7 @@
         </div>
       </div>
       <%}else{%>
-      <div style="display: none;" class="item-user item1">
+      <div class="item-user item1">
         <div class="text1" style="color:#ff7919;font-size: 18px;margin-top: 23px;">
           个人中心
         </div>
@@ -680,8 +680,8 @@
       <li id="user_name"><input placeholder="用户名" id="log_username"></li>
       <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
       <li id="li_login">
-        <a id="login">登录</a>
-        <a id="reg" style="margin-left: 40px;">注册</a>
+        <a id="login" style="cursor: pointer;">登录</a>
+        <a id="reg" style="margin-left: 40px;cursor: pointer;">注册</a>
       </li>
     </ul>
   </div>

@@ -32,7 +32,11 @@
             });
 
 
-
+            $("body").on('click', '.handcan', function () {
+                var v1=$("#counter");
+                var oid=v1.attr("data-oid");
+                time_out_cancel(oid,"n");
+            });
         });
         setInterval(function () {
         //alert("in");
@@ -46,7 +50,7 @@
             if(sec==0){
                 if(min==0){
                     $("#counter").attr("data-state","1");
-                    time_out_cancel(oid);
+                    time_out_cancel(oid,"y");
                 }
                 else{
                     min=min-1;
@@ -145,13 +149,13 @@
     </div>
 
     <div class="count-down-wrapper">
-        <div class="count-down" data-sec=<%=OPB.getBeans().get(0).getTime().get(1) %> data-min=<%=OPB.getBeans().get(0).getTime().get(0) %> data-state="0" data-count="0" id="counter" style="margin-top: -20px;">
+        <div class="count-down" data-sec=<%=OPB.getBeans().get(0).getTime().get(1) %> data-min=<%=OPB.getBeans().get(0).getTime().get(0) %> data-oid=<%=OPB.getBeans().get(0).getId()%> data-state="0" data-count="0" id="counter" style="margin-top: -20px;">
             <p class="time-left">
-                请在
-                <span class="minute" id="m_place"><%=OPB.getBeans().get(0).getTime().get(0) %></span>
-                分钟
-                <span class="second" id="s_place"><%=OPB.getBeans().get(0).getTime().get(1) %></span>
-                秒内完成支付
+                <span>请在</span>
+                <span class="minute" id="m_place"><%=OPB.getBeans().get(0).getTime().get(0)%></span>
+                <span>分钟</span>
+                <span class="minute" id="s_place"><%=OPB.getBeans().get(0).getTime().get(1)%></span>
+                <span>秒内完成支付</span>
             </p>
             <p class="tip">超时订单会自动取消，请尽快支付</p>
         </div>
@@ -173,16 +177,16 @@
         <tbody>
         <tr>
             <td class="movie-name"><%=OPB.getBeans().get(i).getActName() %></td>
-            <td class="showtime"><%=OPB.getBeans().get(i).getTime() %></td>
+            <td class="showtime"><%=OPB.getBeans().get(i).getActTime() %></td>
             <td class="cinema-name"><%=OPB.getBeans().get(i).getVenueName() %></td>
             <td>
-                <span class="hall"><%=OPB.getBeans().get(i).getTime() %></span>
-                <div class="seats">
+                <span class="hall"><%=OPB.getBeans().get(i).getRoom() %></span>
+                <div class="seats" style="margin-top: -5px;">
                     <div>
                         <%if(OPB.getBeans().get(i).getSeatX().size()>1){%>
-                        <span class=""><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座等" %></span>
+                        <span class="" style="margin-top: -5px;"><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座等" %></span>
                         <%}else{%>
-                        <span class=""><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座" %></span>
+                        <span class="" style="margin-top: -5px;"><%=OPB.getBeans().get(i).getSeatX().get(0)+"排"+OPB.getBeans().get(i).getSeatY().get(0)+"座" %></span>
                         <%}%>
                     </div>
                     <div>
@@ -197,9 +201,11 @@
 
     <div class="right" style="float: left;margin-bottom: 20px;">
         <div class="box-main">
-            <div style="float: left;width: 450px;margin-left: 1000px;margin-top: 25px;">
-                <a class="ensure_btn" href="./pay.jsp">确认支付</a>
+            <div style="float: left;width: 500px;margin-left: 650px;margin-top: 25px;">
+                <a class="ensure_btn handcan" style="background-color: #676d70;float: left;cursor: pointer;">取消订单</a>
+                <a class="ensure_btn" href="./jsp/pay.jsp" target="_blank" style="margin-left: 230px;cursor: pointer;">确认支付</a>
             </div>
+
         </div>
     </div>
 </div>
