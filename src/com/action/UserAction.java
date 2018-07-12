@@ -12,7 +12,6 @@ import com.sun.deploy.net.HttpResponse;
 import com.util.MD5Util;
 import com.util.SendMailUtil;
 import org.apache.struts2.ServletActionContext;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
@@ -30,8 +29,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by guagua on 18/2/21.

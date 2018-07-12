@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="search-bar">
-            <form style="overflow: hidden;">
+            <form action="SearchByInp" style="overflow: hidden;">
                 <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword"  class="input" value=<%=userbean.getCurInput() %>>
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
