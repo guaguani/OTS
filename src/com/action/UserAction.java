@@ -472,6 +472,11 @@ public class UserAction extends ActionSupport{
         }
         UserBean userBean=(UserBean)session.getAttribute("userbean");
         String inp = getParam("keyword");
+        try {
+            inp = new String(getParam("keyword").getBytes("iso-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("INPUT IS:"+inp);
         searchPageBean.setCur_input(inp);
