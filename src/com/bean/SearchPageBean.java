@@ -14,27 +14,48 @@ public class SearchPageBean implements Serializable{
 	private int cur_offset;
 	private ArrayList<String> style;
 	private ArrayList<String> type;
+	private ArrayList<String> typee;
+	private boolean last;
 
 	public SearchPageBean(){
 		style=new ArrayList<String>();
-		style.add("background-color: #ff7919;");
-		type.add("全部");
+		type=new ArrayList<String>();
+		typee=new ArrayList<String>();
+		style.add("search_type pick");
+		type.add("全部演出");
+		typee.add("all");
 		type.add("演唱会");
+		typee.add("con");
 		type.add("话剧歌剧");
+		typee.add("ope");
 		type.add("休闲展览");
+		typee.add("ent");
 		type.add("体育赛事");
+		typee.add("spo");
 		type.add("音乐会");
+		typee.add("mus");
 		type.add("儿童亲子");
+		typee.add("chi");
 		type.add("舞蹈芭蕾");
+		typee.add("dan");
 		type.add("戏曲综艺");
+		typee.add("bei");
 
 		for(int i=1;i<9;i++){
-			style.add("");
+			style.add("search_type");
 		}
-		cur_type="全部";
+		cur_type="全部演出";
 		cur_input="";
 		cur_city="全国";
 		cur_offset=8;
+	}
+
+	public ArrayList<String> getTypee() {
+		return typee;
+	}
+
+	public boolean isLast() {
+		return last;
 	}
 
 	public ArrayList<String> getType() {
@@ -49,9 +70,6 @@ public class SearchPageBean implements Serializable{
 		return style;
 	}
 
-	public void setStyle(ArrayList<String> style) {
-		this.style = style;
-	}
 
 	public ArrayList<ActivityBean> getBeans() {
 		return beans;
@@ -59,6 +77,9 @@ public class SearchPageBean implements Serializable{
 
 	public void setBeans(ArrayList<ActivityBean> beans) {
 		this.beans = beans;
+		if(beans.size()<8){
+			last=true;
+		}
 	}
 
 	public String getCur_type() {
@@ -67,6 +88,14 @@ public class SearchPageBean implements Serializable{
 
 	public void setCur_type(String cur_type) {
 		this.cur_type = cur_type;
+		for(int i=0;i<type.size();i++){
+			if(type.get(i).equals(cur_type)){
+				style.set(i,"search_type pick");
+			}
+			else{
+				style.set(i,"search_type");
+			}
+		}
 	}
 
 	public String getCur_city() {

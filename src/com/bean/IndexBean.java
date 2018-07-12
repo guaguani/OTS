@@ -26,7 +26,7 @@ public class IndexBean implements Serializable{
 		curCity="全国";
 		ActService service=new ActServiceImpl();
 		adBeans=service.advertiseAct();
-		System.out.println("ad:"+adBeans.size());
+		System.out.println("ad:"+adBeans.size()+adBeans.get(0).getApath());
 		hot=service.hotAct();
 		System.out.println("hot:"+hot.size());
 		con=service.selectByCond("全国","演唱会",0);

@@ -7,7 +7,7 @@ public interface ActService {
 	/*
 	 * 购票  返回订单号
 	 */
-	public int buyTicket(int aid,String showtime,double ticket,int num,double sum,String username);
+	public int buyTicket(int aid,String showtime,double ticket,int num,String username);
 	/*
 	 * 得到活动详细信息
 	 */

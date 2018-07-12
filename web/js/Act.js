@@ -23,6 +23,15 @@ function lock_seat(info){//date a price a num l
     window.location.href="../CreateOrder?info="+info;
 }
 
+function search_act_up(){
+    alert("IN SEARCH ACT UP");
+    window.location.href="../ActPageChange?dir=up";
+}
+
+function search_act_down(){
+    alert("IN SEARCH ACT DOWN");
+    window.location.href="../ActPageChange?dir=down";
+}
 
 function too_much(){
     var tar = document.getElementById("upline_board");

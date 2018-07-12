@@ -22,6 +22,8 @@ public class UserBean implements Serializable{
 	private String curPos;
 	private String curType;
 	private String curInput;
+	private String pagePos;
+	private boolean wrong;
 
 	public UserBean(){
 		id="";
@@ -29,6 +31,22 @@ public class UserBean implements Serializable{
 		curInput="";
 		curPos="全国";
 		curType="全部演出";
+	}
+
+	public String getPagePos() {
+		return pagePos;
+	}
+
+	public boolean isWrong() {
+		return wrong;
+	}
+
+	public void setWrong(boolean wrong) {
+		this.wrong = wrong;
+	}
+
+	public void setPagePos(String pagePos) {
+		this.pagePos = pagePos;
 	}
 
 	public String getCurPos() {

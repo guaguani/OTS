@@ -112,7 +112,7 @@ public class ActDaoImpl implements ActDao{
 
     @Override
     public ArrayList<ActivityBean> advertiseAct() {
-        int [] idarray = {5, 433, 749 , 844, 61,1429, 1380,1588 ,1770,2109};
+        int [] idarray = {2192, 2193, 2194, 2195, 2196};
         return getListByIds(idarray);
     }
 
@@ -131,10 +131,28 @@ public class ActDaoImpl implements ActDao{
         ResultSet rs = null;
         int pos = offset * 8;
         try {
-            String sql = "select * from Activity where city = ? and type = ? limit 8 offset " + pos;
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1,city);
-            stmt.setString(2,type);
+            String sql="";
+            if(city.equals("全国")){
+                sql = "select * from Activity where type = ? limit 8 offset " + pos;
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,type);
+                System.out.println("IN ONE:"+type);
+            }
+            else if(type.equals("全部演出")){
+                sql = "select * from Activity where city = ? limit 8 offset " + pos;
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,city);
+                System.out.println("IN TWO:"+city);
+            }
+            else{
+                sql = "select * from Activity where city = ? and type = ? limit 8 offset " + pos;
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,city);
+                stmt.setString(2,type);
+                System.out.println("IN THREE:"+type+","+city);
+            }
+
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -176,6 +194,12 @@ public class ActDaoImpl implements ActDao{
                 return stu1.getFirst().compareTo(stu2.getFirst());
             }
         });
+        System.out.println("LIST IN DAO:"+list.size());
+        int i=0;
+        for(ActivityBean a:list){
+            System.out.println(i+":"+a.getApath());
+            i++;
+        }
         return list;
     }
 

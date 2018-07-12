@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="searchPagebean" class="com.bean.SearchPageBean" scope="session"></jsp:useBean>
+<jsp:useBean id="searchPagebean" type="com.bean.SearchPageBean" scope="session"></jsp:useBean>
 <jsp:useBean id="userbean" class="com.bean.UserBean" scope="session"></jsp:useBean>
 <html>
 <head>
@@ -22,8 +22,8 @@
             $("body").on('click', '.city-name', function () {
                 $(this).parent().parent().find(".city_box").toggle();
             });
-            $("body").on('click', '.city-item', function () {
-                var name = $(this).html();
+            $("body").on('click','.city-item',function(){
+                var name=$(this).attr("data-name");
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
@@ -44,12 +44,19 @@
 
             });
             $("body").on('click', '.search_type', function () {
-                search_by_type($(this.attr("name")));
+                search_by_type($(this).attr("name"));
             });
 
             $("body").on('click', '.activity_box', function () {
                 var id=$(this).attr("data-aid");
                 get_act_detail(id);
+            });
+
+            $("body").on('click', '.page_up', function () {
+                search_act_up();
+            });
+            $("body").on('click', '.page_down', function () {
+                search_act_down();
             });
 
         });
@@ -71,7 +78,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="country">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -90,7 +97,7 @@
         </div>
         <div class="search-bar">
             <form action="" style="overflow: hidden;">
-                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value=<%=searchPagebean.getCur_input() %> class="input">
+                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword"  class="input" value=<%=searchPagebean.getCur_input() %>>
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
@@ -118,51 +125,18 @@
             <dt>分 类：</dt>
             <dd class="search_city_num">
                 <ul class="clear">
+                    <%for(int i=0;i<searchPagebean.getType().size();i++){%>
                     <li>
-                        <a class="search_type" id="all" name="all" style=<%=searchPagebean.getStyle().get(0) %> >
-                            全部
+                        <%if(searchPagebean.getStyle().get(i).equals("search_type pick")){%>
+                        <a class="search_type pick" id="all" name=<%=searchPagebean.getTypee().get(i)%>>
+                        <%}else{%>
+                        <a class="search_type" id="all" name=<%=searchPagebean.getTypee().get(i)%>>
+                            <%}%>
+                            <%=searchPagebean.getType().get(i)%>
                         </a>
+                            <%%>
                     </li>
-                    <li>
-                        <a class="search_type" id="con" name="con" style=<%=searchPagebean.getStyle().get(1) %> >
-                            演唱会
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="ope" name="ope" style=<%=searchPagebean.getStyle().get(2) %> >
-                            话剧歌剧
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="ent" name="ent" style=<%=searchPagebean.getStyle().get(3) %> >
-                            休闲展览
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="spo" name="spo" style=<%=searchPagebean.getStyle().get(4) %> >
-                            体育赛事
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="mus" name="mus" style=<%=searchPagebean.getStyle().get(5) %> >
-                            音乐会
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="chi" name="chi" style=<%=searchPagebean.getStyle().get(6) %> >
-                            儿童亲子
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="dan" name="dan" style=<%=searchPagebean.getStyle().get(7) %> >
-                            舞蹈芭蕾
-                        </a>
-                    </li>
-                    <li>
-                        <a class="search_type" id="bei" name="bei" style=<%=searchPagebean.getStyle().get(8) %> >
-                            戏曲综艺
-                        </a>
-                    </li>
+                    <%}%>
                 </ul>
             </dd>
 
@@ -197,9 +171,13 @@
             </li>
             <%}%>
 
-            <div style="float: left;width: 450px;margin-left: 17%;margin-top: 5%;">
-                <a class="page_but">上一页</a>
-                <a class="page_but">下一页</a>
+            <div style="float: left;width: 1200px;margin-left: 10px;margin-top: 20px;margin-bottom: 20px;">
+                <%if(searchPagebean.getCur_offset()>8){%>
+                <a class="page_but page_up" style="float: left;margin-left: 210px;margin-bottom: 10px;cursor: pointer;">上一页</a>
+                <%}%>
+                <%if(!searchPagebean.isLast()){%>
+                <a class="page_but page_down" style="float: right;margin-right: 210px;margin-bottom: 10px;cursor: pointer;">下一页</a>
+                <%}%>
             </div>
         </ul>
     </div>

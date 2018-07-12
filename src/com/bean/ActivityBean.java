@@ -2,6 +2,10 @@ package com.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.*;
+import java.util.Calendar;
 
 
 public class ActivityBean implements Serializable{
@@ -33,6 +37,8 @@ public class ActivityBean implements Serializable{
 	private String state;
 	/*广告位图片路径*/
 	private String apath;
+
+
 	
 	
 	
@@ -49,7 +55,10 @@ public class ActivityBean implements Serializable{
 		this.id = id;
 	}
 
-	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	public int getVid() {
 		return vid;
 	}

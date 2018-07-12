@@ -54,7 +54,7 @@
               $(this).parent().parent().find(".city_box").toggle();
           });
           $("body").on('click','.city-item',function(){
-              var name=$(this).html();
+              var name=$(this).attr("data-name");
               $(this).parent().parent().parent().parent().find(".city-name").html(name);
               search_by_city(name);
           });
@@ -121,7 +121,7 @@
       <div class="city_box" style="display: none;">
         <div>
           <ul>
-            <li class="city-item" data-name="beijing">全国</li>
+            <li class="city-item" data-name="country">全国</li>
             <li class="city-item" data-name="shanghai">上海</li>
             <li class="city-item" data-name="beijing">北京</li>
             <li class="city-item" data-name="guangzhou">广州</li>
@@ -168,28 +168,28 @@
   <div class="box" style="min-height: 360px;overflow: hidden;">
     <ul class="left_cate" style="padding: 0;">
       <li class="item-1">
-        <a class="search_type" name="演唱会">演唱会</a>
+        <a class="search_type" name="con">演唱会</a>
       </li>
       <li class="item-2">
-        <a class="search_type" name="话剧歌剧">话剧歌剧</a>
+        <a class="search_type" name="ope">话剧歌剧</a>
       </li>
       <li class="item-5">
-        <a class="search_type" name="休闲展览">休闲展览</a>
+        <a class="search_type" name="ent">休闲展览</a>
       </li>
       <li class="item-8">
-        <a class="search_type" name="体育赛事">体育赛事</a>
+        <a class="search_type" name="spo">体育赛事</a>
       </li>
       <li class="item-3">
-        <a class="search_type" name="音乐会">音乐会</a>
+        <a class="search_type" name="mus">音乐会</a>
       </li>
       <li class="item-4">
-        <a class="search_type" name="儿童亲子">儿童亲子</a>
+        <a class="search_type" name="chi">儿童亲子</a>
       </li>
       <li class="item-6">
-        <a class="search_type" name="舞蹈芭蕾">舞蹈芭蕾</a>
+        <a class="search_type" name="dan">舞蹈芭蕾</a>
       </li>
       <li class="item-7">
-        <a class="search_type" name="戏曲综艺">戏曲综艺</a>
+        <a class="search_type" name="bei">戏曲综艺</a>
       </li>
     </ul>
     <div class="ad_pos" style="margin-top: 16px;">
@@ -261,7 +261,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">演唱会</span>
       </a>
-      <a class="more" data-type="演唱会">更多 &gt;</a>
+      <a class="more" data-type="con">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -311,7 +311,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">话剧歌剧</span>
       </a>
-      <a class="more" data-type="话剧歌剧">更多 &gt;</a>
+      <a class="more" data-type="ope">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -361,7 +361,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">休闲展览</span>
       </a>
-      <a class="more" data-type="休闲展览">更多 &gt;</a>
+      <a class="more" data-type="ent">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -411,7 +411,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">体育赛事</span>
       </a>
-      <a class="more" data-type="体育赛事">更多 &gt;</a>
+      <a class="more" data-type="spo">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -461,7 +461,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">音乐会</span>
       </a>
-      <a class="more" data-type="音乐会">更多 &gt;</a>
+      <a class="more" data-type="mus">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -511,7 +511,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">儿童亲子</span>
       </a>
-      <a class="more" data-type="儿童亲子">更多 &gt;</a>
+      <a class="more" data-type="chi">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -561,7 +561,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">舞蹈芭蕾</span>
       </a>
-      <a class="more" data-type="舞蹈芭蕾">更多 &gt;</a>
+      <a class="more" data-type="dan">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">
@@ -611,7 +611,7 @@
         <img src="../img/hot.png" class="title-icon">
         <span class="title-text1">戏曲综艺</span>
       </a>
-      <a class="more" data-type="戏曲综艺">更多 &gt;</a>
+      <a class="more" data-type="bei">更多 &gt;</a>
     </div>
     <div class="items">
       <ul style="margin-top: 0px;padding: 0;">

@@ -22,7 +22,7 @@ public class ActServiceImpl implements ActService{
     private OrderDao orderDao = new OrderDaoImpl();
 
     @Override
-    public int buyTicket(int aid, String showtime, double ticket, int num, double sum, String username) {
+    public int buyTicket(int aid, String showtime, double ticket, int num, String username) {
         OrderBean orderBean = new OrderBean();
 
         int oid = (int)(1 + Math.random()*10000000);
@@ -45,7 +45,7 @@ public class ActServiceImpl implements ActService{
         orderBean.setActid(aid);
         orderBean.setVenueid(venueid);
         orderBean.setState(state);
-        orderBean.setSum(sum);
+        orderBean.setSum(ticket*num);
         orderBean.setActName(actName);
         orderBean.setActTime(showtime);
         orderBean.setVenueName(venueName);
