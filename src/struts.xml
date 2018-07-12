@@ -72,5 +72,12 @@
 			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
+		<action name="modifyUser" class="com.action.UserAction" method="modifyUserInfo">
+			<result name="success">/jsp/information.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="register" class="com.action.UserAction" method="register">
+			<result name="success">/index.jsp</result>
+		</action>
 	</package>
 </struts>

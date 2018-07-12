@@ -63,7 +63,7 @@
               $(".log_pane").show();
           });
           $("body").on('click', '.item-user', function () {
-              window.location.href='./information.jsp';
+              window.location.href='/jsp/information.jsp';
           });
           $("body").on('click', '#login', function () {
               var name = $("#log_username").val();
@@ -95,6 +95,20 @@
           $("body").on('click', '.more', function () {
               var type=$(this).attr("data-type");
               search_by_type(type);
+          });
+
+          $("body").on('click','#reg',function () {
+              $(".pop_login_form").hide();
+              $("#pop_register_form").show();
+          });
+          $("body").on('click','#register',function () {
+              var id = $("#log_rusername").val();
+              var pass = $("#log_rpassword").val();
+              register(id, pass);
+          });
+          $("body").on('click','#log',function () {
+              $(".pop_login_form").show();
+              $("#pop_register_form").hide();
           });
       });
 
@@ -677,11 +691,19 @@
     <div style="color: red;margin-left: 100px;display: none;" id="wrong_tip">用户名或密码错误，请重试</div>
     <%}%>
     <ul class="pop_login_form">
-      <li id="user_name"><input placeholder="用户名" id="log_username"></li>
+      <li id="user_name"><input placeholder="账号" id="log_username"></li>
       <li id="password"><input type="password" placeholder="密码" id="log_password"></li>
       <li id="li_login">
         <a id="login" style="cursor: pointer;">登录</a>
         <a id="reg" style="margin-left: 40px;cursor: pointer;">注册</a>
+      </li>
+    </ul>
+    <ul id="pop_register_form" class="pop_login_form" style="display: none">
+      <li id="ruser_name"><input placeholder="昵称" id="log_rusername"></li>
+      <li id="rpassword"><input type="password" placeholder="密码" id="log_rpassword"></li>
+      <li id="li_register">
+        <a id="register" style="cursor: pointer;">注册</a>
+        <a id="log" style="margin-left: 40px;cursor: pointer;">登录</a>
       </li>
     </ul>
   </div>

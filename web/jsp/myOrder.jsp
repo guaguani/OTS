@@ -114,7 +114,7 @@
         <div class="main">
             <div class="info-content clearfix">
                 <div class="user-profile-nav" style="cursor: pointer;">
-                    <a href="./information.jsp">个人信息</a>
+                    <a href="/jsp/information.jsp">个人信息</a>
                     <a class="active">我的订单</a>
                     <a class="logout">退出登录</a>
                  </div>

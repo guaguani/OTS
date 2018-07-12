@@ -17,4 +17,6 @@ public interface User_newDao {
      *存在则返回TRUE,不存在则返回FALSE
      */
     public String isUserExist(String userid);
+
+    public void addUser(String id,String name,String ps);
 }

@@ -25,26 +25,7 @@ public class User_newDaoImpl implements User_newDao {
                 userBean.setId(userid);
                 userBean.setName(rs.getString(2));
                 userBean.setPwd(rs.getString(3));
-                userBean.setGender(rs.getString(4));
-
-                String province = rs.getString(5);
-                String city = rs.getString(6);
-                String district = rs.getString(7);
-                String detail = rs.getString(8);
-                AddressBean addressBean = new AddressBean();
-                addressBean.setProvince(province);
-                addressBean.setCity(city);
-                addressBean.setDistrict(district);
-                addressBean.setDetail(detail);
-                userBean.setAddress(addressBean);
-
                 userBean.setPayID(rs.getString(9));
-                userBean.setB_year(rs.getInt(10));
-                userBean.setB_month(rs.getInt(11));
-                userBean.setB_day(rs.getInt(12));
-
-                String interest = rs.getString(13);
-                userBean.setInterest(stringTolist(interest));
 
             }
 
@@ -80,22 +61,15 @@ public class User_newDaoImpl implements User_newDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "update user_new set name=?, pwd=?, gender=?, province=?, city=?, district=?, " +
-                         "detail=?, b_year=?, b_month=?, b_day=?,interest=? where id = ?;";
+            String sql = "update user_new set name=?, pwd=?, payID=?" +
+                         " where id = ?;";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, user.getName());
             stmt.setString(2,user.getPwd());
-            stmt.setString(3,user.getGender());
-            stmt.setString(4,user.getAddress().getProvince());
-            stmt.setString(5,user.getAddress().getCity());
-            stmt.setString(6,user.getAddress().getDistrict());
-            stmt.setString(7,user.getAddress().getDetail());
-            stmt.setInt(8,user.getB_year());
-            stmt.setInt(9,user.getB_month());
-            stmt.setInt(10,user.getB_day());
-            stmt.setString(11,listToString(user.getInterest()));
-            stmt.setString(12,user.getId());
+            stmt.setString(3,user.getPayID());
+
+            stmt.setString(4,user.getId());
 
             stmt.executeUpdate();
 
@@ -140,6 +114,36 @@ public class User_newDaoImpl implements User_newDao {
             }
         }
         return result;
+    }
+
+    @Override
+    public void addUser(String id, String name, String ps) {
+        PreparedStatement stmt = null;
+        Connection conn = JdbcPool.getInstance().getConnection();
+        try {
+
+            String sql = "insert into user_new"
+                    + "(id, name, pwd) "
+                    + "values(?, ?, ?);";
+
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1,id);
+            stmt.setString(2,name);
+            stmt.setString(3,ps);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                stmt.close();
+                JdbcPool.getInstance().releaseConnection(conn);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private String listToString(ArrayList<String> list){

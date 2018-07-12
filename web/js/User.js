@@ -7,3 +7,7 @@ function logout(){
     //alert("in method logout");
     window.location.href="../logout";
 }
+
+function register(id, pass){
+    window.location.href="../register?id="+id+"&pwd="+pass;
+}

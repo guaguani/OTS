@@ -290,19 +290,48 @@ public class UserAction extends ActionSupport{
      */
     public String modifyUserInfo(){
         HttpSession session=ServletActionContext.getRequest().getSession();
-        String password = getParam("password");
-        String oldpw = session.getAttribute("password").toString();
-        String email = session.getAttribute("Username").toString();
-        if(oldpw.equals(password)){
-            return ERROR;
+        UserBean userBean = (UserBean)session.getAttribute("userbean");
+        System.out.println("id:"+userBean.getId());
+        String username=getParam("username");
+        try {
+            username = new String(getParam("username").getBytes("iso-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String password=getParam("password");
+        String payid=getParam("payid");
+        boolean notMod=true;
+
+        System.out.println(username+password+payid);
+        if(!(username==null||username.equals(""))){
+            userBean.setName(username);
+            notMod=false;
+        }
+        if(!(password==null||password.equals(""))){
+            userBean.setPwd(password);
+            notMod=false;
+        }
+        if(!(payid==null||payid.equals(""))){
+            userBean.setPayID(payid);
+            notMod=false;
+        }
+        if(!notMod){
+            String result = nuserService.modUser(userBean);
+            session.setAttribute("userbean", userBean);
+            if(result.equals("SUCCESS")){
+                System.out.println("成功");
+                return SUCCESS;
+            }
+            else{
+                ActionContext actionContext = ActionContext.getContext();
+                actionContext.put("result","修改失败，请您重新尝试");
+                return ERROR;
+            }
         }
         else{
-            userService.modifyPw(password,email);
             return SUCCESS;
         }
     }
-
-
 
     /**
      * 从jsp页面获得参数值
@@ -577,6 +606,8 @@ public class UserAction extends ActionSupport{
             String res=orderService.userPay(ac,pw,o.getSum(),o.getId());
             System.out.println("PAY ORDER "+o.getId()+":ac--"+ac+",pw--"+pw+",sum--"+o.getSum()+",res--"+res);
             if(res.equals("FAIL")){
+                ActionContext actionContext = ActionContext.getContext();
+                actionContext.put("result","支付失败，请检查您输入的信息，重新尝试");
                 return ERROR;
             }
         }
@@ -726,6 +757,32 @@ public class UserAction extends ActionSupport{
         session.setAttribute("OPB",OPB);
         return SUCCESS;
 
+    }
+
+    public String register(){
+        System.out.println("IN USER! REG");
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        String id= getParam("id");
+        try {
+            id = new String(getParam("id").getBytes("iso-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String pwd=getParam("pwd");
+        System.out.println("INFO IS:id--"+id+",pwd---"+pwd);
+        String result=nuserService.checkVcode(id+"="+pwd);
+        UserBean userBean=nuserService.getUserInfo(result);
+
+        OrderPageBean orderPagebean=new OrderPageBean();
+        orderPagebean.setOffset(8);
+        orderPagebean.setType("全部订单");
+        orderPagebean.setBeans(new ArrayList<OrderBean>());
+
+        session.setAttribute("userbean", userBean);
+        session.setAttribute("orderPagebean", orderPagebean);
+        session.setAttribute("searchPagebean", new SearchPageBean());
+
+        return SUCCESS;
     }
 
 }

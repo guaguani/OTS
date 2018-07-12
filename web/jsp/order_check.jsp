@@ -203,7 +203,7 @@
         <div class="box-main">
             <div style="float: left;width: 500px;margin-left: 650px;margin-top: 25px;">
                 <a class="ensure_btn handcan" style="background-color: #676d70;float: left;cursor: pointer;">取消订单</a>
-                <a class="ensure_btn" href="./jsp/pay.jsp" target="_blank" style="margin-left: 230px;cursor: pointer;">确认支付</a>
+                <a class="ensure_btn" href="./jsp/pay.jsp" tyle="margin-left: 230px;cursor: pointer;">确认支付</a>
             </div>
 
         </div>

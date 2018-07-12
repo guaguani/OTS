@@ -29,7 +29,16 @@
             $("body").on('click', '.item-user', function () {
                 window.location.href='./information.jsp';
             });
+            $("body").on('click', '.l2',function () {
+                window.location.href="./myOrder.jsp";
+            });
 
+            $("body").on('click', '#begin',function () {
+                $(this).hide();
+                $(this).prev().show();
+                $("#account").hide();
+                $("#pwd").show();
+            });
         });
     </script>
 </head>
@@ -89,48 +98,62 @@
         <div class="main">
             <div class="info-content clearfix">
                 <div class="user-profile-nav">
-                    <a href="./information.jsp"  class="active">个人信息</a>
-                    <a>我的订单</a>
-                    <a class="logout">退出登录</a>
+                    <a id="l1" href="./information.jsp"  class="active">个人信息</a>
+                    <a id="l2" class="l2">我的订单</a>
+                    <a id="l3" class="logout">退出登录</a>
                 </div>
-                <div style="background-color: #ffffff;float: left;width: 900px;height:450px;border: 1px solid #ffffff;margin-top: 35px;margin-left: 220px;">
-                    <div class="info-main" style="margin-left: 50px;">
-                        <ul class="lst" style="padding-top: 30px">
-                            <li class="itm">
-                                <label for="username" class="am-form-label">昵称</label>
-                                <input type="text" id="username" style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px" value=<%=userbean.getName()%>>
-                            </li>
-                        </ul>
-                        <ul class="lst" style="padding-top: 30px">
-                            <li class="itm">
-                                <label for="user-phone" class="am-form-label">密码</label>
-                                <input type="password" id="user-phone" style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px">
-                            </li>
-                        </ul>
-                        <ul class="lst" style="padding-top: 30px">
-                            <li class="itm">
-                                <label for="Email" class="am-form-label">支付账号</label>
-                                <input type="text" id="Email" placeholder="email"
-                                       style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px" value=<%=userbean.getPayID()%>>
-                            </li>
-                        </ul>
-                        <ul class="lst" style="padding-top: 30px">
-                            <li class="itm">
-                                <label for="Address" class="am-form-label">地址</label>
-                                <input type="text" id="Address" placeholder="address"
-                                       style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px" value=<%=userbean.getAddress().toString()%>>
-                            </li>
-                        </ul>
-                        <ul class="lst" style="padding-top: 30px">
-                            <li class="itm">
-                                <div class="info-btn">
-                                    <div class="am-btn-danger">保存修改</div>
-                                </div>
-                            </li>
-                        </ul>
+                <div id="maindiv" style="background-color: #ffffff;float:left;width: 900px;height:450px;border: 1px solid #ffffff;margin-left: 220px;">
+                    <form action="modifyUser.action">
+                        <div class="info-main" style="margin-left: 50px;">
+                            <ul class="lst" style="padding-top: 30px" id="account">
+                                <li class="itm">
+                                    <label class="am-form-label" style="margin-left:100px;width:80px;display: inline-block">账号</label>
+                                    <span style="margin-left: 35px;"><%=userbean.getId()%></span>
+                                </li>
+                            </ul>
+                            <ul class="lst" style="padding-top: 30px">
+                                <li class="itm">
+                                    <label class="am-form-label" style="margin-left:100px;width:80px;display: inline-block">昵称</label>
+                                    <input type="text" name="username" style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px;font-size:14px" value=<%=userbean.getName()%>>
+                                </li>
+                            </ul>
+                            <ul class="lst" style="padding-top: 30px;display: none;" id="pwd">
+                                <li class="itm">
+                                    <label class="am-form-label" style="margin-left:100px;width:80px;display: inline-block">密码</label>
+                                    <input type="password" name="password" class="password" style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px;font-size:14px" value=<%=userbean.getPwd()%>>
+                                </li>
+                            </ul>
+                            <ul class="lst" style="padding-top: 30px">
+                                <li class="itm">
+                                    <label class="am-form-label" style="margin-left:100px;width:80px;display: inline-block">支付账号</label>
+                                    <%if(userbean.getPayID()==null){%>
+                                    <input type="text" name="payid"
+                                           style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px;font-size:14px;" value="">
+                                    <%}else{%>
+                                    <input type="text" name="payid"
+                                           style="border: 1px solid #E4EAEE;margin-left: 30px;height: 35px;width: 300px;font-size:14px;" value=<%=userbean.getPayID()%>>
+                                    <%}%>
+                                </li>
+                            </ul>
 
-                        </form>
-                    </div>
+                            <ul class="lst" style="padding-top: 30px;display: none;" id="sure">
+                                <li class="itm">
+                                    <div class="info-btn">
+                                        <input type="submit" value="确认修改" style="display: block;height: 42px;background-color: #ff7919;text-align: center;text-decoration: none;color: #fff;font-size: 16px;line-height: 42px;width: 120px;margin-left: 35%;border: 0;cursor: pointer;"/>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="lst" style="padding-top: 30px" id="begin">
+                                <li class="itm">
+                                    <div class="info-btn">
+                                        <a style="display: block;height: 42px;background-color: #ff7919;text-align: center;text-decoration: none;color: #fff;font-size: 16px;line-height: 42px;width: 120px;margin-left: 35%;cursor: pointer;">修改信息</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

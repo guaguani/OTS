@@ -171,7 +171,7 @@
 
 
             $("body").on('click', '.u-btn-buynow', function () {
-                var log=$("#log").attr("name");
+                var log=$("#log1").attr("name");
                 if(log==""){
                     $(".log_pane").show();
                     $("#log_tip").show();
@@ -194,13 +194,27 @@
                 }
 
             });
+
+            $("body").on('click','#reg',function () {
+                document.getElementById("pop_login_form").style.display="none";
+                document.getElementById("pop_register_form").style.display="";
+            });
+            $("body").on('click','#register',function () {
+                var id = $("#log_rusername").val();
+                var pass = $("#log_rpassword").val();
+                register(id, pass);
+            });
+            $("body").on('click','#log',function () {
+                document.getElementById("pop_login_form").style.display="";
+                document.getElementById("pop_register_form").style.display="none";
+            });
         });
 
     </script>
 </head>
 <body>
 <%userbean.setPagePos("activity");%>
-<a id="log" name=<%=userbean.getId()%>>
+<a id="log1" name=<%=userbean.getId()%>>
 <a style="display:none;" id="info" data-date=<%=activitybean.getHalls().get(0).getShowTime()%> data-num="0"></a>
 <div class="header">
     <div class="box1">
@@ -360,6 +374,14 @@
                 <li id="li_login">
                     <a id="login" style="cursor: pointer;">登录</a>
                     <a id="reg" style="margin-left: 40px;cursor: pointer;">注册</a>
+                </li>
+            </ul>
+            <ul id="pop_register_form" class="pop_login_form" style="display: none">
+                <li id="ruser_name"><input placeholder="用户名" id="log_rusername"></li>
+                <li id="rpassword"><input type="password" placeholder="密码" id="log_rpassword"></li>
+                <li id="li_register">
+                    <a id="register">注册</a>
+                    <a id="log" style="margin-left: 40px;">登录</a>
                 </li>
             </ul>
         </div>

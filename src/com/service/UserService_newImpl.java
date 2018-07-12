@@ -35,7 +35,12 @@ public class UserService_newImpl implements UserService_new {
 
     @Override
     public String checkVcode(String vcode) {
-        return null;
+        long i=System.currentTimeMillis();
+        String id=i+"";
+        id=id.substring(id.length()-10);
+        String s[]=vcode.split("=");
+        userNewDao.addUser(id,s[0],s[1]);
+        return id;
     }
 
     @Override
@@ -45,12 +50,7 @@ public class UserService_newImpl implements UserService_new {
 
     @Override
     public String modUser(UserBean user) {
-        UserBean userBean = getUserInfo(user.getId());
-        if (userBean.getPwd().equals(user.getPwd())){
-            return "NOCHANGE";
-        }else {
-            userNewDao.modUser(user);
-        }
-        return "SUCESS";
+        userNewDao.modUser(user);
+        return "SUCCESS";
     }
 }
