@@ -2,19 +2,19 @@ function cancel(id){
     var tar = document.getElementById("canceled_board");
     tar.setAttribute("style","display:block");
     setTimeout("close_board(\"canceled_board\")",2000);
-    cancel_order(id);
+    cancel_order(id,"h");
 }
 
 function time_out_cancel(id){
     var tar = document.getElementById("time_out_cancel_board");
     tar.setAttribute("style","display:block");
     setTimeout("close_board(\"time_out_cancel_board\")",2000);
-    cancel_order(id);
+    cancel_order(id,"t");
 }
 
-function cancel_order(id){
+function cancel_order(id,type){
     alert("in method cancel_order id is "+id);
-    window.location.href="../cancelOrder";
+    window.location.href="../cancelOrder?id="+id+"&type="+type;
 }
 
 function close_board(id){

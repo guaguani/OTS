@@ -1,10 +1,10 @@
 function search_by_city(city){
-    alert("in method search_by_city city is "+city);
+    //alert("in method search_by_city city is "+city);
     window.location.href="../SearchByCond?type=1&city="+city;
 }
 
 function search_by_type(type){
-    alert("in method search_by_type type is "+type);
+    //alert("in method search_by_type type is "+type);
     window.location.href="../SearchByCond?city=1&type="+type;
 }
 
@@ -19,12 +19,12 @@ function lock_seat(info){//date a price a num l
 }
 
 function search_act_up(){
-    alert("IN SEARCH ACT UP");
+    //alert("IN SEARCH ACT UP");
     window.location.href="../ActPageChange?dir=up";
 }
 
 function search_act_down(){
-    alert("IN SEARCH ACT DOWN");
+    //alert("IN SEARCH ACT DOWN");
     window.location.href="../ActPageChange?dir=down";
 }
 

@@ -97,6 +97,9 @@ public class OrderPageBean implements Serializable{
 		for(OrderBean b:beans){
 			sum+=b.getSum();
 		}
+		if(beans.size()<8){
+			last=true;
+		}
 	}
 
 

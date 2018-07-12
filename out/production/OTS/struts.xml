@@ -4,68 +4,72 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<package name="struts2" extends="struts-default">
-		<action name="queryVenue" class="com.action.VenueAction" method="queryVenue">
-			<result name="success">/jsp/VenueMainframe.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="queryUser" class="com.action.UserAction" method="queryUser">
-			<result name="success">/jsp/MainFrame.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
+
 		<action name="addUser" class="com.action.UserAction" method="addUser">
-			<result name="success">/jsp/UserLogin.jsp</result>
+			<result name="success">/index.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
-		<action name="addVenue" class="com.action.VenueAction" method="addVenue">
-			<result name="success">/jsp/VenueLogin.jsp</result>
+
+		<action name="changeCurOrder" class="com.action.UserAction" method="changeCurOrder">
+			<result name="success">/jsp/pay.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
-		<action name="queryManager" class="com.action.ManagerAction" method="queryManager">
-			<result name="success">/jsp/ManagerMainFrame.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="modifyVenueInfo" class="com.action.VenueAction" method="modifyVenueInfo">
-			<result name="success">/jsp/VenueMainframe.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="releasePlan" class="com.action.VenueAction" method="releasePlan">
-			<result name="success">/jsp/VenueMainframe.jsp</result>
-			<result name="error">/jsp/VenueMainframe.jsp</result>
-		</action>
+
+
 		<action name="modifyUserInfo" class="com.action.UserAction" method="modifyUserInfo">
 			<result name="success">/jsp/MainFrame.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
-		<action name="cancelMember" class="com.action.UserAction" method="cancelMember">
-			<result name="success">/jsp/MainFrame.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="showOnePlan" class="com.action.UserAction" method="showOnePlan">
-			<result name="success">/jsp/Plan.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="reserveTickets" class="com.action.UserAction" method="reserveTickets">
-			<result name="success">/jsp/Plan.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
-		<action name="payOrder" class="com.action.UserAction" method="payOrder">
-			<result name="success">/jsp/MainFrame.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
+
+
 		<action name="cancelOrder" class="com.action.UserAction" method="cancelOrder">
-			<result name="success">/jsp/MainFrame.jsp</result>
+			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
-		<action name="approveVenueRegister" class="com.action.ManagerAction" method="approveVenueRegister">
-			<result name="success">/jsp/ManagerMainFrame.jsp</result>
+		<action name="getOrder" class="com.action.UserAction" method="getOrder">
+			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
-		<action name="allocateSeat" class="com.action.UserAction" method="allocateSeat">
-			<result name="success">/jsp/Plan.jsp</result>
-			<result name="error">/jsp/Fail.jsp</result>
-		</action>
+
 		<action name="activate" class="com.action.UserAction" method="activate">
 			<result name="success">/jsp/UserLogin.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="getActDetail" class="com.action.UserAction" method="getActDetail">
+			<result name="success">/jsp/activity.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="SearchByCond" class="com.action.UserAction" method="SearchByCond">
+			<result name="success">/jsp/search.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="SearchByInp" class="com.action.UserAction" method="SearchByInp">
+			<result name="success">/jsp/search.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="CreateOrder" class="com.action.UserAction" method="CreateOrder">
+			<result name="success">/jsp/order_check.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="Pay" class="com.action.UserAction" method="Pay">
+			<result name="success">/jsp/myOrder.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="login" class="com.action.UserAction" method="login">
+			<result name="index">/index.jsp</result>
+			<result name="search">/jsp/search.jsp</result>
+			<result name="activity">/jsp/activity.jsp</result>
+		</action>
+		<action name="logout" class="com.action.UserAction" method="logout">
+			<result name="success">/index.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="ActPageChange" class="com.action.UserAction" method="ActPageChange">
+			<result name="success">/jsp/search.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
+		<action name="OrderPageChange" class="com.action.UserAction" method="OrderPageChange">
+			<result name="success">/jsp/myOrder.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
 	</package>

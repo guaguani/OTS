@@ -415,6 +415,7 @@ public class UserAction extends ActionSupport{
         HttpSession session=ServletActionContext.getRequest().getSession();
         String id = getParam("id");
         ActivityBean activityBean=actService.getByID(Integer.parseInt(id));
+        check();
         activityBean.setEngc(transToE(activityBean.getCity()));
         activityBean.setEngt(transToE(activityBean.getType()));
         session.setAttribute("activitybean", activityBean);
@@ -537,6 +538,7 @@ public class UserAction extends ActionSupport{
         UserBean userBean=(UserBean)session.getAttribute("userbean");
 
         String info = getParam("info");
+        System.out.println("INFO IS:"+info);
         String types[][];
         if(info.indexOf("l")<0){
             types=new String[1][];
@@ -556,6 +558,7 @@ public class UserAction extends ActionSupport{
         ArrayList<OrderBean> ob=new ArrayList<OrderBean>();
         for(int i=0;i<types.length;i++){
             int oid=actService.buyTicket(activityBean.getId(),types[i][0],Double.parseDouble(types[i][1]),Integer.parseInt(types[i][2]),userBean.getId());
+            System.out.println("ORDER"+oid+":aid--"+activityBean.getId()+",date--"+types[i][0]+",price--"+Double.parseDouble(types[i][1])+",num--"+Integer.parseInt(types[i][2])+",user--"+userBean.getId());
             ob.add(orderService.getOrderByID(oid));
         }
         OPB.setBeans(ob);
@@ -575,6 +578,7 @@ public class UserAction extends ActionSupport{
         String pw = getParam("pw");
         for(OrderBean o:OPB.getBeans()){
             String res=orderService.userPay(ac,pw,o.getSum(),o.getId());
+            System.out.println("PAY ORDER "+o.getId()+":ac--"+ac+",pw--"+pw+",sum--"+o.getSum()+",res--"+res);
             if(res.equals("FAIL")){
                 return ERROR;
             }
@@ -592,6 +596,7 @@ public class UserAction extends ActionSupport{
         HttpSession session=ServletActionContext.getRequest().getSession();
         String id=getParam("id");
         String pwd=getParam("pwd");
+        System.out.println("INFO IS:id--"+id+",pwd---"+pwd);
         String result=nuserService.logIn(id, pwd);
         if(!result.equals("SUCCESS")) {
             userbean.setWrong(true);
@@ -623,12 +628,21 @@ public class UserAction extends ActionSupport{
 
 
     public String cancelOrder(){
+        System.out.println("IN CANCEL ORDER");
         HttpSession session=ServletActionContext.getRequest().getSession();
         OrderPageBean OPB=(OrderPageBean) session.getAttribute("OPB");
         UserBean userBean=(UserBean)session.getAttribute("userbean");
-        for(OrderBean o:OPB.getBeans()){
-            orderService.cancleOrder(o.getId());
+        int id=Integer.parseInt(getParam("id"));
+        String type=getParam("type");
+        if(type.equals("h")){
+            orderService.cancleOrder(id);
         }
+        else{
+            for(OrderBean o:OPB.getBeans()){
+                orderService.cancleOrder(o.getId());
+            }
+        }
+
         OrderPageBean orderPagebean=new OrderPageBean();
         orderPagebean.setType("已取消");
         orderPagebean.setOffset(8);
@@ -638,13 +652,14 @@ public class UserAction extends ActionSupport{
     }
 
     public String getOrder(){
+        System.out.println("IN GET ORDER");
         HttpSession session=ServletActionContext.getRequest().getSession();
         check();
         String type=trans(getParam("type"));
 
         UserBean userBean=(UserBean)session.getAttribute("userbean");
-
         OrderPageBean orderPagebean=(OrderPageBean)session.getAttribute("orderPagebean");
+
         orderPagebean.setType(type);
         orderPagebean.setOffset(8);
         orderPagebean.setBeans(orderService.getOrder(0,userBean.getId(),type));
@@ -672,18 +687,20 @@ public class UserAction extends ActionSupport{
         }
 
         orderPageBean.setBeans(orderService.getOrder(offset,userBean.getId(),orderPageBean.getType()));
-
         session.setAttribute("orderPagebean", orderPageBean);
-
 
         return SUCCESS;
     }
 
     public String changeCurOrder(){
+        System.out.println("IN CHANGE CUR ORDER");
         String orderid = getParam("oid");
 
         HttpSession session=ServletActionContext.getRequest().getSession();
         OrderPageBean OPB=(OrderPageBean) session.getAttribute("OPB");
+        if(OPB==null){
+            OPB=new OrderPageBean();
+        }
         ArrayList<OrderBean> beans=new ArrayList<OrderBean>();
         beans.add(orderService.getOrderByID(Integer.parseInt(orderid)));
         OPB.setBeans(beans);
