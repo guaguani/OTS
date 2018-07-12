@@ -28,10 +28,7 @@
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
-            $("body").on('click','.btn-submit',function(){
-                var user_input=$(this).prev().val();
-                search_by_input(user_input);
-            });
+
             $("body").on('click','.item-login',function(){
                 $(".log_pane").show();
             });
@@ -237,7 +234,7 @@
         </div>
         <div class="search-bar">
             <form action="SearchByInp" style="overflow: hidden;">
-                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value=<%=userbean.getCurInput()%> class="input">
+                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword"  class="input" value=<%=userbean.getCurInput()%>>
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
@@ -263,9 +260,9 @@
         <p style="background-color: #eaeaea;    padding: 12px 20px 14px 20px;">
             <a href="/">罗汉豆</a>
             <span class="arrow">&gt;</span>
-            <a id="pos" data-name=<%=activitybean.getEngc()%>><%=userbean.getCurPos()%></a>
+            <a id="pos" style="cursor: pointer;" data-name=<%=activitybean.getEngc()%>><%=userbean.getCurPos()%></a>
             <span class="arrow">&gt;</span>
-            <a id="type" data-name=<%=activitybean.getEngt()%>><%=userbean.getCurType()%></a>
+            <a id="type" style="cursor: pointer;" data-name=<%=activitybean.getEngt()%>><%=userbean.getCurType()%></a>
             <span class="arrow">&gt;</span>
             <strong><%=activitybean.getName()%></strong>
         </p>
@@ -282,9 +279,9 @@
                         <span class="tt">时间：</span>
                         <%for(int i=0;i<activitybean.getHalls().size();i++){%>
                         <%if(i==0){%>
-                            <span style="color: #ff7919;" class="tic_date"><%=activitybean.getHalls().get(i).getShowTime()%></span>
+                            <span style="color: #ff7919;cursor: pointer;" class="tic_date"><%=activitybean.getHalls().get(i).getShowTime()%></span>
                         <%}else{%>
-                        <span style="color: #000000;" class="tic_date"><%=activitybean.getHalls().get(i).getShowTime()%></span>
+                        <span style="color: #000000;cursor: pointer;" class="tic_date"><%=activitybean.getHalls().get(i).getShowTime()%></span>
                         <%}%>
                         <%}%>
                     </div>
@@ -300,9 +297,9 @@
                                 <li class="itm tic_price" data-price=<%=activitybean.getHalls().get(0).getPrices().get(i)%> data-tip=<%=activitybean.getHalls().get(0).getTip().get(i)%>>
                                     <a>
                                         <%if(i==0){%>
-                                        <span class="price" style="color:#ff7919;"><%=activitybean.getHalls().get(0).getTip().get(i)%></span>
+                                        <span class="price" style="color:#ff7919;cursor: pointer;"><%=activitybean.getHalls().get(0).getTip().get(i)%></span>
                                         <%}else{%>
-                                        <span class="price"><%=activitybean.getHalls().get(0).getTip().get(i)%></span>
+                                        <span class="price" style="cursor: pointer;"><%=activitybean.getHalls().get(0).getTip().get(i)%></span>
                                         <%}%>
                                     </a>
                                 </li>

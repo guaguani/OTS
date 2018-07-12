@@ -9,7 +9,7 @@ function search_by_type(type){
 }
 
 function get_act_detail(act_id){
-    alert("in method get_act_id id is "+act_id);
+    //alert("in method get_act_id id is "+act_id);
     window.location.href="../getActDetail?id="+act_id;
 }
 

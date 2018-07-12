@@ -22,10 +22,7 @@
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
-            $("body").on('click', '.btn-submit', function () {
-                var user_input=$(this).prev().val();
-                search_by_input(user_input);
-            });
+
             $("body").on('click', '.logout', function () {
                 logout();
             });

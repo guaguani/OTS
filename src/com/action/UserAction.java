@@ -595,11 +595,19 @@ public class UserAction extends ActionSupport{
         String pwd=getParam("pwd");
         System.out.println("INFO IS:id--"+id+",pwd---"+pwd);
         String result=nuserService.logIn(id, pwd);
-        if(!result.equals("SUCCESS")) {
-            userbean.setWrong(true);
-            return userbean.getPagePos();
+        UserBean userBean=(UserBean)session.getAttribute("userbean");
+        if(userBean==null){
+            userBean=new UserBean();
+            userBean.setPagePos("index");
         }
-        userbean.setWrong(false);
+
+        if(!result.equals("LOGINSUCESS")) {
+            userBean.setWrong(true);
+            System.out.println(result);
+            System.out.println(userBean.getPagePos());
+            return userBean.getPagePos();
+        }
+        userBean.setWrong(false);
         session.setAttribute("username", id);
 
         UserBean userbean=nuserService.getUserInfo(id);
@@ -611,6 +619,7 @@ public class UserAction extends ActionSupport{
         session.setAttribute("userbean", userbean);
         session.setAttribute("orderPagebean", orderPagebean);
         session.setAttribute("searchPagebean", new SearchPageBean());
+        System.out.println(userBean.getPagePos());
         return userbean.getPagePos();
     }
 
