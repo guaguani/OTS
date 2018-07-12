@@ -231,7 +231,7 @@
       <img src="../img/hot.png" class="title-icon">
       <span class="title-text">近期热门</span>
     </a>
-    <a class="more" data-type="全部演出">更多 &gt;</a>
+    <a class="more" data-type="all">更多 &gt;</a>
   </div>
   <div style="border-top-color:#ffcca6;border-top-width:2px" class="items">
     <ul style="padding: 0;">

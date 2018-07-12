@@ -17,8 +17,8 @@
             $("body").on('click', '.city-name', function () {
                 $(this).parent().parent().find(".city_box").toggle();
             });
-            $("body").on('click', '.city-item', function () {
-                var name = $(this).html();
+            $("body").on('click','.city-item',function(){
+                var name=$(this).attr("data-name");
                 $(this).parent().parent().parent().parent().find(".city-name").html(name);
                 search_by_city(name);
             });
@@ -51,6 +51,13 @@
                 cancel(order_id);
             });
 
+            $("body").on('click', '.page_up', function () {
+                search_order_up();
+            });
+            $("body").on('click', '.page_down', function () {
+                search_order_down();
+            });
+
         });
     </script>
 </head>
@@ -70,7 +77,7 @@
             <div class="city_box" style="display: none;">
                 <div>
                     <ul>
-                        <li class="city-item" data-name="beijing">全国</li>
+                        <li class="city-item" data-name="country">全国</li>
                         <li class="city-item" data-name="shanghai">上海</li>
                         <li class="city-item" data-name="beijing">北京</li>
                         <li class="city-item" data-name="guangzhou">广州</li>
@@ -89,7 +96,7 @@
         </div>
         <div class="search-bar">
             <form style="overflow: hidden;">
-                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword" value=<%=userbean.getCurInput() %> class="input">
+                <input placeholder="输入场馆、演出名称查询" autocomplete="off" name="keyword"  class="input" value=<%=userbean.getCurInput() %>>
                 <input type="submit" value="搜索" class="btn-submit">
             </form>
         </div>
@@ -119,32 +126,17 @@
                         <dl id="category_filter_id" class="search_city_line">
                             <dd class="search_city_num" style="margin-left: 21px;">
                                 <ul class="clear" style="font-size: 18px;padding-left: 0px;">
+                                    <%for(int i=0;i<orderPagebean.getTypes().size();i++){%>
                                     <li>
-                                        <a class="order_type" name="all" style=<%=orderPagebean.getStyle().get(0) %>>
-                                            全部订单
+                                        <%if(orderPagebean.getStyle().get(i).equals("color:#ff7919;")){%>
+                                        <a class="order_type"  style="color:#ff7919;" name=<%=orderPagebean.getTypese().get(i)%>>
+                                            <%}else{%>
+                                                <a class="order_type"  name=<%=orderPagebean.getTypese().get(i)%>>
+                                                    <%}%>
+                                            <%=orderPagebean.getTypes().get(i)%>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="order_type" name="unpay" style=<%=orderPagebean.getStyle().get(1) %>>
-                                            未支付
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="order_type" name="unuse" style=<%=orderPagebean.getStyle().get(2) %>>
-                                            待使用
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="order_type" name="finish" style=<%=orderPagebean.getStyle().get(3) %>>
-                                            已完成
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="order_type" name="cancel" style=<%=orderPagebean.getStyle().get(4) %>>
-                                            已取消
-                                        </a>
-                                    </li>
-
+                                    <%}%>
                                 </ul>
                             </dd>
 
@@ -181,6 +173,14 @@
                         </div>
                     </div>
                     <%}%>
+                    <div style="float: left;width: 1200px;margin-left: 10px;margin-top: 20px;margin-bottom: 20px;">
+                        <%if(orderPagebean.getOffset()>8){%>
+                        <a class="page_but page_up" style="float: left;margin-left: 210px;margin-bottom: 10px;cursor: pointer;">上一页</a>
+                        <%}%>
+                        <%if(!orderPagebean.isLast()){%>
+                        <a class="page_but page_down" style="float: right;margin-right: 210px;margin-bottom: 10px;cursor: pointer;">下一页</a>
+                        <%}%>
+                    </div>
                 </div>
             </div>
         </div>

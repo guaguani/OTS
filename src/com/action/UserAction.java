@@ -374,6 +374,16 @@ public class UserAction extends ActionSupport{
             eng.add("xian");
             chi.add("长沙");
             eng.add("changsha");
+            chi.add("全部订单");
+            eng.add("all-o");
+            chi.add("未支付");
+            eng.add("unp");
+            chi.add("待使用");
+            eng.add("unu");
+            chi.add("已完成");
+            eng.add("fin");
+            chi.add("已取消");
+            eng.add("can");
 
         }
     }
@@ -605,15 +615,43 @@ public class UserAction extends ActionSupport{
 
     public String getOrder(){
         HttpSession session=ServletActionContext.getRequest().getSession();
-        String type=getParam("type");
+        check();
+        String type=trans(getParam("type"));
 
         UserBean userBean=(UserBean)session.getAttribute("userbean");
 
-        OrderPageBean orderPagebean=new OrderPageBean();
+        OrderPageBean orderPagebean=(OrderPageBean)session.getAttribute("orderPagebean");
         orderPagebean.setType(type);
         orderPagebean.setOffset(8);
         orderPagebean.setBeans(orderService.getOrder(0,userBean.getId(),type));
         session.setAttribute("orderPagebean",orderPagebean);
+        return SUCCESS;
+    }
+
+    public String OrderPageChange(){
+        System.out.println("IN ORDER! PAGE CHANGE");
+        HttpSession session=ServletActionContext.getRequest().getSession();
+
+        OrderPageBean orderPageBean=(OrderPageBean) session.getAttribute("orderPagebean");
+        UserBean userBean=(UserBean)session.getAttribute("userbean");
+
+        String dir=getParam("dir");
+        System.out.println("GET DIR:"+dir);
+
+        int offset=orderPageBean.getOffset();
+        if(dir.equals("up")){
+            orderPageBean.setOffset(offset-8);
+            offset=offset-16;
+        }
+        else{
+            orderPageBean.setOffset(offset+8);
+        }
+
+        orderPageBean.setBeans(orderService.getOrder(offset,userBean.getId(),orderPageBean.getType()));
+
+        session.setAttribute("orderPagebean", orderPageBean);
+
+
         return SUCCESS;
     }
 

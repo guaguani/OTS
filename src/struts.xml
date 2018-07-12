@@ -68,5 +68,9 @@
 			<result name="success">/jsp/search.jsp</result>
 			<result name="error">/jsp/Fail.jsp</result>
 		</action>
+		<action name="OrderPageChange" class="com.action.UserAction" method="OrderPageChange">
+			<result name="success">/jsp/myOrder.jsp</result>
+			<result name="error">/jsp/Fail.jsp</result>
+		</action>
 	</package>
 </struts>
